@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  div.container#header
+    div.row
+      h1(class='col-xs-6 col-sm-6 col-md-6')='hello '+username
+      button(
+        class='btn-default col-xs-3 col-sm-3 col-md-3'
+        style='float:right; margin:20px;'
+      ) add new
+  div.container
+    h3 jobs applied:
+    if applied == undefined
+      div.row
+        label no jobs
+    else
+      each item in applied
+        div.row
+          label=item.website

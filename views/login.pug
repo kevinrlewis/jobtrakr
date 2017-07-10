@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  form(method='POST')
+    div.container
+      div.row
+        h1(class='col-xs-offset-4 col-sm-offset-5') Job Trak
+      if message.length > 0
+        div.row(class='alert alert-danger')=message
+      div.row
+        label(for="username" class='col-sm-offset-3 col-xs-4 col-sm-2 col-md-2 col-lg-2') Username:
+        input(
+          type="plaintext"
+          placeholder="Username"
+          name='username'
+          class='col-xs-5 col-sm-4 col-md-4 col-lg-4'
+        )
+      div.row
+        label(for="password" class='col-sm-offset-3 col-xs-4 col-sm-2 col-md-2 col-lg-2') Password:
+        input(
+          type="password"
+          placeholder="Password"
+          name='password'
+          class='col-xs-5 col-sm-4 col-md-4 col-lg-4'
+        )
+      div.row(style='margin-top:10px;')
+        input(
+          class='btn btn-default col-xs-offset-4 col-sm-offset-5'
+          type='submit'
+          value='sign in'
+          name='button_signin'
+          formaction='/login'
+        )
+        button(
+          class='btn btn-default'
+          onclick='signupPressed()'
+        ) sign up
+  label(
+    style='color:#58D68D; display:none;'
+  ) sign up successful
