@@ -8,13 +8,14 @@ var userSchema = mongoose.Schema({
   local            : {
     username     : String,
     password     : String,
-  }
+  },
+  jobs : [{ type: mongoose.Schema.Types.Mixed }]
 
 });
 
 // methods ======================
 // generating a hash
-userSchema.methods.generateHash = function(password) {
+userSchema.statics.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 

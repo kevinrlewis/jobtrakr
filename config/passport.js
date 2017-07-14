@@ -60,11 +60,17 @@ module.exports = function(passport) {
           console.log('creating new user...');
           // if there is no user with that email
           // create the user
-          var newUser = new User();
-
-          // set the user's local credentials
-          newUser.local.username = username;
+          var newUser = new User({
+            local: {
+              username: username
+            },
+            jobs: [{ website: 'google.com' }]
+          });
           newUser.local.password = newUser.generateHash(password);
+          // set the user's local credentials
+          // newUser.local.username = username;
+          // newUser.local.password = newUser.generateHash(password);
+          // newUser.jobs = [{ website: 'google.com'}];
 
           // save the user
           newUser.save(function(err) {
@@ -72,7 +78,7 @@ module.exports = function(passport) {
               console.log(err);
               throw err;
             }
-            console.log('user saved');
+            console.log('user saved: ', newUser);
             return done(null, newUser);
           });
         }

@@ -28,13 +28,13 @@ block content
           class='btn btn-default col-xs-offset-4 col-sm-offset-5'
           type='submit'
           value='sign in'
-          name='button_signin'
+          name='signinButton'
           formaction='/login'
         )
-        button(
+        input(
           class='btn btn-default'
-          onclick='signupPressed()'
-        ) sign up
-  label(
-    style='color:#58D68D; display:none;'
-  ) sign up successful
+          type='submit'
+          value='sign up'
+          name='signupButton'
+          formaction='/login'
+        )

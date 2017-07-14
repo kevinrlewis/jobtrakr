@@ -1,5 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.container
+    div.row
+      h1(
+        class='col-xs-2'
+      )=title
+    div.row
+      a(
+        href='/login'
+        class='col-xs-offset-1 col-xs-2'
+      ) log in
+      p(class='col-xs-2') or
+      a(
+        href='/signup'
+        class='col-xs-2'
+      ) sign up

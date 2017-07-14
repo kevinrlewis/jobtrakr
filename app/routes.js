@@ -1,11 +1,13 @@
 // ROUTES
 // ==============================================
+// load up the user model
+var User = require('../app/models/user');
 
 module.exports = function(app, passport) {
 
   //home page
   app.get('/', function(req, res) {
-    res.render('index.pug');
+    res.render('index.pug', { title: 'JobTrak' });
   });
 
   // login form
@@ -15,7 +17,11 @@ module.exports = function(app, passport) {
 
   // process login
   // post
-  app.post('/login', passport.authenticate('local-login', {
+  app.post('/login',
+  function(req, res, next) {
+    if(req.body.signupButton) res.redirect('/signup');
+    else next();
+  }, passport.authenticate('local-login', {
     successRedirect : '/profile', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
@@ -40,6 +46,23 @@ module.exports = function(app, passport) {
       user : req.user
     });
   });
+
+  // process adding a job
+  app.post('/profile', isLoggedIn, function(req, res) {
+    console.log(req.body);
+    User.findOneAndUpdate(
+      { 'local.username': req.user.local.username },
+      { $push: { 'jobs':{'website': req.body.joblink } } },
+      { returnNewDocument: true },
+      function(err, user) {
+
+        // if there are any errors, return the error
+        if (err) {
+          console.log(err);
+          return done(err);
+        }
+    });
+  })
 
   // logout page
   app.get('/logout', function(req, res) {
