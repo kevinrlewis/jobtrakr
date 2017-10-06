@@ -67,6 +67,8 @@ module.exports = function(passport) {
             jobs: [{ website: 'google.com' }]
           });
           newUser.local.password = newUser.generateHash(password);
+
+          
           // set the user's local credentials
           // newUser.local.username = username;
           // newUser.local.password = newUser.generateHash(password);

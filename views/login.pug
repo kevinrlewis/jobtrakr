@@ -7,6 +7,7 @@ block content
         h1(class='col-xs-offset-4 col-sm-offset-5') Job Trak
       if message.length > 0
         div.row(class='alert alert-danger')=message
+      hr
       div.row
         label(for="username" class='col-sm-offset-3 col-xs-4 col-sm-2 col-md-2 col-lg-2') Username:
         input(
@@ -30,6 +31,7 @@ block content
           value='sign in'
           name='signinButton'
           formaction='/login'
+          id='sign-in'
         )
         input(
           class='btn btn-default'

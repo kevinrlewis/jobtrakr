@@ -18,9 +18,12 @@ module.exports = function(app, passport) {
   // process login
   // post
   app.post('/login',
+  // request, response, next function
   function(req, res, next) {
+    // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) res.redirect('/signup');
     else next();
+    // authenticate the login using passport
   }, passport.authenticate('local-login', {
     successRedirect : '/profile', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
@@ -29,7 +32,8 @@ module.exports = function(app, passport) {
 
   // signup form
   app.get('/signup', function(req, res) {
-    res.render('signup.pug', { message: req.flash('signupMesage') });
+    // render the signup page
+    res.render('signup.pug', { message: req.flash('signupMessage') });
   });
 
   // process signup
@@ -49,18 +53,35 @@ module.exports = function(app, passport) {
 
   // process adding a job
   app.post('/profile', isLoggedIn, function(req, res) {
-    console.log(req.body);
     User.findOneAndUpdate(
       { 'local.username': req.user.local.username },
+      function(err, user) {
+        if (err) {
+          console.log(err);
+          return done(err);
+        }
+        for(var i = 0; i < user.jobs.length; i++) {
+          if (user.jobs[i].website == req.body.joblink) {
+            console.log('already applied');
+            console.log(req.body);
+            return;
+          }
+        }
+      },
       { $push: { 'jobs':{'website': req.body.joblink } } },
       { returnNewDocument: true },
       function(err, user) {
+        console.log('hello, adding job....');
 
         // if there are any errors, return the error
         if (err) {
           console.log(err);
           return done(err);
         }
+
+        //reload page
+        res.redirect('/profile');
+        return;
     });
   })
 

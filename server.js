@@ -27,7 +27,13 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // connect mongodb database
-mongoose.connect(db.url);
+try {
+  mongoose.connect(db.url);
+} catch (e) {
+  console.log(e.message);
+  // handle or display that the database can't connect
+}
+
 
 // require the routes and passport files
 require('./config/passport')(passport); // pass passport for configuration
