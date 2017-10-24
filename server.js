@@ -27,9 +27,11 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // connect mongodb database
+// TODO: Fix
 try {
   mongoose.connect(db.url);
 } catch (e) {
+  console.log("was unable to connect to database");
   console.log(e.message);
   // handle or display that the database can't connect
 }
@@ -43,9 +45,10 @@ require('./app/routes.js')(app, passport);
 ////////////////////////////////////////////////////////////////////////////////
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  /*var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  next(err);*/
+  res.redirect('/logout')
 });
 
 // error handler

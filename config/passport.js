@@ -64,11 +64,11 @@ module.exports = function(passport) {
             local: {
               username: username
             },
-            jobs: [{ website: 'google.com' }]
+            jobs: []
           });
           newUser.local.password = newUser.generateHash(password);
 
-          
+
           // set the user's local credentials
           // newUser.local.username = username;
           // newUser.local.password = newUser.generateHash(password);

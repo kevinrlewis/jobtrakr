@@ -1,10 +1,27 @@
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #666666;
+  color: #ffaa00;
 }
 
 a {
   color: #00B7FF;
+}
+
+#home-container {
+  color: #ffaa00;
+}
+
+
+.container > div > .btn {
+  border-color: #ffaa00;
+  background-color: #666666;
+  color: #ffaa00;
+}
+.container > div > .btn:hover {
+  background-color: #ffaa00;
+  color: #666666;
 }
 
 .btn {
@@ -22,6 +39,7 @@ hr {
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
+    border-color: #ffaa00;
 }
 
 .row {
@@ -31,12 +49,19 @@ hr {
 .rmv {
   padding: 1px;
   border: 0px;
+  background-color: #ffaa00;
+  color: #000000;
 }
 
 #job-box {
-  border-left: solid 5px #006600;
+  border-left: solid 5px #ffaa00;
   margin-bottom: 3px;
-  background-color: #e6ffe6;
+  background-color: #ffe6b3;
+  color: #000000;
+}
+
+#job-box > button {
+
 }
 
 /* The Modal (background) */
@@ -55,13 +80,14 @@ hr {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #ffe6b3;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
     border-radius: 0px;
     padding-top: 5px;
+    color: #000000; /* Black text */
 }
 
 /* The Close Button */

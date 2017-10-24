@@ -27,25 +27,25 @@ block content
           div.row
             h3(style="float: left; margin: 0px;") Add Job
             span(class="close" onclick="modalclose_click()") x
-          form(method="POST")
+          div.row(id='existsAlert' class='alert alert-danger' style='display: none;') Job already exists.
+          form(action="/add" method="POST")
             div.row(id="addJobForm")
-              label.col-xs-2 Job Link:
+              label.col-xs-4.col-sm-2 Job Link:
               input(
                 type="plaintext"
                 placeholder="Link"
-                class="col-xs-10"
+                class="col-xs-8 col-xs-10"
                 name="joblink"
-                formaction="/profile"
               )
             div.row
-              input(class="btn btn-success col-xs-offset-5 col-xs-2" type="submit" value="submit")
-    //div.row(class='alert alert-danger' style='display:none;') Job Exists
+              input(class="btn btn-success col-xs-offset-5 col-xs-3 col-sm-2" type="submit" value="submit")
+
     if user.jobs == undefined
-      div.row
-        label no jobs
+      label error retrieving jobs
     else
       each item, index in user.jobs
         div.row(id="job-box")
-          label(class="col-xs-1")=index
+          label(class="col-xs-1" type="text" name="index")=index
           label(class="col-xs-9")=item.website
-          button(class="btn btn-danger rmv col-xs-offset-1 col-xs-1" aria-hidden="true") remove
+          form(action="/remove?index="+index method="POST")
+            input(type='submit' class="btn btn-danger rmv col-xs-offset-1 col-xs-1" aria-hidden="true" value="remove")

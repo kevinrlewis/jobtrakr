@@ -2,6 +2,7 @@
 // ==============================================
 // load up the user model
 var User = require('../app/models/user');
+var userScript = require('../public/scripts/user');
 
 module.exports = function(app, passport) {
 
@@ -52,52 +53,96 @@ module.exports = function(app, passport) {
   });
 
   // process adding a job
-  app.post('/profile', isLoggedIn, function(req, res) {
-    User.findOneAndUpdate(
-      { 'local.username': req.user.local.username },
-      function(err, user) {
-        if (err) {
-          console.log(err);
-          return done(err);
-        }
-        for(var i = 0; i < user.jobs.length; i++) {
-          if (user.jobs[i].website == req.body.joblink) {
-            console.log('already applied');
-            console.log(req.body);
-            return;
+  app.post('/add', isLoggedIn, function(req, res) {
+    console.log("-----------------------------------------");
+    console.log("adding a job...");
+    var jobObject = {'website': req.body.joblink, 'date': calcDate() };
+    var temp = false;
+
+    // if the job already was added
+    if(jobExists(req.user.local.username, req.body.joblink))
+    {
+      // TODO: do not allow duplicate jobs
+      console.log("job already exists");
+    } else {
+      console.log("job does not exist yet");
+      // this should not run if job has already been applied to
+      User.findOneAndUpdate(
+        { 'local.username': req.user.local.username },
+        { $push: { 'jobs':jobObject } },
+        { upsert: true },
+        function(err, user) {
+          console.log('hello, adding job....');
+
+          // if there are any errors, return the error
+          if (err) {
+            console.log(err);
+            return done(err);
           }
-        }
-      },
-      { $push: { 'jobs':{'website': req.body.joblink } } },
-      { returnNewDocument: true },
-      function(err, user) {
-        console.log('hello, adding job....');
 
-        // if there are any errors, return the error
-        if (err) {
-          console.log(err);
-          return done(err);
-        }
-
-        //reload page
-        res.redirect('/profile');
-        return;
+          //reload page
+          res.redirect('/profile');
+          return;
+        });
+      }
+      console.log("-----------------------------------------");
     });
-  })
 
-  // logout page
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
+    // process removing a job
+    app.post('/remove', isLoggedIn, function(req, res) {
+      console.log("-----------------------------------------");
+      console.log('removing job...');
+      jobsarray = req.user.jobs;
+      jobsarray.splice(req.query.index, 1);
+
+
+      User.findOneAndUpdate(
+        { 'local.username': req.user.local.username },
+        { 'jobs': jobsarray },
+        function(err, user) {
+          // if there are any errors, return the error
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+
+          //reload page
+          res.redirect('/profile');
+          return;
+        });
+        console.log("-----------------------------------------");
+    });
+
+    // logout page
+    app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+    });
 }
 
 // middleware to check if user is logged in
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
+  if (req.isAuthenticated())
+  return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('/');
+  // if they aren't redirect them to the home page
+  res.redirect('/');
+}
+
+// calculate the Date
+function calcDate() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+
+  var yyyy = today.getFullYear();
+  if (dd < 10){
+    dd = '0' + dd;
+  }
+  if (mm < 10){
+    mm = '0' + mm;
+  }
+  var today = mm + '/' + dd + '/' + yyyy;
+  return today;
 }
