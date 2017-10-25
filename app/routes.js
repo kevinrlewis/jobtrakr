@@ -52,39 +52,29 @@ module.exports = function(app, passport) {
     });
   });
 
+  // TODO: fix duplicate jobs
   // process adding a job
   app.post('/add', isLoggedIn, function(req, res) {
     console.log("-----------------------------------------");
     console.log("adding a job...");
     var jobObject = {'website': req.body.joblink, 'date': calcDate() };
-    var temp = false;
+    User.findOneAndUpdate(
+      { 'local.username': req.user.local.username },
+      { $push: { 'jobs':jobObject } },
+      { upsert: true },
+      function(err, user) {
+        console.log('hello, adding job....');
 
-    // if the job already was added
-    if(jobExists(req.user.local.username, req.body.joblink))
-    {
-      // TODO: do not allow duplicate jobs
-      console.log("job already exists");
-    } else {
-      console.log("job does not exist yet");
-      // this should not run if job has already been applied to
-      User.findOneAndUpdate(
-        { 'local.username': req.user.local.username },
-        { $push: { 'jobs':jobObject } },
-        { upsert: true },
-        function(err, user) {
-          console.log('hello, adding job....');
+        // if there are any errors, return the error
+        if (err) {
+          console.log(err);
+          return done(err);
+        }
 
-          // if there are any errors, return the error
-          if (err) {
-            console.log(err);
-            return done(err);
-          }
-
-          //reload page
-          res.redirect('/profile');
-          return;
-        });
-      }
+        //reload page
+        res.redirect('/profile');
+        return;
+      });
       console.log("-----------------------------------------");
     });
 
@@ -118,6 +108,11 @@ module.exports = function(app, passport) {
       req.logout();
       res.redirect('/');
     });
+}
+
+// check if job already exists
+function jobExists() {
+
 }
 
 // middleware to check if user is logged in
