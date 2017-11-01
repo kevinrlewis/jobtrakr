@@ -56,26 +56,49 @@ module.exports = function(app, passport) {
   // process adding a job
   app.post('/add', isLoggedIn, function(req, res) {
     console.log("-----------------------------------------");
-    console.log("adding a job...");
-    var jobObject = {'website': req.body.joblink, 'date': calcDate() };
-    User.findOneAndUpdate(
-      { 'local.username': req.user.local.username },
-      { $push: { 'jobs':jobObject } },
-      { upsert: true },
-      function(err, user) {
-        console.log('hello, adding job....');
+    console.log("checking if job exists");
+    var add;
 
-        // if there are any errors, return the error
-        if (err) {
-          console.log(err);
-          return done(err);
-        }
+    //console.log(req.user.jobs);
+    console.log(req.query);
+    add = true;
+    // loop through jobs
+    for(var i = 0; i < req.user.jobs.length; i++) {
+      // if job link exists in jobs array
+      if(req.user.jobs[i].website == req.query.link) {
+        console.log("JOB EXISTS");
+        //res.status(500).send();
+        add = false;
+        break;
+      }
+    }
 
-        //reload page
-        res.redirect('/profile');
-        return;
-      });
+    console.log("add: " + add);
+    if(add) {
       console.log("-----------------------------------------");
+      console.log("adding a job...");
+      // job object to add to mongodb
+      var jobObject = {'website': req.query.link, 'date': calcDate() };
+      // mongoose find one and update
+      User.findOneAndUpdate(
+        { 'local.username': req.user.local.username },
+        { $push: { 'jobs':jobObject } },
+        { upsert: true },
+        function(err, user) {
+          console.log('hello, adding job....');
+
+          // if there are any errors, return the error
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          //reload page
+          //res.redirect('/profile');
+          return;
+        });
+        console.log("-----------------------------------------");
+    }
+    res.redirect('/profile');
     });
 
     // process removing a job
@@ -85,7 +108,7 @@ module.exports = function(app, passport) {
       jobsarray = req.user.jobs;
       jobsarray.splice(req.query.index, 1);
 
-
+      // mongoose find one and update for removing job
       User.findOneAndUpdate(
         { 'local.username': req.user.local.username },
         { 'jobs': jobsarray },
@@ -108,11 +131,6 @@ module.exports = function(app, passport) {
       req.logout();
       res.redirect('/');
     });
-}
-
-// check if job already exists
-function jobExists() {
-
 }
 
 // middleware to check if user is logged in

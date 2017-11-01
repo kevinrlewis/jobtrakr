@@ -28,18 +28,20 @@ block content
             h3(style="float: left; margin: 0px;") Add Job
             span(class="close" onclick="modalclose_click()") x
           div.row(id='existsAlert' class='alert alert-danger' style='display: none;') Job already exists.
-          form(action="/add" method="POST" onsubmit="return checkJobExist(user.jobs)")
-            div.row(id="addJobForm")
-              label.col-xs-4.col-sm-2 Job Link:
-              input(
-                id="linkTextField"
-                type="plaintext"
-                placeholder="Link"
-                class="col-xs-8 col-xs-10"
-                name="joblink"
-              )
-            div.row
-              input(class="btn btn-success col-xs-offset-5 col-xs-3 col-sm-2" type="submit" value="submit")
+          div.row(id="addJobForm")
+            label.col-xs-4.col-sm-2 Job Link:
+            input(
+              id="linkTextField"
+              type="plaintext"
+              placeholder="Link"
+              class="col-xs-8 col-xs-10"
+              name="job_link"
+            )
+          div.row
+            button(
+              class="btn btn-success col-xs-offset-5 col-xs-3 col-sm-2"
+              onclick="checkJobExist()"
+            ) submit
     div.container(id="job-box-container")
       if user.jobs == undefined
         label error retrieving jobs
