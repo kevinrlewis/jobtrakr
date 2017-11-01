@@ -52,33 +52,31 @@ module.exports = function(app, passport) {
     });
   });
 
-  // TODO: fix duplicate jobs
   // process adding a job
   app.post('/add', isLoggedIn, function(req, res) {
-    console.log("-----------------------------------------");
-    console.log("checking if job exists");
     var add;
 
     //console.log(req.user.jobs);
-    console.log(req.query);
+    console.log(req);
     add = true;
     // loop through jobs
     for(var i = 0; i < req.user.jobs.length; i++) {
       // if job link exists in jobs array
-      if(req.user.jobs[i].website == req.query.link) {
+      if(req.user.jobs[i].website == req.body.job_link) {
         console.log("JOB EXISTS");
-        //res.status(500).send();
+        res.render("user.pug", {
+          message: true,
+          user: req.user
+        });
         add = false;
         break;
       }
     }
 
-    console.log("add: " + add);
+    // process adding a job if the link does not exist yet
     if(add) {
-      console.log("-----------------------------------------");
-      console.log("adding a job...");
       // job object to add to mongodb
-      var jobObject = {'website': req.query.link, 'date': calcDate() };
+      var jobObject = {'website': req.body.job_link, 'date': calcDate() };
       // mongoose find one and update
       User.findOneAndUpdate(
         { 'local.username': req.user.local.username },
@@ -93,18 +91,14 @@ module.exports = function(app, passport) {
             return done(err);
           }
           //reload page
-          //res.redirect('/profile');
+          res.redirect('/profile');
           return;
         });
-        console.log("-----------------------------------------");
     }
-    res.redirect('/profile');
     });
 
     // process removing a job
     app.post('/remove', isLoggedIn, function(req, res) {
-      console.log("-----------------------------------------");
-      console.log('removing job...');
       jobsarray = req.user.jobs;
       jobsarray.splice(req.query.index, 1);
 
@@ -123,7 +117,6 @@ module.exports = function(app, passport) {
           res.redirect('/profile');
           return;
         });
-        console.log("-----------------------------------------");
     });
 
     // logout page
