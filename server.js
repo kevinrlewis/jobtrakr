@@ -22,7 +22,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // required for passport
-app.use(session({ secret: 'trakmyjob' })); // session secret
+app.use(session({
+  secret: 'trakmyjob',
+  resave: true,
+  saveUninitialized: true
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -30,7 +34,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // connect mongodb database
 // TODO: Fix
 try {
-  mongoose.connect(db.url);
+  mongoose.connect(db.url, { useMongoClient: true });
 } catch (e) {
   console.log("was unable to connect to database");
   console.log(e.message);
