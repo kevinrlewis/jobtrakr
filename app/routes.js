@@ -56,14 +56,11 @@ module.exports = function(app, passport) {
   app.post('/add', isLoggedIn, function(req, res) {
     var add;
 
-    //console.log(req.user.jobs);
-    console.log(req);
     add = true;
     // loop through jobs
     for(var i = 0; i < req.user.jobs.length; i++) {
       // if job link exists in jobs array
       if(req.user.jobs[i].website == req.body.job_link) {
-        console.log("JOB EXISTS");
         res.render("user.pug", {
           message: true,
           user: req.user
@@ -83,8 +80,6 @@ module.exports = function(app, passport) {
         { $push: { 'jobs':jobObject } },
         { upsert: true },
         function(err, user) {
-          console.log('hello, adding job....');
-
           // if there are any errors, return the error
           if (err) {
             console.log(err);
