@@ -45,18 +45,19 @@ block content
                 type="submit"
                 value="submit"
               )
-    div.container(id="job-box-container")
-      if user.jobs == undefined
-        label error retrieving jobs
-      else
-        each item, index in user.jobs
-          div.row(class="job-box")
-            label(class="col-xs-1" type="text" name="index")=index
-            label(class="col-xs-9")=item.website
-            form(action="/remove?index="+index method="POST")
-              input(
-                type='submit'
-                class="btn btn-danger rmv col-xs-offset-1 col-xs-1"
-                aria-hidden="true"
-                value="remove"
-              )
+
+    if user.jobs == undefined
+      label error retrieving jobs
+    else
+      each item, index in user.jobs
+        div.row(class="job-box")
+          label(class="col-xs-1" type="text" name="index")=(index+1)
+          label(class="col-xs-8")=item.website
+          label(class="col-xs-1")=item.date
+          form(action="/remove?index="+index method="POST")
+            input(
+              type='submit'
+              class="btn btn-danger rmv col-xs-offset-1 col-xs-1"
+              aria-hidden="true"
+              value="remove"
+            )
