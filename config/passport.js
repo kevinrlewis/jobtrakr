@@ -42,8 +42,7 @@ module.exports = function(passport) {
     // asynchronous
     // User.findOne wont fire unless data is sent back
     process.nextTick(function() {
-
-      // find a user whose email is the same as the forms email
+      // find a user whose username is the same as the forms username
       // we are checking to see if the user trying to login already exists
       User.findOne({ 'local.username' :  username }, function(err, user) {
         // if there are any errors, return the error
@@ -52,7 +51,7 @@ module.exports = function(passport) {
           return done(err);
         }
 
-        // check to see if theres already a user with that email
+        // check to see if theres already a user with that username
         if (user) {
           console.log('user exists');
           return done(null, false, req.flash('signupMessage', 'That username is already taken.'));

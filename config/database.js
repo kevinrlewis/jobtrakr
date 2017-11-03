@@ -2,6 +2,6 @@
 // url of mongodb
 module.exports = {
 
-    'url' : 'mongodb://kevinrlewis:Kevlew22@ds151202.mlab.com:51202/jobtrak'
+    'url' : 'mongodb://admin:Kevlew22@ds243335.mlab.com:43335/jobtrakr-dev'
 
 };
