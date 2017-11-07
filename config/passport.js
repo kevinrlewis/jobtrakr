@@ -79,7 +79,7 @@ module.exports = function(passport) {
               console.log(err);
               throw err;
             }
-            console.log('user saved: ', newUser);
+            //console.log('user saved: ', newUser);
             return done(null, newUser);
           });
         }

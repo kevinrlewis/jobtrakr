@@ -12,6 +12,7 @@ var flash    = require('connect-flash');
 var bcrypt   = require('bcrypt-nodejs');
 var session  = require('express-session');
 var db = require('./config/database.js');
+var validUrl = require('valid-url');
 //var validator = require('express-validator');
 
 app.use(bodyParser.json());

@@ -15,8 +15,6 @@ block content
         )
   hr
   div.container
-    if message
-      div.row(id='existsAlert' class='alert alert-danger') Job already exists.
     div.row
       h3(class='col-xs-4 col-sm-4 col-md-4' style='margin-top:2px;') jobs applied:
       button(
@@ -27,24 +25,33 @@ block content
       div.row(id='popupModal' class='modal')
         div.modal-content.container
           div.row
-            h3(style="float: left; margin: 0px;") Add Job
+            h3(style="float: left; margin: 0px;") add job
             span(class="close" onclick="modalclose_click()") x
-          form(action="/add" method="POST")
-            div.row(id="addJobForm")
-              label.col-xs-4.col-sm-2 Job Link:
+          div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
+            label.col-xs-12 job already exists.
+          div.container
+            div.row
+              label.col-xs-4.col-sm-2 job link:
               input(
                 id="linkTextField"
                 type="plaintext"
-                placeholder="Link"
-                class="col-xs-8 col-xs-10"
-                name="job_link"
+                placeholder="link"
+                class="col-xs-8 col-sm-7"
               )
             div.row
+              label.col-xs-4.col-sm-2 comments:
               input(
-                class="btn btn-success col-xs-offset-5 col-xs-3 col-sm-2"
-                type="submit"
-                value="submit"
+                id="jobCommentField"
+                type="plaintext"
+                placeholder="comments or identifiers"
+                class="col-xs-8 col-sm-7"
               )
+            div.row
+              button(
+                id="submitJobBtn"
+                class="btn btn-success col-xs-offset-4 col-xs-3 col-sm-2"
+                onclick="addJob()"
+              ) submit
 
     if user.jobs == undefined
       label error retrieving jobs
@@ -52,7 +59,9 @@ block content
       each item, index in user.jobs
         div.row(class="job-box")
           label(class="col-xs-1" type="text" name="index")=(index+1)
-          label(class="col-xs-8")=item.website
+          label(class="col-xs-5")=item.hostname
+          a(href="#" class="col-xs-2" data-toggle="tooltip" data-placement="right" title=item.comments) comments
+          a(class="col-xs-1" href=item.website) link
           label(class="col-xs-1")=item.date
           form(action="/remove?index="+index method="POST")
             input(

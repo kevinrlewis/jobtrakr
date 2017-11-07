@@ -78,8 +78,13 @@ hr {
   border-radius: 0px;
 }
 
+#submitJobBtn {
+  background-color: var(--bck-color);
+}
 
-
+#submitJobBtn:hover {
+  background-color: var(--accent);
+}
 
 
 /* The Modal (background) */
@@ -106,6 +111,10 @@ hr {
     border-radius: 0px;
     padding-top: 5px;
     color: var(--txt-color); /* Black text */
+}
+
+#popupModal input {
+  color: #17202A;
 }
 
 /* The Close Button */

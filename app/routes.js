@@ -53,72 +53,94 @@ module.exports = function(app, passport) {
   });
 
   // process adding a job
-  app.post('/add', isLoggedIn, function(req, res) {
-    var add;
-
-    add = true;
+  app.post('/add', isLoggedIn,
+  function(req, res, next) {
+    console.log("checking if job exists...");
+    // job exists middle ware
     // loop through jobs
     for(var i = 0; i < req.user.jobs.length; i++) {
       // if job link exists in jobs array
-      if(req.user.jobs[i].website == req.body.job_link) {
-        res.render("user.pug", {
-          message: true,
-          user: req.user
-        });
-        add = false;
-        break;
+      if(req.user.jobs[i].website === req.body.joblink) {
+        console.log("job exists, sending 500 error");
+
+        // send response
+        res.status(500).send('Job already exists.');
+        return;
       }
     }
-
-    // process adding a job if the link does not exist yet
-    if(add) {
-      // job object to add to mongodb
-      var jobObject = {'website': req.body.job_link, 'date': calcDate() };
-      // mongoose find one and update
-      User.findOneAndUpdate(
-        { 'local.username': req.user.local.username },
-        { $push: { 'jobs':jobObject } },
-        { upsert: true },
-        function(err, user) {
-          // if there are any errors, return the error
-          if (err) {
-            console.log(err);
-            return done(err);
-          }
-          //reload page
-          res.redirect('/profile');
-          return;
-        });
+    next();
+  },
+  /*function(req, res, next) {
+    console.log("validating url...");
+    if(validUrl.isUri(req.body.joblink)) {
+      next();
+    } else {
+      console.log("invalid url");
+      res.status(500).send('Invalid URL.');
+      return;
     }
-    });
+  },*/
+  function(req, res, next) {
+    console.log("adding job...");
+    // job add middleware
+    // process adding a job if the link does not exist yet
+    // job object to add to mongodb
+    var jobObject = {
+      'website': req.body.joblink,
+      'date': calcDate(),
+      'hostname': req.body.hostname,
+      'hash': req.body.hash,
+      'pathname': req.body.pathname,
+      'search': req.body.search,
+      'comments': req.body.comments
+    };
+    // mongoose find one and update
+    User.findOneAndUpdate(
+      { 'local.username': req.user.local.username },
+      { $push: { 'jobs':jobObject } },
+      { upsert: true },
+      function(err, user) {
+        // if there are any errors, return the error
+        if (err) {
+          console.log(err);
+        }
 
-    // process removing a job
-    app.post('/remove', isLoggedIn, function(req, res) {
-      jobsarray = req.user.jobs;
-      jobsarray.splice(req.query.index, 1);
+        var response = {
+            status  : 200,
+            success : 'Updated Successfully'
+        };
+        // send response
+        res.end(JSON.stringify(response));
+      });
+  });
 
-      // mongoose find one and update for removing job
-      User.findOneAndUpdate(
-        { 'local.username': req.user.local.username },
-        { 'jobs': jobsarray },
-        function(err, user) {
-          // if there are any errors, return the error
-          if (err) {
-            console.log(err);
-            return done(err);
-          }
+  // process removing a job
+  app.post('/remove', isLoggedIn, function(req, res) {
+    jobsarray = req.user.jobs;
+    jobsarray.splice(req.query.index, 1);
 
-          //reload page
-          res.redirect('/profile');
-          return;
-        });
-    });
+    // mongoose find one and update for removing job
+    User.findOneAndUpdate(
+      { 'local.username': req.user.local.username },
+      { 'jobs': jobsarray },
+      function(err, user) {
+        // if there are any errors, return the error
+        if (err) {
+          console.log(err);
+          return done(err);
+        }
 
-    // logout page
-    app.get('/logout', function(req, res) {
-      req.logout();
-      res.redirect('/');
-    });
+        //reload page
+        res.redirect('/profile');
+        return;
+      });
+  });
+
+  // logout page
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 }
 
 // middleware to check if user is logged in
