@@ -2,6 +2,6 @@
 // url of mongodb
 module.exports = {
 
-    'url' : 'mongodb://admin:Kevlew22@ds243335.mlab.com:43335/jobtrakr-dev'
+    'url' : process.env.MONGODB_URI || 'mongodb://admin:8891607453@ds243335.mlab.com:43335/jobtrakr-dev'
 
 };

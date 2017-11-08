@@ -13,6 +13,9 @@ var bcrypt   = require('bcrypt-nodejs');
 var session  = require('express-session');
 var db = require('./config/database.js');
 var validUrl = require('valid-url');
+var helmet = require('helmet');
+var compression = require('compression');
+var debug = require('debug')('pusc');
 //var validator = require('express-validator');
 
 app.use(bodyParser.json());
@@ -31,6 +34,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+app.use(helmet());
 
 // connect mongodb database
 // TODO: Fix

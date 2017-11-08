@@ -1,13 +1,20 @@
 {
   "name": "jobtrak-2",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "engines": {
+    "node": "8.9.0",
+    "npm": "5.5.1"
+  },
   "description": "",
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "compression": "^1.7.1",
     "connect-flash": "^0.1.1",
+    "debug": "^3.1.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "helmet": "^3.9.0",
     "mongoose": "^4.13.0",
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",

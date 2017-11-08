@@ -4,6 +4,9 @@ var LocalStrategy = require('passport-local').Strategy;
 // load up the user model
 var User = require('../app/models/user');
 
+// debugger for the passport
+var debug = require('debug')('passport');
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
@@ -38,10 +41,13 @@ module.exports = function(passport) {
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, username, password, done) {
-    console.log('local signup processing passport');
+    //console.log('local signup processing passport');
+    debug('local signup processing passport');
     // asynchronous
     // User.findOne wont fire unless data is sent back
     process.nextTick(function() {
+
+      debug('accessing database to process user sign up...');
       // find a user whose username is the same as the forms username
       // we are checking to see if the user trying to login already exists
       User.findOne({ 'local.username' :  username }, function(err, user) {
