@@ -4,31 +4,35 @@ block content
   form(method='POST')
     div.container
         div.row
-          h1(class='col-xs-offset-1 col-sm-offset-4') JobTrakr Sign-up
+          h1(class='col-xs-offset-1 col-xs-8 col-sm-7') sign-up
+          a(
+            class='btn btn-default col-xs-3 col-sm-offset-2 col-sm-2'
+            href='/login'
+          ) back
         hr
         if message.length > 0
           div.row(class='alert alert-danger')=message
         div.row
-          label(for="username" class='col-sm-offset-3 col-xs-6 col-sm-3') Enter username:
+          label(for="username" class='col-sm-offset-3 col-xs-6 col-sm-3') enter username:
           input(
             type="plaintext"
-            placeholder="Username"
+            placeholder="username"
             class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
             name="username"
           )
         div.row
-          label(for="password1" class='col-sm-offset-3 col-xs-6 col-sm-3') Enter password:
+          label(for="password1" class='col-sm-offset-3 col-xs-6 col-sm-3') enter password:
           input(
             type="password"
-            placeholder="Password"
+            placeholder="password"
             class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
             name="password"
           )
         div.row
-          label(for="password2" class='col-sm-offset-3 col-xs-6 col-sm-3') Re-enter password:
+          label(for="password2" class='col-sm-offset-3 col-xs-6 col-sm-3') confirm password:
           input(
             type="password"
-            placeholder="Re-enter password"
+            placeholder="password"
             class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
           )
         div.row(style='margin-top:10px;')
@@ -37,4 +41,5 @@ block content
             class='btn btn-default col-xs-offset-5 col-sm-offset-6'
             name='newsignup'
             formaction='/signup'
+            value='submit'
           )

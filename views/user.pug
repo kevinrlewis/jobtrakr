@@ -5,10 +5,10 @@ block content
   include modal.pug
   div.container#header(style='margin-bottom:10px;')
     div.row
-      h1(class='col-xs-8 col-sm-6' style='margin-top:0px;')='hello '+user.local.username
+      h1(class='col-xs-9 col-sm-6' style='margin-top:0px;')='hello '+user.local.username
       form(method='GET')
         input(
-          class='btn btn-danger col-xs-offset-1 col-sm-offset-4 col-md-offset-5 col-xs-3 col-sm-2 col-md-1'
+          class='btn btn-danger col-sm-offset-4 col-md-offset-5 col-xs-3 col-sm-2 col-md-1'
           value='logout'
           type='submit'
           formaction='/logout'
@@ -16,9 +16,9 @@ block content
   hr
   div.container
     div.row
-      h3(class='col-xs-4 col-sm-4 col-md-4' style='margin-top:2px;') jobs applied:
+      h3(class='col-xs-8' style='margin-top:2px;') jobs applied:
       button(
-        class='btn btn-default col-xs-offset-4 col-xs-4 col-sm-4 col-md-4'
+        class='btn btn-default col-xs-4'
         id="addJobBtn"
         onclick="addjob_click()"
       ) add a job
@@ -26,7 +26,7 @@ block content
         div.modal-content.container
           div.row
             h3(style="float: left; margin: 0px;") add job
-            span(class="close" onclick="modalclose_click()") x
+            span(id="modalCloseSpan" class="close" onclick="modalclose_click()") x
           div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
             label.col-xs-12 job already exists.
           div.container
@@ -58,15 +58,24 @@ block content
     else
       each item, index in user.jobs
         div.row(class="job-box")
-          label(class="col-xs-1" type="text" name="index")=(index+1)
-          label(class="col-xs-5")=item.hostname
-          a(href="#" class="col-xs-2" data-toggle="tooltip" data-placement="right" title=item.comments) comments
-          a(class="col-xs-1" href=item.website) link
-          label(class="col-xs-1")=item.date
+          label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
+          label(class="col-xs-8 col-sm-5")=item.hostname
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
+          div.row(id='commentPopupModal'+index class='modal')
+            div.modal-content.container
+              div.row
+                h3(style="float: left; margin: 0px;") comments
+                span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
+              div.row
+                label(id="modalCommentLabel" class='col-xs-10')=item.comments
+                
+                
+          a(class="col-xs-1 col-sm-1" href=item.website) link
+          label(class="col-xs-8 col-sm-1")=item.date
           form(action="/remove?index="+index method="POST")
             input(
               type='submit'
-              class="btn btn-danger rmv col-xs-offset-1 col-xs-1"
+              class="btn btn-danger rmv col-xs-offset-1 col-xs-3 col-sm-offset-1 col-sm-1"
               aria-hidden="true"
               value="remove"
             )

@@ -62,3 +62,10 @@ function addJob(url) {
     }
   });
 }
+
+
+/*function editCommentClick() {
+  var comments;
+  comments = $('#modalCommentLabel').val();
+  $('#modalCommentLabel').replaceWith("<input type='plaintext' value='" + comments + "'/>");
+}*/

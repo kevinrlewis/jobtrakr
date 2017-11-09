@@ -5,6 +5,22 @@
   --accent: #82b74b;
 }
 
+@media (max-width: 375px) {
+  .col-xs-4 {
+    width: 40%;
+    padding: 0px;
+  }
+  .col-xs-8 {
+    width: 60%;
+  }
+  #submitJobBtn {
+    width: 33%;
+  }
+  .edit-icon {
+    width: 20%;
+  }
+}
+
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -14,6 +30,10 @@ body {
 
 a {
   color: var(--txt-color);
+}
+
+a:hover {
+  color: var(--bck-color);
 }
 
 #home-container {
@@ -86,6 +106,28 @@ hr {
   background-color: var(--accent);
 }
 
+#commentlink:hover {
+  cursor: pointer;
+}
+
+#modalCloseSpan {
+  color: var(--bck-color);
+  opacity: .8;
+}
+
+#modalCloseSpan:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.edit-icon {
+  padding: 7px;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: var(--bck-color);
+}
 
 /* The Modal (background) */
 .modal {

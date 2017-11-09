@@ -4,7 +4,7 @@ block content
   form(method='POST')
     div.container
       div.row
-        h1(class='col-xs-offset-4 col-sm-offset-5') JobTrakr
+        h1(class='col-xs-offset-3 col-sm-offset-5') JobTrakr
       hr
       if message.length > 0
         div.row(class='alert alert-danger')=message
@@ -14,7 +14,7 @@ block content
           type="plaintext"
           placeholder="Username"
           name='username'
-          class='text-field col-xs-5 col-sm-4 col-md-4 col-lg-4'
+          class='text-field col-xs-offset-1 col-xs-6 col-sm-4 col-md-4 col-lg-4'
         )
       div.row
         label(for="password" class='col-sm-offset-3 col-xs-4 col-sm-2 col-md-2 col-lg-2') Password:
@@ -22,11 +22,11 @@ block content
           type="password"
           placeholder="Password"
           name='password'
-          class='text-field col-xs-5 col-sm-4 col-md-4 col-lg-4'
+          class='text-field col-xs-offset-1 col-xs-6 col-sm-4 col-md-4 col-lg-4'
         )
       div.row(style='margin-top:10px;')
         input(
-          class='btn btn-default col-xs-offset-4 col-sm-offset-5'
+          class='btn btn-default col-xs-offset-3 col-sm-offset-3 col-sm-2'
           type='submit'
           value='sign in'
           name='signinButton'
@@ -34,7 +34,7 @@ block content
           id='sign-in'
         )
         input(
-          class='btn btn-default'
+          class='btn btn-default col-xs-offset-1 col-sm-offset-3 col-sm-2'
           type='submit'
           value='sign up'
           name='signupButton'

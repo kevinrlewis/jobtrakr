@@ -15,7 +15,7 @@ var db = require('./config/database.js');
 var validUrl = require('valid-url');
 var helmet = require('helmet');
 var compression = require('compression');
-var debug = require('debug')('pusc');
+var debug = require('debug')('server');
 //var validator = require('express-validator');
 
 app.use(bodyParser.json());
