@@ -3,17 +3,19 @@ extends layout
 block content
   div.container(id='home-container')
     div.row
-      h1(class='col-xs-offset-3 col-sm-offset-5')=title
+      h1(class='col-xs-4')=title
+      a(
+        href='/login'
+        class='btn btn-default col-xs-3 col-sm-3'
+        style='margin-top: 3%;'
+      ) login
+      a(
+        href='/signup'
+        class='btn btn-default col-xs-offset-1 col-sm-offset-1 col-xs-3 col-sm-3'
+        style='margin-top: 3%;'
+      ) sign up
+
     hr
     div.row
       p(class='col-sm-offset-3 col-xs-12 col-sm-6') JobTrak will help you keep track of your jobs during the application process. Begin tracking by clicking one of the options below.
-    div.row
-      a(
-        href='/login'
-        class='btn btn-default col-xs-offset-1 col-xs-4 col-sm-offset-3 col-sm-2'
-      ) login
-      h4(class='col-xs-2' style="text-align: center;") or
-      a(
-        href='/signup'
-        class='btn btn-default col-xs-4 col-sm-2'
-      ) sign up
+    
