@@ -12,47 +12,50 @@ block content
           value='logout'
           type='submit'
           formaction='/logout'
+          style='margin-top: 1%;'
         )
   hr
-  div.container
+  div.row(id='popupModal' class='modal')
+    div.modal-content.container
+      div.row
+        h3(class="col-xs-4" style="float: left; margin: 0px;") add job
+        span(id="modalCloseSpan" class="close col-xs-offset-7 col-xs-1" onclick="modalclose_click()") x
+      div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
+        label.col-xs-12 job already exists.
+      div.container
+        div.row
+          label.col-xs-4.col-sm-2 job link:
+          input(
+            id="linkTextField"
+            type="plaintext"
+            placeholder="link"
+            class="col-xs-8 col-sm-7"
+          )
+        div.row
+          label.col-xs-4.col-sm-2 comments:
+          input(
+            id="jobCommentField"
+            type="plaintext"
+            placeholder="comments or identifiers"
+            class="col-xs-8 col-sm-7"
+          )
+        div.row
+          button(
+            id="submitJobBtn"
+            class="btn btn-success col-xs-offset-4 col-xs-3 col-sm-2"
+            onclick="addJob()"
+          ) submit
+        h5(id='prospect-header' style='display: none;')
+
+  div.box-cont.container
     div.row
       h3(class='col-xs-8' style='margin-top:2px;') jobs applied:
       button(
         class='btn btn-default col-xs-4'
         id="addJobBtn"
-        onclick="addjob_click()"
+        onclick="addjob_click(1)"
       ) add a job
-      div.row(id='popupModal' class='modal')
-        div.modal-content.container
-          div.row
-            h3(style="float: left; margin: 0px;") add job
-            span(id="modalCloseSpan" class="close" onclick="modalclose_click()") x
-          div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
-            label.col-xs-12 job already exists.
-          div.container
-            div.row
-              label.col-xs-4.col-sm-2 job link:
-              input(
-                id="linkTextField"
-                type="plaintext"
-                placeholder="link"
-                class="col-xs-8 col-sm-7"
-              )
-            div.row
-              label.col-xs-4.col-sm-2 comments:
-              input(
-                id="jobCommentField"
-                type="plaintext"
-                placeholder="comments or identifiers"
-                class="col-xs-8 col-sm-7"
-              )
-            div.row
-              button(
-                id="submitJobBtn"
-                class="btn btn-success col-xs-offset-4 col-xs-3 col-sm-2"
-                onclick="addJob()"
-              ) submit
-
+      
     if user.jobs == undefined
       label error retrieving jobs
     else
@@ -60,7 +63,9 @@ block content
         div.row(class="job-box")
           label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
           label(class="col-xs-8 col-sm-5")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
+            style='padding-left: 0px;'
+          ) comments
           div.row(id='commentPopupModal'+index class='modal')
             div.modal-content.container
               div.row
@@ -68,9 +73,7 @@ block content
                 span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
               div.row
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
-                
-                
-          a(class="col-xs-1 col-sm-1" href=item.website) link
+          a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
           label(class="col-xs-8 col-sm-1")=item.date
           form(action="/remove?index="+index method="POST")
             input(
@@ -79,3 +82,52 @@ block content
               aria-hidden="true"
               value="remove"
             )
+
+  div.box-cont.container
+    div.row
+      h3(class='col-xs-8' style='margin-top:2px;') prospective jobs:
+      button(
+        class='btn btn-default col-xs-4'
+        id="addJobBtn"
+        onclick="addjob_click(2)"
+      ) add a prospect
+    if user.jobs == undefined
+      label error retrieving jobs
+    else
+      each item, index in user.prospectjobs
+        div.row(class="job-box")
+          label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
+          label(class="col-xs-8 col-sm-4")=item.hostname
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
+            style='padding-left: 0px;'
+          ) comments
+          div.row(id='commentPopupModal'+index class='modal')
+            div.modal-content.container
+              div.row
+                h3(style="float: left; margin: 0px;") comments
+                span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
+              div.row
+                label(id="modalCommentLabel" class='col-xs-10')=item.comments
+          a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
+          label(class="col-xs-8 col-sm-1")=item.date
+          div.job-btn-grp(class="col-xs-offset-1 col-sm-2")
+            form(action="/move?prospect="+index method="POST")
+              button(
+                type='submit'
+                class="btn btn-success move"
+                aria-hidden="true"
+                style="float: left; padding-left: 5px; padding-right: 5px;"
+              )
+                i(class='fa fa-check' aria-hidden="true")
+            form(action="/remove?prospect="+index method="POST")
+              input(
+                type='submit'
+                class="btn btn-danger rmv"
+                aria-hidden="true"
+                value="remove"
+                style="float: right; padding-left: 5px; padding-right: 5px;"
+              )
+
+  div.container
+    label(id='check-mark-info' class='col-xs-12' style='float: right;') click the check mark to move to applied 
+      i(class='fa fa-check' aria-hidden="true")

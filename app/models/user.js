@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     username     : String,
     password     : String,
   },
-  jobs : [{ type: mongoose.Schema.Types.Mixed }]
+  jobs : [{ type: mongoose.Schema.Types.Mixed }],
+  prospectjobs : [{ type: mongoose.Schema.Types.Mixed }]
 
 });
 

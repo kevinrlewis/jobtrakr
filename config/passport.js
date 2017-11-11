@@ -69,7 +69,8 @@ module.exports = function(passport) {
             local: {
               username: username
             },
-            jobs: []
+            jobs: [],
+            prospectjobs: []
           });
           newUser.local.password = newUser.generateHash(password);
 

@@ -1,5 +1,11 @@
 // When the user clicks on the button, open the modal
-function addjob_click() {
+function addjob_click(jobtype) {
+  console.log("addjob_click:" + jobtype);
+  if(jobtype === 1) {
+    $('#prospect-header').css('display', 'none');
+  } else {
+    $('#prospect-header').css('display', 'block');
+  }
   document.getElementById('popupModal').style.display = "block";
 }
 
@@ -15,6 +21,7 @@ function modalclose_click() {
 // When the user clicks on <span> (x), close the modal
 function comments_modalclose_click(index) {
   document.getElementById('commentPopupModal' + index).style.display = "none";
+  location.reload();
 }
 
 // When the user clicks anywhere outside of the modal, close it
