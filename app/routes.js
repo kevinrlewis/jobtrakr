@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
 
   // login form
   app.get('/login', function(req, res) {
-    res.render('login.pug', { message: req.flash('loginMessage') });
+    res.render('login.pug', { message: req.flash('loginMessage'), title: 'jobtrakr' });
   });
 
   // process login
@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
   // signup form
   app.get('/signup', function(req, res) {
     // render the signup page
-    res.render('signup.pug', { message: req.flash('signupMessage') });
+    res.render('signup.pug', { message: req.flash('signupMessage'), title: 'jobtrakr' });
   });
 
   // process signup
@@ -48,7 +48,8 @@ module.exports = function(app, passport) {
   // user page
   app.get('/profile', isLoggedIn, function(req, res) {
     res.render('user.pug', {
-      user : req.user
+      user : req.user,
+      title: 'jobtrakr'
     });
   });
 
