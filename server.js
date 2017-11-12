@@ -16,6 +16,7 @@ var validUrl = require('valid-url');
 var helmet = require('helmet');
 var compression = require('compression');
 var debug = require('debug')('server');
+var favicon = require('serve-favicon');
 //var validator = require('express-validator');
 
 app.use(bodyParser.json());
@@ -24,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // required for passport
 app.use(session({
