@@ -58,6 +58,17 @@ a:hover {
   border-radius: 0px;
 }
 
+.btn-danger {
+  background-color: #550000;
+  border-color: var(--txt-color);
+}
+
+.btn-danger:hover {
+  background-color: #FFAAAA;
+  border-color: var(--bck-color);
+  color: var(--bck-color);
+}
+
 #sign-in {
   margin-right: 5px;
 }
@@ -83,6 +94,11 @@ hr {
   color: var(--txt-color);
 }
 
+.rmv:hover {
+  background-color: #550000;
+  color: var(--txt-color);
+}
+
 .move {
   padding: 1px;
   border: 0px;
@@ -91,7 +107,18 @@ hr {
 
 }
 
-#check-mark-info {
+.reject {
+  padding: 1px;
+  border: 0px;
+  background-color: var(--bck-color);
+  color: var(--txt-color);
+}
+
+.reject:hover {
+  background-color: #550000;
+}
+
+.box-info {
   text-align: center;
   font-size: 12px;
 }
@@ -103,14 +130,18 @@ hr {
   color: var(--txt-color);
 }
 
-.job-box > button {
-
+.reject-box {
+  border-left: solid 5px #FFAAAA;
 }
 
 .box-cont {
   background-color: #674d3c;
   /*background-color: #7a3b2e;*/
   margin-top: 2%;
+}
+
+#reject-box {
+  background-color: #550000;
 }
 
 .job-btn-grp {

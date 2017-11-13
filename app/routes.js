@@ -49,7 +49,10 @@ module.exports = function(app, passport) {
   app.get('/profile', isLoggedIn, function(req, res) {
     res.render('user.pug', {
       user : req.user,
-      title: 'jobtrakr'
+      title: 'jobtrakr',
+      appliedsum : (req.user.jobs.length),
+      prospectivesum : (req.user.prospectjobs.length),
+      rejectedsum : (req.user.rejectjobs.length)
     });
   });
 
@@ -199,38 +202,73 @@ module.exports = function(app, passport) {
   app.post('/move', isLoggedIn,
   function(req, res, next) {
     console.log("moving job...");
-    var jobsarray;
-    var prospectarray;
-    var movingobject;
+    if(req.query.prospect) {
+      var jobsarray;
+      var prospectarray;
+      var movingobject;
 
-    jobsarray = req.user.jobs;
-    prospectarray = req.user.prospectjobs;
+      jobsarray = req.user.jobs;
+      prospectarray = req.user.prospectjobs;
 
-    // object to move to jobsarray
-    movingobject = prospectarray[req.query.prospect];
-    console.log('movingobject: ' + movingobject);
+      // object to move to jobsarray
+      movingobject = prospectarray[req.query.prospect];
+      console.log('movingobject: ' + movingobject);
 
-    // remove object from prospect array
-    prospectarray.splice(req.query.prospect, 1);
+      // remove object from prospect array
+      prospectarray.splice(req.query.prospect, 1);
 
-    // add object to jobs array
-    jobsarray.push(movingobject);
+      // add object to jobs array
+      jobsarray.push(movingobject);
 
-    // mongoose find one and update
-    User.findOneAndUpdate(
-      { 'local.username': req.user.local.username },
-      { 'jobs': jobsarray, 'prospectjobs': prospectarray },
-      { upsert: true },
-      function(err, user) {
-        // if there are any errors, return the error
-        if (err) {
-          console.log(err);
-        }
+      // mongoose find one and update
+      User.findOneAndUpdate(
+        { 'local.username': req.user.local.username },
+        { 'jobs': jobsarray, 'prospectjobs': prospectarray },
+        { upsert: true },
+        function(err, user) {
+          // if there are any errors, return the error
+          if (err) {
+            console.log(err);
+          }
 
-        // send response
-        res.redirect('/profile');
-        return;
-      });
+          // send response
+          res.redirect('/profile');
+          return;
+        });
+    } else if(req.query.reject) {
+      var jobsarray;
+      var rejectsarray;
+      var movingobject;
+
+      jobsarray = req.user.jobs;
+      rejectsarray = req.user.rejectjobs;
+
+      // object to move to jobsarray
+      movingobject = jobsarray[req.query.reject];
+      console.log('movingobject: ' + movingobject);
+
+      // remove object from prospect array
+      jobsarray.splice(req.query.reject, 1);
+
+      // add object to jobs array
+      rejectsarray.push(movingobject);
+
+      // mongoose find one and update
+      User.findOneAndUpdate(
+        { 'local.username': req.user.local.username },
+        { 'jobs': jobsarray, 'rejectjobs': rejectsarray },
+        { upsert: true },
+        function(err, user) {
+          // if there are any errors, return the error
+          if (err) {
+            console.log(err);
+          }
+
+          // send response
+          res.redirect('/profile');
+          return;
+        });
+    }
   });
 
   // logout page

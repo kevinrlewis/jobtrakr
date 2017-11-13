@@ -49,7 +49,7 @@ block content
 
   div.box-cont.container
     div.row
-      h3(class='col-xs-8' style='margin-top:2px;') jobs applied:
+      h3(class='col-xs-8' style='margin-top:2px;')=("jobs applied: " + appliedsum) 
       button(
         class='btn btn-default col-xs-4'
         id="addJobBtn"
@@ -62,7 +62,7 @@ block content
       each item, index in user.jobs
         div.row(class="job-box")
           label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-8 col-sm-5")=item.hostname
+          label(class="col-xs-8 col-sm-4")=item.hostname
           a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
             style='padding-left: 0px;'
           ) comments
@@ -75,17 +75,31 @@ block content
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
           label(class="col-xs-8 col-sm-1")=item.date
-          form(action="/remove?index="+index method="POST")
-            input(
-              type='submit'
-              class="btn btn-danger rmv col-xs-offset-1 col-xs-3 col-sm-offset-1 col-sm-1"
-              aria-hidden="true"
-              value="remove"
-            )
+          div.job-btn-grp(class="col-xs-offset-1 col-sm-2")
+            form(action="/move?reject="+index method="POST")
+              button(
+                type='submit'
+                class="btn btn-success reject"
+                aria-hidden="true"
+                style="float: left; padding-left: 5px; padding-right: 5px;"
+              )
+                i(class='fa fa-chevron-circle-down' aria-hidden="true")
+            form(action="/remove?prospect="+index method="POST")
+              input(
+                type='submit'
+                class="btn btn-danger rmv"
+                aria-hidden="true"
+                value="remove"
+                style="float: right; padding-left: 5px; padding-right: 5px;"
+              )
+
+  div.container
+    label(class='box-info col-xs-12' style='float: right;') click the down mark to move to rejected 
+      i(class='fa fa-chevron-circle-down' aria-hidden="true")
 
   div.box-cont.container
     div.row
-      h3(class='col-xs-8' style='margin-top:2px;') prospective jobs:
+      h3(class='col-xs-8' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
       button(
         class='btn btn-default col-xs-4'
         id="addJobBtn"
@@ -129,5 +143,37 @@ block content
               )
 
   div.container
-    label(id='check-mark-info' class='col-xs-12' style='float: right;') click the check mark to move to applied 
+    label(class='box-info col-xs-12' style='float: right;') click the check mark to move to applied 
       i(class='fa fa-check' aria-hidden="true")
+
+  div.box-cont.container#reject-box
+    div.row
+      h3(class='col-xs-8' style='margin-top:2px;')=("rejected jobs: " + rejectedsum)
+    if user.rejectjobs == undefined
+      label error retrieving jobs
+    else
+      each item, index in user.rejectjobs
+        div.row(class="job-box reject-box")
+          label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
+          label(class="col-xs-8 col-sm-4")=item.hostname
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
+            style='padding-left: 0px;'
+          ) comments
+          div.row(id='commentPopupModal'+index class='modal')
+            div.modal-content.container
+              div.row
+                h3(style="float: left; margin: 0px;") comments
+                span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
+              div.row
+                label(id="modalCommentLabel" class='col-xs-10')=item.comments
+          a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
+          label(class="col-xs-8 col-sm-1")=item.date
+          div.job-btn-grp(class="col-xs-offset-1 col-sm-2")
+            form(action="/remove?prospect="+index method="POST")
+              input(
+                type='submit'
+                class="btn btn-danger rmv"
+                aria-hidden="true"
+                value="remove"
+                style="float: right; padding-left: 5px; padding-right: 5px;"
+              )

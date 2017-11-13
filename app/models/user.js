@@ -10,7 +10,8 @@ var userSchema = mongoose.Schema({
     password     : String,
   },
   jobs : [{ type: mongoose.Schema.Types.Mixed }],
-  prospectjobs : [{ type: mongoose.Schema.Types.Mixed }]
+  prospectjobs : [{ type: mongoose.Schema.Types.Mixed }],
+  rejectjobs : [{ type: mongoose.Schema.Types.Mixed }]
 
 });
 
