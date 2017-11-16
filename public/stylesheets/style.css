@@ -26,7 +26,9 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("/images/back.jpeg");
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
+  background-position: 100% top;
+  background-attachment: fixed;
 
   color: var(--txt-color);
 }
