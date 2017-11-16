@@ -15,6 +15,7 @@ block content
           style='margin-top: 1%;'
         )
   hr
+  
   div.row(id='popupModal' class='modal')
     div.modal-content.container
       div.row
@@ -47,9 +48,13 @@ block content
           ) submit
         h5(id='prospect-header' style='display: none;')
 
+  
+
   div.box-cont.container
     div.row
-      h3(class='col-xs-8' style='margin-top:2px;')=("jobs applied: " + appliedsum) 
+      h3(class='col-xs-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
+      label(class='box-info col-xs-4') click the down mark to move to rejected 
+        i(class='fa fa-chevron-circle-down' aria-hidden="true")
       button(
         class='btn btn-default col-xs-4'
         id="addJobBtn"
@@ -93,13 +98,11 @@ block content
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
 
-  div.container
-    label(class='box-info col-xs-12' style='float: right;') click the down mark to move to rejected 
-      i(class='fa fa-chevron-circle-down' aria-hidden="true")
-
   div.box-cont.container
     div.row
-      h3(class='col-xs-8' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
+      h3(class='col-xs-4' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
+      label(class='box-info col-xs-4') click the check mark to move to applied 
+        i(class='fa fa-check' aria-hidden="true")
       button(
         class='btn btn-default col-xs-4'
         id="addJobBtn"
@@ -141,10 +144,6 @@ block content
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
-
-  div.container
-    label(class='box-info col-xs-12' style='float: right;') click the check mark to move to applied 
-      i(class='fa fa-check' aria-hidden="true")
 
   div.box-cont.container#reject-box
     div.row

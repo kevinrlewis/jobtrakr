@@ -24,7 +24,10 @@
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: var(--bck-color);
+  background-image: url("/images/back.jpeg");
+  background-repeat: no-repeat;
+  background-size:cover;
+
   color: var(--txt-color);
 }
 
@@ -140,6 +143,7 @@ hr {
   margin-top: 2%;
 }
 
+
 #reject-box {
   background-color: #550000;
 }
@@ -228,4 +232,12 @@ hr {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.version {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--txt-color);
+  float: right;
 }
