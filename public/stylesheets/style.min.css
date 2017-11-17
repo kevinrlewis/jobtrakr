@@ -1,0 +1,16 @@
+:root{--txt-color:#E5EEEC;--bck-color:#3e4444;--off-color:#c1946a;--accent:#82b74b}
+@media(max-width:375px){.col-xs-4{width:40%;padding:0px}.col-xs-8{width:60%}
+#submitJobBtn{width:33%}.edit-icon{width:20%}}
+body{padding:25px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif;background-image:url("/images/back.jpg");background-repeat:no-repeat;background-size:cover;background-position:100%top;background-attachment:fixed;color:var(--txt-color)}
+a{color:var(--txt-color)}
+a:hover{color:var(--bck-color)}
+#home-container{color:var(--txt-color)}.text-field{color:#17202A}.container>div>.btn{border-color:var(--txt-color);background-color:var(--off-color);color:var(--txt-color)}.container>div>.btn:hover{background-color:var(--accent);color:var(--bck-color)}.btn{border-radius:0px}.btn-danger{background-color:#550000;border-color:var(--txt-color)}.btn-danger:hover{background-color:#FFAAAA;border-color:var(--bck-color);color:var(--bck-color)}
+#sign-in{margin-right:5px}
+hr{display:block;height:5px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;border-color:var(--txt-color)}.row{padding:5px}.rmv{padding:1px;border:0px;background-color:var(--bck-color);color:var(--txt-color)}.rmv:hover{background-color:#550000;color:var(--txt-color)}.move{padding:1px;border:0px;background-color:var(--bck-color);color:var(--txt-color)}.reject{padding:1px;border:0px;background-color:var(--bck-color);color:var(--txt-color)}.reject:hover{background-color:#550000}.box-info{text-align:center;font-size:12px}.job-box{border-left:solid 5px var(--accent);margin-bottom:3px;background-color:var(--off-color);color:var(--txt-color)}.reject-box{border-left:solid 5px #FFAAAA}.box-cont{background-color:#674d3c;margin-top:2%}
+#reject-box{background-color:#550000}.job-btn-grp{padding-right:0px}.alert{border-radius:0px}
+#submitJobBtn{background-color:var(--bck-color)}
+#submitJobBtn:hover{background-color:var(--accent)}
+#commentlink:hover{cursor:pointer}
+#modalCloseSpan{color:var(--bck-color);opacity:.8}
+#modalCloseSpan:hover{color:var(--accent);opacity:1}.edit-icon{padding:7px;cursor:pointer}.edit-icon:hover{color:var(--bck-color)}/* The Modal (background) */.modal{display:none;position:fixed;z-index:1;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4);/* Black w/ opacity */}/* Modal Content/Box */.modal-content{background-color:var(--off-color);margin:15%auto;padding:20px;border:1px solid #888;width:80%;border-radius:0px;padding-top:5px;color:var(--txt-color);/* Black text */}
+#popupModal input{color:#17202A}/* The Close Button */.close{color:#aaa;float:right;font-size:28px;font-weight:bold;text-align:right;padding-right:5px}.close:hover,.close:focus{color:black;text-decoration:none;cursor:pointer}.version{position:absolute;top:0;right:0;color:var(--txt-color);float:right}
