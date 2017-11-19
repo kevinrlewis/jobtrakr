@@ -33,7 +33,7 @@
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #BC8F8F;
+  background-color: var(--bck-color);
   color: var(--txt-color);
 }
 
