@@ -52,11 +52,11 @@ block content
 
   div.box-cont.container
     div.row
-      h3(class='col-xs-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
-      label(class='box-info col-xs-4') click the down mark to move to rejected 
+      h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
+      label(class='box-info col-xs-6 col-sm-4') click the down mark to move to rejected 
         i(class='fa fa-chevron-circle-down' aria-hidden="true")
       button(
-        class='btn btn-default col-xs-4'
+        class='btn btn-default col-xs-6 col-sm-4'
         id="addJobBtn"
         onclick="addjob_click(1)"
       ) add a job
@@ -68,10 +68,8 @@ block content
       each item, index in user.jobs
         div.row(class="job-box")
           label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-8 col-sm-4")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
-            style='padding-left: 0px;'
-          ) comments
+          label(class="col-xs-10 col-sm-4")=item.hostname
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
           div.row(id='commentPopupModal'+index class='modal')
             div.modal-content.container
               div.row
@@ -80,12 +78,12 @@ block content
               div.row
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
-          label(class="col-xs-8 col-sm-1")=item.date
-          div.job-btn-grp(class="col-xs-offset-1 col-sm-2")
+          label(class="col-xs-2 col-sm-1")=item.date
+          div.job-btn-grp(class="col-sm-offset-1")
             form(action="/move?reject="+index method="POST")
               button(
                 type='submit'
-                class="btn btn-success reject"
+                class="btn btn-success reject col-xs-offset-2 col-xs-1 col-sm-offset-1 col-sm-1"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
               )
@@ -93,7 +91,7 @@ block content
             form(action="/remove?prospect="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv"
+                class="btn btn-danger rmv col-xs-3 col-sm-1"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
@@ -101,11 +99,11 @@ block content
 
   div.box-cont.container
     div.row
-      h3(class='col-xs-4' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
-      label(class='box-info col-xs-4') click the check mark to move to applied 
+      h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
+      label(class='box-info col-xs-6 col-sm-4') click the check mark to move to applied 
         i(class='fa fa-check' aria-hidden="true")
       button(
-        class='btn btn-default col-xs-4'
+        class='btn btn-default col-xs-6 col-sm-4'
         id="addJobBtn"
         onclick="addjob_click(2)"
       ) add a prospect
@@ -115,10 +113,8 @@ block content
       each item, index in user.prospectjobs
         div.row(class="job-box")
           label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-8 col-sm-4")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
-            style='padding-left: 0px;'
-          ) comments
+          label(class="col-xs-10 col-sm-4")=item.hostname
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
           div.row(id='commentPopupModal'+index class='modal')
             div.modal-content.container
               div.row
@@ -127,12 +123,12 @@ block content
               div.row
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
-          label(class="col-xs-8 col-sm-1")=item.date
-          div.job-btn-grp(class="col-xs-offset-1 col-sm-2")
+          label(class="col-xs-2 col-sm-1")=item.date
+          div.job-btn-grp(class="col-sm-offset-1")
             form(action="/move?prospect="+index method="POST")
               button(
                 type='submit'
-                class="btn btn-success move"
+                class="btn btn-success move col-xs-offset-2 col-xs-1 col-sm-offset-1 col-sm-1"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
               )
@@ -140,7 +136,7 @@ block content
             form(action="/remove?prospect="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv"
+                class="btn btn-danger rmv col-xs-3 col-sm-1"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
@@ -148,17 +144,15 @@ block content
 
   div.box-cont.container#reject-box
     div.row
-      h3(class='col-xs-8' style='margin-top:2px;')=("rejected jobs: " + rejectedsum)
+      h3(class='col-xs-12' style='margin-top:2px;')=("rejected jobs: " + rejectedsum)
     if user.rejectjobs == undefined
       label error retrieving jobs
     else
       each item, index in user.rejectjobs
         div.row(class="job-box reject-box")
           label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-8 col-sm-4")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')'
-            style='padding-left: 0px;'
-          ) comments
+          label(class="col-xs-10 col-sm-4")=item.hostname
+          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
           div.row(id='commentPopupModal'+index class='modal')
             div.modal-content.container
               div.row
@@ -167,12 +161,12 @@ block content
               div.row
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
-          label(class="col-xs-8 col-sm-1")=item.date
-          div.job-btn-grp(class="col-xs-offset-1 col-sm-2")
+          label(class="col-xs-2 col-sm-1")=item.date
+          div.job-btn-grp(class="col-sm-offset-1")
             form(action="/remove?prospect="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv"
+                class="btn btn-danger rmv col-xs-offset-2 col-xs-3 col-sm-offset-1 col-sm-1"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"

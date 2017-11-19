@@ -19,6 +19,15 @@
   .edit-icon {
     width: 20%;
   }
+  #commentlink {
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 376px) {
+  #commentlink {
+    padding-left: 5%;
+  }
 }
 
 body {
