@@ -33,12 +33,7 @@
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url("/images/back.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 100% top;
-  background-attachment: fixed;
-
+  background-color: #BC8F8F;
   color: var(--txt-color);
 }
 
