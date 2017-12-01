@@ -50,11 +50,11 @@ block content
 
   
 
-  div.box-cont.container
+  div.box-cont.container#jobsapplied
     div.row
       h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
       label(class='box-info col-xs-6 col-sm-4') click the down mark to move to rejected 
-        i(class='fa fa-chevron-circle-down' aria-hidden="true")
+        i(class='fa fa-arrow-down' aria-hidden="true")
       button(
         class='btn btn-default col-xs-6 col-sm-4'
         id="addJobBtn"
@@ -87,8 +87,8 @@ block content
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
               )
-                i(class='fa fa-chevron-circle-down' aria-hidden="true")
-            form(action="/remove?prospect="+index method="POST")
+                i(class='fa fa-arrow-down' aria-hidden="true")
+            form(action="/remove?index="+index method="POST")
               input(
                 type='submit'
                 class="btn btn-danger rmv col-xs-3 col-sm-1"
