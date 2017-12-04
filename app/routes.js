@@ -194,14 +194,30 @@ module.exports = function(app, passport) {
           res.redirect('/profile');
           return;
         });
-    }
+    } else if(req.query.reject) {
+      jobsarray = req.user.rejectjobs;
+      jobsarray.splice(req.query.reject, 1);
+      // mongoose find one and update for removing job
+      User.findOneAndUpdate(
+        { 'local.username': req.user.local.username },
+        { 'rejectjobs': jobsarray },
+        function(err, user) {
+          // if there are any errors, return the error
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
 
+          //reload page
+          res.redirect('/profile');
+          return;
+        });
+    }
   });
 
   // process adding a job
   app.post('/move', isLoggedIn,
   function(req, res, next) {
-    console.log("moving job...");
     if(req.query.prospect) {
       var jobsarray;
       var prospectarray;
@@ -212,7 +228,6 @@ module.exports = function(app, passport) {
 
       // object to move to jobsarray
       movingobject = prospectarray[req.query.prospect];
-      console.log('movingobject: ' + movingobject);
 
       // remove object from prospect array
       prospectarray.splice(req.query.prospect, 1);
@@ -245,7 +260,6 @@ module.exports = function(app, passport) {
 
       // object to move to jobsarray
       movingobject = jobsarray[req.query.reject];
-      console.log('movingobject: ' + movingobject);
 
       // remove object from prospect array
       jobsarray.splice(req.query.reject, 1);
