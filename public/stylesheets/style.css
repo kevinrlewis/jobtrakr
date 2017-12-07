@@ -1,8 +1,8 @@
 :root {
-  --txt-color: #E5EEEC;
-  --bck-color: #3e4444;
-  --off-color: #c1946a;
-  --accent: #82b74b;
+  --txt-color: #FFFFFF;
+  --bck-color: #353535;
+  --off-color: #6C534E;
+  --accent: #77AD78;
 }
 
 @media (max-width: 375px) {
@@ -42,7 +42,7 @@ a {
 }
 
 a:hover {
-  color: var(--bck-color);
+  color: #8EA8C3;
 }
 
 #home-container {
@@ -73,9 +73,9 @@ a:hover {
 }
 
 .btn-danger:hover {
-  background-color: #FFAAAA;
+  background-color: #A50104;
   border-color: var(--bck-color);
-  color: var(--bck-color);
+  /*color: var(--bck-color);*/
 }
 
 #sign-in {
@@ -148,7 +148,7 @@ hr {
 }
 
 .box-cont {
-  background-color: #674d3c;
+  /*background-color: #674d3c;*/
   /*background-color: #7a3b2e;*/
   margin-top: 2%;
 }
@@ -159,7 +159,7 @@ hr {
 }
 
 #jobsapplied {
-  background-color: #336600;
+  background-color: #23395B;
 }
 
 .job-btn-grp {
