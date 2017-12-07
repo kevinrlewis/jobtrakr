@@ -1,8 +1,8 @@
 :root {
   --txt-color: #FFFFFF;
-  --bck-color: #353535;
-  --off-color: #6C534E;
-  --accent: #77AD78;
+  --bck-color: #001A23;
+  --off-color: #53687E;
+  --accent: #60993E;
 }
 
 @media (max-width: 375px) {
@@ -68,13 +68,13 @@ a:hover {
 }
 
 .btn-danger {
-  background-color: #550000;
-  border-color: var(--txt-color);
+  background-color: #8D0801;
+  border-color: var(--bck-color);
 }
 
 .btn-danger:hover {
-  background-color: #A50104;
-  border-color: var(--bck-color);
+  background-color: #8D0801;
+  border-color: var(--txt-color);
   /*color: var(--bck-color);*/
 }
 
@@ -104,7 +104,7 @@ hr {
 }
 
 .rmv:hover {
-  background-color: #550000;
+  background-color: #8D0801;
   color: var(--txt-color);
 }
 
@@ -128,7 +128,7 @@ hr {
 }
 
 .reject:hover {
-  background-color: #550000;
+  background-color: #8D0801;
 }
 
 .box-info {
@@ -145,21 +145,25 @@ hr {
 
 .reject-box {
   border-left: solid 5px #FFAAAA;
+  background-color: #8D0801;
 }
 
 .box-cont {
   /*background-color: #674d3c;*/
-  /*background-color: #7a3b2e;*/
+  /*background-color: #465362;*/
   margin-top: 2%;
 }
 
+#prospective .job-box {
+  border-left: solid 5px var(--txt-color);
+}
 
 #reject-box {
-  background-color: #550000;
+
 }
 
 #jobsapplied {
-  background-color: #23395B;
+  /*background-color: #465362;*/
 }
 
 .job-btn-grp {
