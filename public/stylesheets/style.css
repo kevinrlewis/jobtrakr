@@ -1,10 +1,11 @@
 :root {
-  --txt-color: #FFFFFF;
-  --bck-color: #001A23;
-  --off-color: #53687E;
+  --txt-color: #000000;
+  --bck-color: #FFFFFF;
+  --off-color: #A6D49F;
   --accent: #60993E;
 }
 
+/*WIDTH RELEVANT STYLES*/
 @media (max-width: 375px) {
   .col-xs-4 {
     width: 40%;
@@ -22,6 +23,9 @@
   #commentlink {
     padding-left: 0px;
   }
+  #title {
+    font-size: 400%!important;
+  }
 }
 
 @media (min-width: 376px) {
@@ -30,11 +34,20 @@
   }
 }
 
+/*OTHER STYLES*/
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: var(--bck-color);
   color: var(--txt-color);
+}
+
+#title {
+  font-size: 600%;
+}
+
+#prospective > .job-box {
+  background-color: #CCCCCC;
 }
 
 a {
@@ -59,7 +72,7 @@ a:hover {
   color: var(--txt-color);
 }
 .container > div > .btn:hover {
-  background-color: var(--accent);
+  background-color: #360;
   color: var(--bck-color);
 }
 
@@ -105,7 +118,7 @@ hr {
 
 .rmv:hover {
   background-color: #8D0801;
-  color: var(--txt-color);
+  color: var(--bck-color);
 }
 
 .move {
@@ -144,8 +157,8 @@ hr {
 }
 
 .reject-box {
-  border-left: solid 5px #FFAAAA;
-  background-color: #8D0801;
+  border-left: solid 5px #9A031E;
+  background-color: #E3B5A4;
 }
 
 .box-cont {
@@ -179,7 +192,7 @@ hr {
 }
 
 #submitJobBtn:hover {
-  background-color: var(--accent);
+  background-color: #360;
 }
 
 #commentlink:hover {

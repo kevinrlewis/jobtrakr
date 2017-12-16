@@ -4,7 +4,7 @@ block content
   form(method='POST')
     div.container
       div.row
-        h1(class='col-xs-offset-1 col-xs-11 col-sm-11') jobtrakr
+        h1#title(class='col-xs-12' style="text-align: center;") jobtrakr
       hr
       if message.length > 0
         div.row(class='alert alert-danger')=message
@@ -26,15 +26,16 @@ block content
         )
       div.row(style='margin-top:10px;')
         input(
-          class='btn btn-default col-xs-offset-2 col-sm-offset-3 col-sm-2'
+          class='btn btn-default col-xs-offset-3 col-sm-offset-3 col-xs-6 col-sm-6'
           type='submit'
           value='sign in'
           name='signinButton'
           formaction='/login'
           id='sign-in'
         )
+      div.row
         input(
-          class='btn btn-default col-xs-offset-2 col-sm-offset-2 col-sm-2'
+          class='btn btn-default col-xs-offset-3 col-sm-offset-3 col-xs-6 col-sm-6'
           type='submit'
           value='sign up'
           name='signupButton'
