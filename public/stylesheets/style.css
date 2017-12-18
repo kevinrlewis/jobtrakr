@@ -35,6 +35,10 @@
 }
 
 /*OTHER STYLES*/
+* {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -58,6 +62,12 @@ a:hover {
   color: #8EA8C3;
 }
 
+label {
+  text-align: right;
+  line-height: 2rem;
+  font-weight: bold;
+}
+
 #home-container {
   color: var(--txt-color);
 }
@@ -76,8 +86,22 @@ a:hover {
   color: var(--bck-color);
 }
 
+.container-fluid > div > .btn {
+  border-color: var(--txt-color);
+  background-color: var(--off-color);
+  color: var(--txt-color);
+}
+.container-fluid > div > .btn:hover {
+  background-color: #360;
+  color: var(--bck-color);
+}
+
 .btn {
   border-radius: 0px;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
 
 .btn-danger {
@@ -91,8 +115,8 @@ a:hover {
   /*color: var(--bck-color);*/
 }
 
-#sign-in {
-  margin-right: 5px;
+.form-control {
+  border-radius: 0;
 }
 
 hr {

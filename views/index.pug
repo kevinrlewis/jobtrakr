@@ -1,17 +1,17 @@
 extends layout
 
 block content
-  div.container(id='home-container')
+  div.container-fluid(id='home-container')
     div.row
-      h1#title(class='col-xs-12' style='text-align: center;')=title
+      h1.mx-auto#title(class='col-xs-12' style='text-align: center;')=title
     hr
     div.row
       a(
         href='/login'
-        class='btn btn-default col-xs-offset-3 col-sm-offset-2 col-xs-6 col-sm-8'
+        class='btn btn-default offset-xs-3 offset-sm-2 col-xs-6 col-sm-8'
       ) login
     div.row
       a(
         href='/signup'
-        class='btn btn-default col-xs-offset-3 col-sm-offset-2 col-xs-6 col-sm-8'
+        class='btn btn-default offset-xs-3 offset-sm-2 col-xs-6 col-sm-8'
       ) sign up

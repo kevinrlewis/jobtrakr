@@ -3,16 +3,16 @@ extends layout
 
 block content
   include modal.pug
-  div.container#header(style='margin-bottom:10px;')
+  div.container-fluid#header(style='margin-bottom:10px;')
     div.row
-      h1(class='col-xs-9 col-sm-6' style='margin-top:0px;')='hello '+user.local.username
-      form(method='GET')
+      h1(class='col-9' style='margin-top:0px;')='hello '+user.local.username
+      form.col-3(method='GET')
         input(
-          class='btn btn-danger col-sm-offset-4 col-md-offset-5 col-xs-3 col-sm-2 col-md-1'
+          class='btn btn-danger'
           value='logout'
           type='submit'
           formaction='/logout'
-          style='margin-top: 1%;'
+          style='margin-top: 1%; float: right;'
         )
   hr
   
@@ -20,7 +20,7 @@ block content
     div.modal-content.container
       div.row
         h3(class="col-xs-4" style="float: left; margin: 0px;") add job
-        span(id="modalCloseSpan" class="close col-xs-offset-7 col-xs-1" onclick="modalclose_click()") x
+        span(id="modalCloseSpan" class="close offset-xs-7 col-xs-1" onclick="modalclose_click()") x
       div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
         label.col-xs-12 job already exists.
       div.container
@@ -43,14 +43,14 @@ block content
         div.row
           button(
             id="submitJobBtn"
-            class="btn btn-success col-xs-offset-4 col-xs-3 col-sm-2"
+            class="btn btn-success offset-xs-4 col-xs-3 col-sm-2"
             onclick="addJob()"
           ) submit
         h5(id='prospect-header' style='display: none;')
 
   
 
-  div.box-cont.container#jobsapplied
+  div.box-cont.container-fluid#jobsapplied
     div.row
       h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
       label(class='box-info col-xs-6 col-sm-4') click the down mark to move to rejected 
@@ -79,11 +79,11 @@ block content
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
           label(class="col-xs-2 col-sm-1")=item.date
-          div.job-btn-grp(class="col-sm-offset-1")
+          div.job-btn-grp(class="offset-sm-1 col-sm-2")
             form(action="/move?reject="+index method="POST")
               button(
                 type='submit'
-                class="btn btn-success reject col-xs-offset-2 col-xs-1 col-sm-offset-1 col-sm-1"
+                class="btn btn-success reject"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
               )
@@ -91,13 +91,13 @@ block content
             form(action="/remove?index="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv col-xs-3 col-sm-1"
+                class="btn btn-danger rmv"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
 
-  div.box-cont.container#prospective
+  div.box-cont.container-fluid#prospective
     div.row
       h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
       label(class='box-info col-xs-6 col-sm-4') click the check mark to move to applied 
@@ -124,11 +124,11 @@ block content
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
           label(class="col-xs-2 col-sm-1")=item.date
-          div.job-btn-grp(class="col-sm-offset-1")
+          div.job-btn-grp(class="offset-sm-1")
             form(action="/move?prospect="+index method="POST")
               button(
                 type='submit'
-                class="btn btn-success move col-xs-offset-2 col-xs-1 col-sm-offset-1 col-sm-1"
+                class="btn btn-success move offset-xs-2 col-xs-1 offset-sm-1 col-sm-1"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
               )
@@ -142,7 +142,7 @@ block content
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
 
-  div.box-cont.container#reject-box
+  div.box-cont.container-fluid#reject-box
     div.row
       h3(class='col-xs-12' style='margin-top:2px;')=("rejected jobs: " + rejectedsum)
     if user.rejectjobs == undefined
@@ -162,11 +162,11 @@ block content
                 label(id="modalCommentLabel" class='col-xs-10')=item.comments
           a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
           label(class="col-xs-2 col-sm-1")=item.date
-          div.job-btn-grp(class="col-sm-offset-1")
+          div.job-btn-grp(class="offset-sm-1")
             form(action="/remove?reject="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv col-xs-offset-2 col-xs-3 col-sm-offset-1 col-sm-1"
+                class="btn btn-danger rmv offset-xs-2 col-xs-3 offset-sm-1 col-sm-1"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
