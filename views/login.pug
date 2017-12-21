@@ -8,34 +8,32 @@ block content
       hr
       if message.length > 0
         div.row(class='alert alert-danger')=message
-      div.row
-        label(for="username" class='offset-sm-3 col-xs-4 col-sm-2 col-md-2 col-lg-2') username:
+      div.row.justify-content-center
         input.form-control(
           type="plaintext"
           placeholder="username"
           name='username'
-          class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
+          class='text-field col-xs-12 col-sm-7'
         )
-      div.row
-        label(for="password" class='offset-sm-3 col-xs-4 col-sm-2 col-md-2 col-lg-2') password:
+      div.row.justify-content-center
         input.form-control(
           type="password"
           placeholder="password"
           name='password'
-          class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
+          class='text-field col-xs-12 col-sm-7'
         )
-      div.row(style='margin-top:10px;')
+      div.row.justify-content-center(style='margin-top:10px;')
         input(
-          class='btn btn-default offset-xs-3 offset-sm-3 col-xs-6 col-sm-6'
+          class='btn btn-default col-xs-12 col-sm-7'
           type='submit'
           value='sign in'
           name='signinButton'
           formaction='/login'
           id='sign-in'
         )
-      div.row
+      div.row.justify-content-center
         input(
-          class='btn btn-default offset-xs-3 offset-sm-3 col-xs-6 col-sm-6'
+          class='btn btn-default col-xs-12 col-sm-7'
           type='submit'
           value='sign up'
           name='signupButton'

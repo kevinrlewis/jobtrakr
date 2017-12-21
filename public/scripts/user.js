@@ -15,21 +15,24 @@ function addJob(url) {
   console.log('add job pressed...');
   var prospect;
 
-  if(!$('#linkTextField').val()) {
-    $('#linkTextField').css('border-color', 'red');
-    return;
-  }
-
-  if(document.getElementById('prospect-header').style.display == "block") {
+  if(document.getElementById('addprospectarea').style.display === "block") {
     prospect = 2;
   } else {
     prospect = 1;
   }
   console.log("addJob: " + prospect);
   if(prospect === 2) {
-    console.log('adding prospective job....')
+    // if the link field is empty
+    if(!$('#plinkTextField').val()) {
+      $('#plinkTextField').css('border-color', 'red');
+      return;
+    }
+    // adding a prospective job
+    console.log('adding prospective job....');
+
+    // link element
     var el = document.createElement('a');
-    el.href = $("#linkTextField").val();
+    el.href = $("#plinkTextField").val();
 
     // handle generic job pages
     var modhost;
@@ -41,10 +44,19 @@ function addJob(url) {
 
     // handle empty comments
     var comments;
-    if(!$('#jobCommentField').val()) {
+    if(!$('#pjobCommentField').val()) {
       comments = "no comments";
     } else {
-      comments = $('#jobCommentField').val();
+      comments = $('#pjobCommentField').val();
+    }
+
+    // company
+    var company;
+    if(!$('#pcompanyTextField').val()) {
+      $('#pcompanyTextField').css('border-color', 'red');
+      return;
+    } else {
+      company = $('#pcompanyTextField').val();
     }
 
     //console.log('before ajax call...');
@@ -58,7 +70,8 @@ function addJob(url) {
         pathname: el.pathname,
         search: el.search,
         joblink: el.href,
-        comments: comments
+        comments: comments,
+        company: company
       }),
       datatype: "json",
       success: function(data, status) {
@@ -72,6 +85,13 @@ function addJob(url) {
       }
     });
   } else {
+    // if the link text field is empty
+    if(!$('#linkTextField').val()) {
+      $('#linkTextField').css('border-color', 'red');
+      return;
+    }
+    // adding a regular job
+    console.log('adding job....');
     var el = document.createElement('a');
     el.href = $("#linkTextField").val();
 
@@ -91,6 +111,15 @@ function addJob(url) {
       comments = $('#jobCommentField').val();
     }
 
+    // company
+    var company;
+    if(!$('#companyTextField').val()) {
+      $('#companyTextField').css('border-color', 'red');
+      return;
+    } else {
+      company = $('#companyTextField').val();
+    }
+
     //console.log('before ajax call...');
     $.ajax({
       type: 'POST',
@@ -102,7 +131,8 @@ function addJob(url) {
         pathname: el.pathname,
         search: el.search,
         joblink: el.href,
-        comments: comments
+        comments: comments,
+        company: company
       }),
       datatype: "json",
       success: function(data, status) {

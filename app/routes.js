@@ -81,7 +81,8 @@ module.exports = function(app, passport) {
       'hash': req.body.hash,
       'pathname': req.body.pathname,
       'search': req.body.search,
-      'comments': req.body.comments
+      'comments': req.body.comments,
+      'company': req.body.company
     };
     // mongoose find one and update
     User.findOneAndUpdate(
@@ -129,7 +130,8 @@ module.exports = function(app, passport) {
       'hash': req.body.hash,
       'pathname': req.body.pathname,
       'search': req.body.search,
-      'comments': req.body.comments
+      'comments': req.body.comments,
+      'company': req.body.company
     };
     // mongoose find one and update
     User.findOneAndUpdate(

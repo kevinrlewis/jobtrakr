@@ -6,31 +6,40 @@
 }
 
 /*WIDTH RELEVANT STYLES*/
+/*FOR MOBILE DEVICES*/
 @media (max-width: 375px) {
-  .col-xs-4 {
-    width: 40%;
-    padding: 0px;
-  }
-  .col-xs-8 {
-    width: 60%;
-  }
   #submitJobBtn {
     width: 33%;
   }
   .edit-icon {
     width: 20%;
   }
-  #commentlink {
-    padding-left: 0px;
-  }
   #title {
     font-size: 400%!important;
   }
+  #instru {
+    display: none;
+  }
+  .reject {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
+  .rmv {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
 }
 
+/*FOR REGULAR DEVICES*/
 @media (min-width: 376px) {
   #commentlink {
     padding-left: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  #instru {
+    display: none;
   }
 }
 
@@ -44,6 +53,20 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: var(--bck-color);
   color: var(--txt-color);
+}
+
+#addjobarea {
+  text-align: center;
+  background-color: var(--txt-color);
+  color: var(--bck-color);
+  margin-bottom: 1%;
+}
+
+#addprospectarea {
+  text-align: center;
+  background-color: var(--txt-color);
+  color: var(--bck-color);
+  margin-bottom: 1%;
 }
 
 #title {
