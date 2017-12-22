@@ -24,38 +24,35 @@ block content
         id="addJobBtn"
         onclick="addjob_click()"
       ) add a job
-    div.row#addjobarea(style="display: none;")
+    div.row.hide#addjobarea
       div.container-fluid
         div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
           label.col-xs-12 job already exists.
         div.row.justify-content-center
-          label.col-xs-4.col-sm-2 company:
-          input(
+          input.form-control(
             id="companyTextField"
             type="plaintext"
             placeholder="company"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
         div.row.justify-content-center
-          label.col-xs-4.col-sm-2 job link:
-          input(
+          input.form-control(
             id="linkTextField"
             type="plaintext"
             placeholder="link"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
         div.row.justify-content-center
-          label.col-xs-4.col-sm-2 comments:
-          input(
+          input.form-control(
             id="jobCommentField"
             type="plaintext"
             placeholder="comments or identifiers"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
         div.row.justify-content-center
-          button(
+          button.submit-btn(
             id="submitJobBtn"
-            class="btn btn-success offset-xs-4 col-xs-3 col-sm-2"
+            class="btn btn-success col-12 col-sm-2"
             onclick="addJob()"
           ) submit
     
@@ -68,12 +65,13 @@ block content
           label(class="col-2 col-sm-2 col-md-1")=item.date
           label(class="col-8 col-sm-9 col-md-4")
             if item.company == undefined
-              a(href=item.website)=item.hostname
+              a.btn(href=item.website)=item.hostname
             else
-              a(href=item.website)=item.company
-          label.col-3.col-sm-3.col-md-2 interviews
+              a.btn(href=item.website)=item.company
+          label.col-3.col-sm-3.col-md-2
+            a.btn interviews
           label(class='col-3 col-sm-3 col-md-1')
-            a(id='commentlink' onclick='comments_click(' + index + ')') comments
+            a.btn(id='commentlink' onclick='comments_click(' + index + ')') comments
           div.d-flex.p-2.col-6.col-sm-6.col-md-3.justify-content-end
             form(action="/move?reject="+index method="POST")
               button(
@@ -90,9 +88,9 @@ block content
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
-          div.comment-area(id='comment'+index style="display: none")
-            p=item.comments
-          
+          div.comment-area.hide(id='comment'+index style='padding: 0!important;')
+            h8=item.comments
+        
   div.box-cont.container-fluid#prospective
     div.row
       h3(class='col-xs-12 col-sm-6 col-md-6' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
@@ -102,38 +100,35 @@ block content
         onclick="addprospect_click()"
       ) add a prospect
       
-    div.row#addprospectarea(style="display: none;")
+    div.row.hide#addprospectarea
       div.container
         div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
           label.col-xs-12 job already exists.
         div.row.justify-content-center
-          label.col-xs-4.col-sm-2 company:
-          input(
+          input.form-control(
             id="pcompanyTextField"
             type="plaintext"
             placeholder="company"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
-        div.row.justify-content-center
-          label.col-xs-4.col-sm-2 job link:
-          input(
+        div.row.justify-content-center      
+          input.form-control(
             id="plinkTextField"
             type="plaintext"
             placeholder="link"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
         div.row.justify-content-center
-          label.col-xs-4.col-sm-2 comments:
-          input(
+          input.form-control(
             id="pjobCommentField"
             type="plaintext"
             placeholder="comments or identifiers"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
         div.row.justify-content-center
-          button(
+          button.submit-btn(
             id="psubmitJobBtn"
-            class="btn btn-success offset-xs-4 col-xs-3 col-sm-2"
+            class="btn btn-success col-12 col-sm-2"
             onclick="addJob()"
           ) submit
   
@@ -146,12 +141,13 @@ block content
           label(class="col-2 col-sm-2 col-md-1")=item.date
           label(class="col-8 col-sm-9 col-md-4")
             if item.company == undefined
-              a(href=item.website)=item.hostname
+              a.btn(href=item.website)=item.hostname
             else
-              a(href=item.website)=item.company
-          label.col-3.col-sm-3.col-md-2 interviews
+              a.btn(href=item.website)=item.company
+          label.col-3.col-sm-3.col-md-2
+            a.btn interviews
           label(class='col-3 col-sm-3 col-md-1')
-            a(id='commentlink' onclick='prospectcomments_click(' + index + ')') comments
+            a.btn(id='commentlink' onclick='prospectcomments_click(' + index + ')') comments
           div.d-flex.p-2.col-6.col-sm-6.col-md-3.justify-content-end
             form(action="/move?prospect="+index method="POST")
               button(
@@ -168,8 +164,8 @@ block content
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
-          div.comment-area(id='prospectcomment'+index style="display: none")
-            p=item.comments
+          div.comment-area.hide(id='prospectcomment'+index style='padding: 0!important;')
+            h8=item.comments
 
   div.box-cont.container-fluid#reject-box
     div.row
@@ -183,12 +179,13 @@ block content
           label(class="col-2 col-sm-2 col-md-1")=item.date
           label(class="col-8 col-sm-9 col-md-4")
             if item.company == undefined
-              a(href=item.website)=item.hostname
+              a.btn(href=item.website)=item.hostname
             else
-              a(href=item.website)=item.company
-          label.col-3.col-sm-3.col-md-2 interviews
+              a.btn(href=item.website)=item.company
+          label.col-3.col-sm-3.col-md-2
+            a.btn interviews
           label(class='col-3 col-sm-3 col-md-1')
-            a(id='commentlink' onclick='rejectcomments_click(' + index + ')') comments
+            a.btn(id='commentlink' onclick='rejectcomments_click(' + index + ')') comments
           div.d-flex.p-2.col-6.col-sm-6.col-md-3.justify-content-end
             form(action="/remove?reject="+index method="POST")
               input(
@@ -198,5 +195,5 @@ block content
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
-          div.comment-area(id='rejectcomment'+index style="display: none")
-            p=item.comments
+          div.comment-area.hide(id='rejectcomment'+index style='padding: 0!important;')
+            h8=item.comments

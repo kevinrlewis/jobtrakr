@@ -15,7 +15,7 @@ function addJob(url) {
   console.log('add job pressed...');
   var prospect;
 
-  if(document.getElementById('addprospectarea').style.display === "block") {
+  if($('#addprospectarea').hasClass('show')) {
     prospect = 2;
   } else {
     prospect = 1;

@@ -30,6 +30,21 @@
   }
 }
 
+@media (max-width: 576px) {
+  .reject {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
+  .rmv {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
+  .submit-btn {
+    background-color: #360!important;
+    color: var(--bck-color)!important;
+  }
+}
+
 /*FOR REGULAR DEVICES*/
 @media (min-width: 376px) {
   #commentlink {
@@ -59,7 +74,8 @@ body {
   text-align: center;
   background-color: var(--txt-color);
   color: var(--bck-color);
-  margin-bottom: 1%;
+  transition: all .3s ease-out;
+  height: 100%;
 }
 
 #addprospectarea {
@@ -67,6 +83,33 @@ body {
   background-color: var(--txt-color);
   color: var(--bck-color);
   margin-bottom: 1%;
+}
+
+.hide {
+    overflow: hidden;
+    max-height: 0;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    padding: 0!important;
+}
+.show {
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -moz-transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    max-height: 1000px;
+    overflow: hidden;
+    padding: 1%;
 }
 
 #title {
@@ -78,11 +121,11 @@ body {
 }
 
 a {
-  color: var(--txt-color);
+  color: var(--txt-color)!important;
 }
 
 a:hover {
-  color: #8EA8C3;
+  color: var(--accent)!important;
 }
 
 label {
@@ -234,16 +277,17 @@ hr {
   border-radius: 0px;
 }
 
-#submitJobBtn {
-  background-color: var(--bck-color);
+.submit-btn {
+  background-color: var(--bck-color)!important;
 }
 
-#submitJobBtn:hover {
-  background-color: #360;
+.submit-btn:hover {
+  background-color: #360!important;
 }
 
 #commentlink:hover {
   cursor: pointer;
+  color: var(--accent);
 }
 
 #modalCloseSpan {
