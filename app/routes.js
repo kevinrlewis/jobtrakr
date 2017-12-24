@@ -17,7 +17,6 @@ module.exports = function(app, passport) {
   });
 
   // process login
-  // post
   app.post('/login',
   // request, response, next function
   function(req, res, next) {
@@ -25,7 +24,8 @@ module.exports = function(app, passport) {
     if(req.body.signupButton) res.redirect('/signup');
     else next();
     // authenticate the login using passport
-  }, passport.authenticate('local-login', {
+  },
+  passport.authenticate('local-login', {
     successRedirect : '/profile', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
@@ -37,8 +37,7 @@ module.exports = function(app, passport) {
     res.render('signup.pug', { message: req.flash('signupMessage'), title: 'jobtrakr' });
   });
 
-  // process signup
-  // post
+  // attempt signup
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/profile',
     failureRedirect : '/signup',
@@ -143,7 +142,7 @@ module.exports = function(app, passport) {
         if (err) {
           console.log(err);
         }
-
+        // create response
         var response = {
             status  : 200,
             success : 'Updated Successfully'
@@ -152,8 +151,6 @@ module.exports = function(app, passport) {
         res.end(JSON.stringify(response));
       });
   });
-
-
 
   // process removing a job
   app.post('/remove', isLoggedIn, function(req, res) {
@@ -292,6 +289,9 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
+
+  // TODO: create post for interviews
+  // attempt to add interview to job
 }
 
 // middleware to check if user is logged in

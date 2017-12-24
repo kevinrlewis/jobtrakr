@@ -11,16 +11,92 @@ function showMessage() {
   $('#messageAlert').css("display", "block");
 }
 
+// When the user clicks on the button, open the modal
+function addjob_click() {
+  $('#addjobarea').toggleClass('hide').toggleClass('show');
+  if($('#addprospectarea').hasClass('show')) {
+    $('#addprospectarea').toggleClass('hide').toggleClass('show');
+  }
+  // if add job area is not displayed then display it
+  // if(document.getElementById('addjobarea').style.display === "none") {
+  //   //$('#addjobarea').css('display', 'block');
+  //   //$('#addjobarea').toggleClass('show');
+  //   // if prospect area is open while job area is trying to be opened the close it
+  //   // if(document.getElementById('addprospectarea').style.display === "block") {
+  //   //   $('#addprospectarea').css('display', 'none');
+  //   // }
+  // // if job area is open then close it
+  // } else {
+  //   //$('#addjobarea').css('display', 'none');
+  //   //$('#addjobarea').toggleClass('hide');
+  // }
+}
+
+function addprospect_click() {
+  $('#addprospectarea').toggleClass('hide').toggleClass('show');
+  if($('#addjobarea').hasClass('show')) {
+    $('#addjobarea').toggleClass('hide').toggleClass('show');
+  }
+  // if add prospect area is not displayed
+  // if(document.getElementById('addprospectarea').style.display === "none") {
+  //   // show the area
+  //   $('#addprospectarea').css('display', 'block');
+  //   // if add job area is open close it
+  //   if(document.getElementById('addjobarea').style.display === "block") {
+  //     $('#addjobarea').css('display', 'none');
+  //   }
+  // // if prospect area is displayed then hide it
+  // } else {
+  //   $('#addprospectarea').css('display', 'none');
+  // }
+}
+
+
+function comments_click(index) {
+  $('#comment' + index).toggleClass('hide').toggleClass('show');
+  // if(document.getElementById('comment' + index).style.display === "block") {
+  //   document.getElementById('comment' + index).style.display = "none";
+  // } else {
+  //   document.getElementById('comment' + index).style.display = "block";
+  // }
+}
+
+function prospectcomments_click(index) {
+  $('#prospectcomment' + index).toggleClass('hide').toggleClass('show');
+  // if(document.getElementById('prospectcomment' + index).style.display === "block") {
+  //   document.getElementById('prospectcomment' + index).style.display = "none";
+  // } else {
+  //   document.getElementById('prospectcomment' + index).style.display = "block";
+  // }
+}
+
+function rejectcomments_click(index) {
+  $('#rejectcomment' + index).toggleClass('hide').toggleClass('show');
+  // if(document.getElementById('rejectcomment' + index).style.display === "block") {
+  //   document.getElementById('rejectcomment' + index).style.display = "none";
+  // } else {
+  //   document.getElementById('rejectcomment' + index).style.display = "block";
+  // }
+}
+// When the user clicks on <span> (x), close the modal
+function comments_modalclose_click(index) {
+  document.getElementById('commentPopupModal' + index).style.display = "none";
+  location.reload();
+}
+
+
 function addJob(url) {
   console.log('add job pressed...');
+  // temporary flag variables
   var prospect;
 
+  // determine if a prospective job or regular job is being added
   if($('#addprospectarea').hasClass('show')) {
     prospect = 2;
   } else {
     prospect = 1;
   }
-  console.log("addJob: " + prospect);
+
   if(prospect === 2) {
     // if the link field is empty
     if(!$('#plinkTextField').val()) {
@@ -30,7 +106,7 @@ function addJob(url) {
     // adding a prospective job
     console.log('adding prospective job....');
 
-    // link element
+    // create link element
     var el = document.createElement('a');
     el.href = $("#plinkTextField").val();
 
@@ -59,7 +135,8 @@ function addJob(url) {
       company = $('#pcompanyTextField').val();
     }
 
-    //console.log('before ajax call...');
+    //TODO: deprecate the link parsing, that data also does not need
+    //      to be saved to database.
     $.ajax({
       type: 'POST',
       url: "/addprospect",
@@ -92,6 +169,8 @@ function addJob(url) {
     }
     // adding a regular job
     console.log('adding job....');
+
+    // create link element to parse
     var el = document.createElement('a');
     el.href = $("#linkTextField").val();
 
@@ -149,7 +228,7 @@ function addJob(url) {
 
 }
 
-
+// function for when editting comments is available
 /*function editCommentClick() {
   var comments;
   comments = $('#modalCommentLabel').val();
