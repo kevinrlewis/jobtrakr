@@ -2,172 +2,200 @@ extends layout
 
 
 block content
-  include modal.pug
-  div.container#header(style='margin-bottom:10px;')
+  include userscripts.pug
+  div.container-fluid#header(style='margin-bottom:10px;')
     div.row
-      h1(class='col-xs-9 col-sm-6' style='margin-top:0px;')='hello '+user.local.username
-      form(method='GET')
+      h1(class='col-9' style='margin-top:0px;')='hello '+user.local.username
+      form.col-3(method='GET')
         input(
-          class='btn btn-danger col-sm-offset-4 col-md-offset-5 col-xs-3 col-sm-2 col-md-1'
+          class='btn btn-danger'
           value='logout'
           type='submit'
           formaction='/logout'
-          style='margin-top: 1%;'
+          style='margin-top: 1%; float: right;'
         )
   hr
-  
-  div.row(id='popupModal' class='modal')
-    div.modal-content.container
-      div.row
-        h3(class="col-xs-4" style="float: left; margin: 0px;") add job
-        span(id="modalCloseSpan" class="close col-xs-offset-7 col-xs-1" onclick="modalclose_click()") x
-      div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
-        label.col-xs-12 job already exists.
-      div.container
-        div.row
-          label.col-xs-4.col-sm-2 job link:
-          input(
+
+  div.box-cont.container-fluid#jobsapplied
+    div.row
+      h3(class='col-xs-12 col-sm-6 col-md-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
+      button(
+        class='btn btn-default col-xs-6 offset-sm-2 col-sm-4 offset-md-4'
+        id="addJobBtn"
+        onclick="addjob_click()"
+      ) add a job
+    div.row.hide#addjobarea
+      div.container-fluid
+        div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
+          label.col-xs-12 job already exists.
+        div.row.justify-content-center
+          input.form-control(
+            id="companyTextField"
+            type="plaintext"
+            placeholder="company"
+            class="col-xs-12 col-sm-7"
+          )
+        div.row.justify-content-center
+          input.form-control(
             id="linkTextField"
             type="plaintext"
             placeholder="link"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
-        div.row
-          label.col-xs-4.col-sm-2 comments:
-          input(
+        div.row.justify-content-center
+          input.form-control(
             id="jobCommentField"
             type="plaintext"
             placeholder="comments or identifiers"
-            class="col-xs-8 col-sm-7"
+            class="col-xs-12 col-sm-7"
           )
-        div.row
-          button(
+        div.row.justify-content-center
+          button.submit-btn(
             id="submitJobBtn"
-            class="btn btn-success col-xs-offset-4 col-xs-3 col-sm-2"
+            class="btn btn-success col-12 col-sm-2"
             onclick="addJob()"
           ) submit
-        h5(id='prospect-header' style='display: none;')
-
-  
-
-  div.box-cont.container#jobsapplied
-    div.row
-      h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("jobs applied: " + appliedsum)   
-      label(class='box-info col-xs-6 col-sm-4') click the down mark to move to rejected 
-        i(class='fa fa-arrow-down' aria-hidden="true")
-      button(
-        class='btn btn-default col-xs-6 col-sm-4'
-        id="addJobBtn"
-        onclick="addjob_click(1)"
-      ) add a job
-    
     
     if user.jobs == undefined
       label error retrieving jobs
     else
       each item, index in user.jobs
         div.row(class="job-box")
-          label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-10 col-sm-4")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
-          div.row(id='commentPopupModal'+index class='modal')
-            div.modal-content.container
-              div.row
-                h3(style="float: left; margin: 0px;") comments
-                span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
-              div.row
-                label(id="modalCommentLabel" class='col-xs-10')=item.comments
-          a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
-          label(class="col-xs-2 col-sm-1")=item.date
-          div.job-btn-grp(class="col-sm-offset-1")
+          h4(class="col-2 col-sm-1 col-md-1" type="text" name="index")=(index+1)
+          label(class="col-2 col-sm-2 col-md-1")=item.date
+          label(class="col-8 col-sm-9 col-md-4")
+            if item.company == undefined
+              a.btn(href=item.website)=item.hostname
+            else
+              a.btn(href=item.website)=item.company
+          label.col-3.col-sm-3.col-md-2
+            a.btn(id='interviewslink' onclick='') interviews
+          label(class='col-3 col-sm-3 col-md-1')
+            a.btn(id='commentlink' onclick='comments_click(' + index + ')') comments
+          div.d-flex.p-2.col-6.col-sm-6.col-md-3.justify-content-end
             form(action="/move?reject="+index method="POST")
               button(
                 type='submit'
-                class="btn btn-success reject col-xs-offset-2 col-xs-1 col-sm-offset-1 col-sm-1"
+                class="btn btn-success reject"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
-              )
-                i(class='fa fa-arrow-down' aria-hidden="true")
+              ) rejected
             form(action="/remove?index="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv col-xs-3 col-sm-1"
+                class="btn btn-danger rmv"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
-
-  div.box-cont.container#prospective
+          div.comment-area.hide(id='comment'+index style='padding: 0!important;')
+            h8=item.comments
+              
+            
+        
+  div.box-cont.container-fluid#prospective
     div.row
-      h3(class='col-xs-12 col-sm-4' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
-      label(class='box-info col-xs-6 col-sm-4') click the check mark to move to applied 
-        i(class='fa fa-check' aria-hidden="true")
+      h3(class='col-xs-12 col-sm-6 col-md-6' style='margin-top:2px;')=("prospective jobs: " + prospectivesum)
       button(
-        class='btn btn-default col-xs-6 col-sm-4'
+        class='btn btn-default col-xs-6 offset-sm-2 col-sm-4 offset-md-2 col-md-4'
         id="addJobBtn"
-        onclick="addjob_click(2)"
+        onclick="addprospect_click()"
       ) add a prospect
+      
+    div.row.hide#addprospectarea
+      div.container
+        div.row(id='messageAlert' class='alert alert-danger' style="display: none; font: 13px arial, sans-serif;")
+          label.col-xs-12 job already exists.
+        div.row.justify-content-center
+          input.form-control(
+            id="pcompanyTextField"
+            type="plaintext"
+            placeholder="company"
+            class="col-xs-12 col-sm-7"
+          )
+        div.row.justify-content-center      
+          input.form-control(
+            id="plinkTextField"
+            type="plaintext"
+            placeholder="link"
+            class="col-xs-12 col-sm-7"
+          )
+        div.row.justify-content-center
+          input.form-control(
+            id="pjobCommentField"
+            type="plaintext"
+            placeholder="comments or identifiers"
+            class="col-xs-12 col-sm-7"
+          )
+        div.row.justify-content-center
+          button.submit-btn(
+            id="psubmitJobBtn"
+            class="btn btn-success col-12 col-sm-2"
+            onclick="addJob()"
+          ) submit
+  
     if user.jobs == undefined
       label error retrieving jobs
     else
       each item, index in user.prospectjobs
         div.row(class="job-box")
-          label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-10 col-sm-4")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
-          div.row(id='commentPopupModal'+index class='modal')
-            div.modal-content.container
-              div.row
-                h3(style="float: left; margin: 0px;") comments
-                span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
-              div.row
-                label(id="modalCommentLabel" class='col-xs-10')=item.comments
-          a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
-          label(class="col-xs-2 col-sm-1")=item.date
-          div.job-btn-grp(class="col-sm-offset-1")
+          h4(class="col-2 col-sm-1 col-md-1" type="text" name="index")=(index+1)
+          label(class="col-2 col-sm-2 col-md-1")=item.date
+          label(class="col-8 col-sm-9 col-md-4")
+            if item.company == undefined
+              a.btn(href=item.website)=item.hostname
+            else
+              a.btn(href=item.website)=item.company
+          label.col-3.col-sm-3.col-md-2
+            a.btn interviews
+          label(class='col-3 col-sm-3 col-md-1')
+            a.btn(id='commentlink' onclick='prospectcomments_click(' + index + ')') comments
+          div.d-flex.p-2.col-6.col-sm-6.col-md-3.justify-content-end
             form(action="/move?prospect="+index method="POST")
               button(
                 type='submit'
-                class="btn btn-success move col-xs-offset-2 col-xs-1 col-sm-offset-1 col-sm-1"
+                class="btn btn-success move"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
-              )
-                i(class='fa fa-check' aria-hidden="true")
+              ) applied
             form(action="/remove?prospect="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv col-xs-3 col-sm-1"
+                class="btn btn-danger rmv"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
+          div.comment-area.hide(id='prospectcomment'+index style='padding: 0!important;')
+            h8=item.comments
 
-  div.box-cont.container#reject-box
+  div.box-cont.container-fluid#reject-box
     div.row
-      h3(class='col-xs-12' style='margin-top:2px;')=("rejected jobs: " + rejectedsum)
+      h3(class='col-xs-12 col-sm-6 col-md-6' style='margin-top:2px;')=("rejected jobs: " + rejectedsum)
     if user.rejectjobs == undefined
       label error retrieving jobs
     else
       each item, index in user.rejectjobs
         div.row(class="job-box reject-box")
-          label(class="col-xs-1 col-sm-1" type="text" name="index")=(index+1)
-          label(class="col-xs-10 col-sm-4")=item.hostname
-          a(id='commentlink' class="col-xs-3 col-sm-2" onclick='comments_click(' + index + ')') comments
-          div.row(id='commentPopupModal'+index class='modal')
-            div.modal-content.container
-              div.row
-                h3(style="float: left; margin: 0px;") comments
-                span(id="modalCloseSpan" class="close" onclick='comments_modalclose_click(' + index + ')') x
-              div.row
-                label(id="modalCommentLabel" class='col-xs-10')=item.comments
-          a(class="col-xs-1 col-sm-1" href=item.website style='padding-left: 0px;') link
-          label(class="col-xs-2 col-sm-1")=item.date
-          div.job-btn-grp(class="col-sm-offset-1")
+          h4(class="col-2 col-sm-1 col-md-1" type="text" name="index")=(index+1)
+          label(class="col-2 col-sm-2 col-md-1")=item.date
+          label(class="col-8 col-sm-9 col-md-4")
+            if item.company == undefined
+              a.btn(href=item.website)=item.hostname
+            else
+              a.btn(href=item.website)=item.company
+          label.col-3.col-sm-3.col-md-2
+            a.btn interviews
+          label(class='col-3 col-sm-3 col-md-1')
+            a.btn(id='commentlink' onclick='rejectcomments_click(' + index + ')') comments
+          div.d-flex.p-2.col-6.col-sm-6.col-md-3.justify-content-end
             form(action="/remove?reject="+index method="POST")
               input(
                 type='submit'
-                class="btn btn-danger rmv col-xs-offset-2 col-xs-3 col-sm-offset-1 col-sm-1"
+                class="btn btn-danger rmv"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
               )
+          div.comment-area.hide(id='rejectcomment'+index style='padding: 0!important;')
+            h8=item.comments

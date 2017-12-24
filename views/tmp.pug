@@ -1,0 +1,23 @@
+script(src="/scripts/jquery-3.2.1.min.js")
+script(src="/scripts/bootstrap.min.js")
+link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+
+
+  
+  div.container-fluid.interviews-area.hide(id='interviews'+index style='padding: 0!important;')
+  form.row
+    a.btn.col-1
+      i.fa.fa-plus-square(aria-hidden='true')
+    input.form-control.col-2(type='date')
+    input.form-control.offset-1.col-4(
+      type='plaintext'
+      placeholder="interviewer"
+      )
+    input.form-control.col-4(
+      type='plaintext'
+      placeholder='comments')
+
+
+      function interviews_click(index) {
+        $('#interviews' + index).toggleClass('hide').toggleClass('show');
+      }

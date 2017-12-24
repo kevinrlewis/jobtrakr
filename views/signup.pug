@@ -2,44 +2,36 @@ extends layout
 
 block content
   form(method='POST')
-    div.container
+    div.container-fluid
         div.row
-          h1(class='col-xs-offset-1 col-xs-8 col-sm-7') sign up
-          a(
-            class='btn btn-default col-xs-3 col-sm-offset-2 col-sm-2'
-            href='/login'
-            style='margin-top: 3%;'
-          ) back
+          h1#title(class='col' style='text-align: center;') sign up
         hr
         if message.length > 0
           div.row(class='alert alert-danger')=message
-        div.row
-          label(for="username" class='col-sm-offset-3 col-xs-6 col-sm-3') enter username:
-          input(
+        div.row.justify-content-center
+          input.form-control(
             type="plaintext"
             placeholder="username"
-            class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
+            class='text-field col-xs-12 col-sm-7'
             name="username"
           )
-        div.row
-          label(for="password1" class='col-sm-offset-3 col-xs-6 col-sm-3') enter password:
-          input(
+        div.row.justify-content-center
+          input.form-control(
             type="password"
-            placeholder="password"
-            class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
+            placeholder="enter password"
+            class='text-field col-xs-12 col-sm-7'
             name="password"
           )
-        div.row
-          label(for="password2" class='col-sm-offset-3 col-xs-6 col-sm-3') confirm password:
-          input(
+        div.row.justify-content-center
+          input.form-control(
             type="password"
-            placeholder="password"
-            class='text-field col-xs-6 col-sm-4 col-md-4 col-lg-4'
+            placeholder="confirm password"
+            class='text-field col-xs-12 col-sm-7'
           )
-        div.row(style='margin-top:10px;')
+        div.row.justify-content-center(style='margin-top:10px;')
           input(
             type='submit'
-            class='btn btn-default col-xs-12 col-sm-offset-3 col-sm-7'
+            class='btn btn-default col-xs-12 col-sm-7'
             name='newsignup'
             formaction='/signup'
             value='submit'

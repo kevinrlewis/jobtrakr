@@ -6,40 +6,118 @@
 }
 
 /*WIDTH RELEVANT STYLES*/
+/*FOR MOBILE DEVICES*/
 @media (max-width: 375px) {
-  .col-xs-4 {
-    width: 40%;
-    padding: 0px;
-  }
-  .col-xs-8 {
-    width: 60%;
-  }
   #submitJobBtn {
     width: 33%;
   }
   .edit-icon {
     width: 20%;
   }
-  #commentlink {
-    padding-left: 0px;
-  }
   #title {
     font-size: 400%!important;
   }
+  #instru {
+    display: none;
+  }
+  .reject {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
+  .rmv {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
 }
 
+@media (max-width: 576px) {
+  .reject {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
+  .rmv {
+    color: var(--bck-color)!important;
+    background-color: #9A031E!important;
+  }
+  .submit-btn {
+    background-color: #360!important;
+    color: var(--bck-color)!important;
+  }
+}
+
+/*FOR REGULAR DEVICES*/
 @media (min-width: 376px) {
   #commentlink {
     padding-left: 5%;
   }
 }
 
+@media (max-width: 768px) {
+  #instru {
+    display: none;
+  }
+}
+
 /*OTHER STYLES*/
+* {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: var(--bck-color);
   color: var(--txt-color);
+}
+
+#addjobarea {
+  text-align: center;
+  background-color: var(--txt-color);
+  color: var(--bck-color);
+  transition: all .3s ease-out;
+  height: 100%;
+}
+
+#addprospectarea {
+  text-align: center;
+  background-color: var(--txt-color);
+  color: var(--bck-color);
+  margin-bottom: 1%;
+}
+
+.interviews-area {
+  border-left: solid 5px var(--bck-color);
+}
+
+.interviews-area > a:hover {
+  color: var(--bck-color)!important;
+}
+
+.hide {
+    overflow: hidden;
+    max-height: 0;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    padding: 0!important;
+}
+.show {
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -moz-transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    max-height: 1000px;
+    overflow: hidden;
+    padding: 1%;
 }
 
 #title {
@@ -51,11 +129,17 @@ body {
 }
 
 a {
-  color: var(--txt-color);
+  color: var(--txt-color)!important;
 }
 
 a:hover {
-  color: #8EA8C3;
+  color: var(--accent)!important;
+}
+
+label {
+  text-align: right;
+  line-height: 2rem;
+  font-weight: bold;
 }
 
 #home-container {
@@ -76,8 +160,22 @@ a:hover {
   color: var(--bck-color);
 }
 
+.container-fluid > div > .btn {
+  border-color: var(--txt-color);
+  background-color: var(--off-color);
+  color: var(--txt-color);
+}
+.container-fluid > div > .btn:hover {
+  background-color: #360;
+  color: var(--bck-color);
+}
+
 .btn {
   border-radius: 0px;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
 
 .btn-danger {
@@ -91,8 +189,8 @@ a:hover {
   /*color: var(--bck-color);*/
 }
 
-#sign-in {
-  margin-right: 5px;
+.form-control {
+  border-radius: 0;
 }
 
 hr {
@@ -162,21 +260,11 @@ hr {
 }
 
 .box-cont {
-  /*background-color: #674d3c;*/
-  /*background-color: #465362;*/
   margin-top: 2%;
 }
 
 #prospective .job-box {
   border-left: solid 5px var(--txt-color);
-}
-
-#reject-box {
-
-}
-
-#jobsapplied {
-  /*background-color: #465362;*/
 }
 
 .job-btn-grp {
@@ -187,16 +275,17 @@ hr {
   border-radius: 0px;
 }
 
-#submitJobBtn {
-  background-color: var(--bck-color);
+.submit-btn {
+  background-color: var(--bck-color)!important;
 }
 
-#submitJobBtn:hover {
-  background-color: #360;
+.submit-btn:hover {
+  background-color: #360!important;
 }
 
 #commentlink:hover {
   cursor: pointer;
+  color: var(--accent);
 }
 
 #modalCloseSpan {
@@ -216,53 +305,6 @@ hr {
 
 .edit-icon:hover {
   color: var(--bck-color);
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: var(--off-color);
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    border-radius: 0px;
-    padding-top: 5px;
-    color: var(--txt-color); /* Black text */
-}
-
-#popupModal input {
-  color: #17202A;
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    text-align: right;
-    padding-right: 5px;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .version {
