@@ -3,6 +3,7 @@
 // load up the user model
 var User = require('../app/models/user');
 var userScript = require('../public/scripts/user');
+var request = require('request');
 
 module.exports = function(app, passport) {
 
@@ -46,12 +47,17 @@ module.exports = function(app, passport) {
 
   // user page
   app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('user.pug', {
-      user : req.user,
-      title: 'jobtrakr',
-      appliedsum : (req.user.jobs.length),
-      prospectivesum : (req.user.prospectjobs.length),
-      rejectedsum : (req.user.rejectjobs.length)
+    request('https://api.tronalddump.io/random/quote', function(error, response, body) {
+      var obj = JSON.parse(body);
+      //console.log(req.user.jobs);
+      res.render('user.pug', {
+        user : req.user,
+        title: 'jobtrakr',
+        appliedsum : (req.user.jobs.length),
+        prospectivesum : (req.user.prospectjobs.length),
+        rejectedsum : (req.user.rejectjobs.length),
+        quote: obj.value
+      });
     });
   });
 

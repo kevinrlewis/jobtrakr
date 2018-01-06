@@ -52,9 +52,33 @@
   }
 }
 
+@media (min-width: 576px) {
+  .submit-btn {
+    background-color: var(--bck-color)!important;
+    border: solid 1px #360!important;
+  }
+
+  .submit-btn:hover {
+    background-color: #360!important;
+    border: solid 1px var(--bck-color)!important;
+  }
+  .form-inline .form-control {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   #instru {
     display: none;
+  }
+
+  .fa-arrow-right {
+    display: none;
+  }
+
+  .nav-link {
+    text-align: center;
+    font-size: 150%!important;
   }
 }
 
@@ -64,10 +88,14 @@
 }
 
 body {
-  padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: var(--bck-color);
   color: var(--txt-color);
+  padding-top: 55px;
+}
+
+nav * {
+  color: var(--bck-color);
 }
 
 #addjobarea {
@@ -117,7 +145,6 @@ body {
     transition-timing-function: ease-in;
     max-height: 1000px;
     overflow: hidden;
-    padding: 1%;
 }
 
 #title {
@@ -129,11 +156,12 @@ body {
 }
 
 a {
-  color: var(--txt-color)!important;
+  color: var(--txt-color);
 }
 
 a:hover {
   color: var(--accent)!important;
+  cursor: pointer;
 }
 
 label {
@@ -259,8 +287,13 @@ hr {
   background-color: #E3B5A4;
 }
 
-.box-cont {
-  margin-top: 2%;
+.navbar {
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-brand {
+  padding-bottom: 0;
+  font-size:  2.5rem;
 }
 
 #prospective .job-box {
@@ -273,14 +306,6 @@ hr {
 
 .alert {
   border-radius: 0px;
-}
-
-.submit-btn {
-  background-color: var(--bck-color)!important;
-}
-
-.submit-btn:hover {
-  background-color: #360!important;
 }
 
 #commentlink:hover {
@@ -309,7 +334,7 @@ hr {
 
 .version {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   color: var(--txt-color);
   float: right;

@@ -3,8 +3,10 @@ extends layout
 block content
   form(method='POST')
     div.container-fluid
-        div.row
-          h1#title(class='col' style='text-align: center;') sign up
+        a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
+          div.row
+            h1#title(class='col' style='text-align: center;')=title
+              sup(style="font-size: 20%; top: -3.15em;") beta
         hr
         if message.length > 0
           div.row(class='alert alert-danger')=message

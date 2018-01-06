@@ -1,4 +1,3 @@
-
 function remove(el, i) {
   console.log("-----------------------------------------");
   console.log("in remove function");
@@ -9,6 +8,77 @@ function remove(el, i) {
 
 function showMessage() {
   $('#messageAlert').css("display", "block");
+}
+
+function hideAll() {
+  if($('#home').hasClass('show')) {
+    return;
+  } else {
+    $('#home').toggleClass('hide').toggleClass('show');
+  }
+  if($('#jobsapplied').hasClass('show')) {
+    $('#jobsapplied').toggleClass('hide').toggleClass('show');
+  }
+  if($('#prospective').hasClass('show')) {
+    $('#prospective').toggleClass('hide').toggleClass('show');
+  }
+  if($('#reject-box').hasClass('show')) {
+    $('#reject-box').toggleClass('hide').toggleClass('show');
+  }
+}
+
+function showJA() {
+  $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  if($('#jobsapplied').hasClass('show')) {
+    return;
+  } else {
+    $('#jobsapplied').toggleClass('hide').toggleClass('show');
+  }
+  if($('#prospective').hasClass('show')) {
+    $('#prospective').toggleClass('hide').toggleClass('show');
+  }
+  if($('#reject-box').hasClass('show')) {
+    $('#reject-box').toggleClass('hide').toggleClass('show');
+  }
+  if($('#home').hasClass('show')) {
+    $('#home').toggleClass('hide').toggleClass('show');
+  }
+}
+
+function showPJ() {
+  $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  if($('#prospective').hasClass('show')) {
+    return;
+  } else {
+    $('#prospective').toggleClass('hide').toggleClass('show');
+  }
+  if($('#jobsapplied').hasClass('show')) {
+    $('#jobsapplied').toggleClass('hide').toggleClass('show');
+  }
+  if($('#reject-box').hasClass('show')) {
+    $('#reject-box').toggleClass('hide').toggleClass('show');
+  }
+  if($('#home').hasClass('show')) {
+    $('#home').toggleClass('hide').toggleClass('show');
+  }
+}
+
+function showRJ() {
+  $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  if($('#reject-box').hasClass('show')) {
+    return;
+  } else {
+    $('#reject-box').toggleClass('hide').toggleClass('show');
+  }
+  if($('#prospective').hasClass('show')) {
+    $('#prospective').toggleClass('hide').toggleClass('show');
+  }
+  if($('#jobsapplied').hasClass('show')) {
+    $('#jobsapplied').toggleClass('hide').toggleClass('show');
+  }
+  if($('#home').hasClass('show')) {
+    $('#home').toggleClass('hide').toggleClass('show');
+  }
 }
 
 // When the user clicks on the button, open the modal
@@ -37,6 +107,7 @@ function addprospect_click() {
   if($('#addjobarea').hasClass('show')) {
     $('#addjobarea').toggleClass('hide').toggleClass('show');
   }
+
   // if add prospect area is not displayed
   // if(document.getElementById('addprospectarea').style.display === "none") {
   //   // show the area
@@ -100,7 +171,7 @@ function addJob(url) {
   if(prospect === 2) {
     // if the link field is empty
     if(!$('#plinkTextField').val()) {
-      $('#plinkTextField').css('border-color', 'red');
+      $('#plinkTextField').css('border', 'solid 2px red');
       return;
     }
     // adding a prospective job
