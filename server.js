@@ -1,22 +1,23 @@
 // BASE SETUP
 // ==============================================
 // requires
-var express = require('express');
-var port    = process.env.PORT || 3000;
-var path    = require('path');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var app     = express();
-var passport = require('passport');
-var flash    = require('connect-flash');
-var bcrypt   = require('bcrypt-nodejs');
-var session  = require('express-session');
-var db = require('../db/database.js');
-var validUrl = require('valid-url');
-var helmet = require('helmet');
-var compression = require('compression');
-var debug = require('debug')('server');
-var favicon = require('serve-favicon');
+var express       = require('express');
+var port          = process.env.PORT || 3000;
+var path          = require('path');
+var mongoose      = require('mongoose');
+var bodyParser    = require('body-parser');
+var passport      = require('passport');
+var flash         = require('connect-flash');
+var bcrypt        = require('bcrypt-nodejs');
+var session       = require('express-session');
+var db            = require('../outer/database.js');
+var sec           = require('../outer/session.js')
+var helmet        = require('helmet');
+var compression   = require('compression');
+var debug         = require('debug')('server');
+var favicon       = require('serve-favicon');
+var app           = express();
+
 //var validator = require('express-validator');
 
 app.use(bodyParser.json());
@@ -30,7 +31,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // required for passport
 app.use(session({
-  secret: 'trakmyjob',
+  secret: sec.secret,
   resave: true,
   saveUninitialized: true
 })); // session secret

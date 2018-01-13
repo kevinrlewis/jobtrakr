@@ -329,3 +329,8 @@ hr {
   color: var(--txt-color);
   float: right;
 }
+
+.index-footer {
+  position: fixed;
+  bottom: 0;
+}
