@@ -4,20 +4,27 @@ extends layout
 block content
   include userscripts.pug
   nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
-    a(onclick="hideAll()")  
+    a(href="")  
       h1.navbar-brand=user.local.username
-    button.navbar-toggler(data-toggle='collapse' data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+    button.navbar-toggler(data-toggle='collapse'
+      data-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation")
       span.navbar-toggler-icon
     div.collapse.navbar-collapse#navbarSupportedContent
       ul.navbar-nav.mr-auto
         li.nav-item
-          a.nav-link(href='#prospectivejobs' onclick="showPJ()"
+          a.nav-link(onclick="showPJ()"
             style="font-size: 1rem") Prospective
         li.nav-item
-          a.nav-link(href='#jobsapplied' onclick="showJA()"
+          a.nav-link(onclick="showJA()"
             style="font-size: 1rem") Applied
         li.nav-item
-          a.nav-link(href='#rejectedjobs' onclick="showRJ()"
+          a.nav-link#tt(title='Coming soon!' data-toggle='tooltip' data-placement="bottom" onclick=""
+            style="font-size: 1rem") Interviewing
+        li.nav-item
+          a.nav-link(onclick="showRJ()"
             style="font-size: 1rem") Rejected
       form.form-inline.my-2.my-lg-0(method='GET')
         input.form-control.mr-sm-2(
@@ -60,6 +67,13 @@ block content
             id="pcompanyTextField"
             type="plaintext"
             placeholder="company"
+            class="col-xs-12 col-sm-7"
+          )
+        div.row.justify-content-center
+          input.form-control(
+            id="ptitleTextField"
+            type="plaintext"
+            placeholder="job title"
             class="col-xs-12 col-sm-7"
           )
         div.row.justify-content-center      
@@ -139,6 +153,13 @@ block content
           )
         div.row.justify-content-center
           input.form-control(
+            id="titleTextField"
+            type="plaintext"
+            placeholder="job title"
+            class="col-xs-12 col-sm-7"
+          )
+        div.row.justify-content-center
+          input.form-control(
             id="linkTextField"
             type="plaintext"
             placeholder="link"
@@ -192,6 +213,8 @@ block content
               )
           div.comment-area.hide(id='comment'+index style='padding: 0!important;')
             h8=item.comments            
+
+  div.box-cont.container-fluid.hide#interviews
 
   div.box-cont.container-fluid.hide#reject-box
     div.row

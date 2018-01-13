@@ -1,3 +1,4 @@
+// remove job-box
 function remove(el, i) {
   console.log("-----------------------------------------");
   console.log("in remove function");
@@ -6,79 +7,81 @@ function remove(el, i) {
   console.log("-----------------------------------------");
 }
 
+// show messageAlert
 function showMessage() {
   $('#messageAlert').css("display", "block");
 }
 
-function hideAll() {
-  if($('#home').hasClass('show')) {
-    return;
-  } else {
-    $('#home').toggleClass('hide').toggleClass('show');
-  }
+// toggle to show/hide jobs applied div
+function toggleJobsApplied() {
   if($('#jobsapplied').hasClass('show')) {
     $('#jobsapplied').toggleClass('hide').toggleClass('show');
   }
+}
+
+// toggle to show/hide prospective div
+function toggleProspective() {
   if($('#prospective').hasClass('show')) {
     $('#prospective').toggleClass('hide').toggleClass('show');
   }
+}
+
+// toggle to show/hide reject-box div
+function toggleReject() {
   if($('#reject-box').hasClass('show')) {
     $('#reject-box').toggleClass('hide').toggleClass('show');
   }
 }
 
+// toggle to show/hide home div
+function toggleHome() {
+  if($('#home').hasClass('show')) {
+    $('#home').toggleClass('hide').toggleClass('show');
+  }
+}
+
+// show jobs applied
 function showJA() {
-  $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  $('#navbarSupportedContent').toggleClass('show');
   if($('#jobsapplied').hasClass('show')) {
     return;
   } else {
     $('#jobsapplied').toggleClass('hide').toggleClass('show');
   }
-  if($('#prospective').hasClass('show')) {
-    $('#prospective').toggleClass('hide').toggleClass('show');
-  }
-  if($('#reject-box').hasClass('show')) {
-    $('#reject-box').toggleClass('hide').toggleClass('show');
-  }
-  if($('#home').hasClass('show')) {
-    $('#home').toggleClass('hide').toggleClass('show');
-  }
+  toggleProspective();
+  toggleReject();
+  toggleHome();
 }
 
+// show prospective jobs
 function showPJ() {
-  $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  $('#navbarSupportedContent').toggleClass('show');
   if($('#prospective').hasClass('show')) {
     return;
   } else {
     $('#prospective').toggleClass('hide').toggleClass('show');
   }
-  if($('#jobsapplied').hasClass('show')) {
-    $('#jobsapplied').toggleClass('hide').toggleClass('show');
-  }
-  if($('#reject-box').hasClass('show')) {
-    $('#reject-box').toggleClass('hide').toggleClass('show');
-  }
-  if($('#home').hasClass('show')) {
-    $('#home').toggleClass('hide').toggleClass('show');
-  }
+  toggleJobsApplied();
+  toggleReject();
+  toggleHome();
 }
 
+// show rejected jobs
 function showRJ() {
-  $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  $('#navbarSupportedContent').toggleClass('show');
   if($('#reject-box').hasClass('show')) {
     return;
   } else {
     $('#reject-box').toggleClass('hide').toggleClass('show');
   }
-  if($('#prospective').hasClass('show')) {
-    $('#prospective').toggleClass('hide').toggleClass('show');
-  }
-  if($('#jobsapplied').hasClass('show')) {
-    $('#jobsapplied').toggleClass('hide').toggleClass('show');
-  }
-  if($('#home').hasClass('show')) {
-    $('#home').toggleClass('hide').toggleClass('show');
-  }
+  toggleProspective();
+  toggleJobsApplied();
+  toggleHome();
+}
+
+// show interviews
+function showInterviews() {
+  $('#tt').tooltip('toggle');
 }
 
 // When the user clicks on the button, open the modal
@@ -87,19 +90,6 @@ function addjob_click() {
   if($('#addprospectarea').hasClass('show')) {
     $('#addprospectarea').toggleClass('hide').toggleClass('show');
   }
-  // if add job area is not displayed then display it
-  // if(document.getElementById('addjobarea').style.display === "none") {
-  //   //$('#addjobarea').css('display', 'block');
-  //   //$('#addjobarea').toggleClass('show');
-  //   // if prospect area is open while job area is trying to be opened the close it
-  //   // if(document.getElementById('addprospectarea').style.display === "block") {
-  //   //   $('#addprospectarea').css('display', 'none');
-  //   // }
-  // // if job area is open then close it
-  // } else {
-  //   //$('#addjobarea').css('display', 'none');
-  //   //$('#addjobarea').toggleClass('hide');
-  // }
 }
 
 function addprospect_click() {
@@ -107,55 +97,24 @@ function addprospect_click() {
   if($('#addjobarea').hasClass('show')) {
     $('#addjobarea').toggleClass('hide').toggleClass('show');
   }
-
-  // if add prospect area is not displayed
-  // if(document.getElementById('addprospectarea').style.display === "none") {
-  //   // show the area
-  //   $('#addprospectarea').css('display', 'block');
-  //   // if add job area is open close it
-  //   if(document.getElementById('addjobarea').style.display === "block") {
-  //     $('#addjobarea').css('display', 'none');
-  //   }
-  // // if prospect area is displayed then hide it
-  // } else {
-  //   $('#addprospectarea').css('display', 'none');
-  // }
 }
 
-
+// when comments are clicked, toggle the comments
 function comments_click(index) {
   $('#comment' + index).toggleClass('hide').toggleClass('show');
-  // if(document.getElementById('comment' + index).style.display === "block") {
-  //   document.getElementById('comment' + index).style.display = "none";
-  // } else {
-  //   document.getElementById('comment' + index).style.display = "block";
-  // }
 }
 
+// when prospect comments are clicked, toggle the comments
 function prospectcomments_click(index) {
   $('#prospectcomment' + index).toggleClass('hide').toggleClass('show');
-  // if(document.getElementById('prospectcomment' + index).style.display === "block") {
-  //   document.getElementById('prospectcomment' + index).style.display = "none";
-  // } else {
-  //   document.getElementById('prospectcomment' + index).style.display = "block";
-  // }
 }
 
+// when the reject comments are clicked, toggle the comments
 function rejectcomments_click(index) {
   $('#rejectcomment' + index).toggleClass('hide').toggleClass('show');
-  // if(document.getElementById('rejectcomment' + index).style.display === "block") {
-  //   document.getElementById('rejectcomment' + index).style.display = "none";
-  // } else {
-  //   document.getElementById('rejectcomment' + index).style.display = "block";
-  // }
-}
-// When the user clicks on <span> (x), close the modal
-function comments_modalclose_click(index) {
-  document.getElementById('commentPopupModal' + index).style.display = "none";
-  location.reload();
 }
 
-
+// when the submit adding a job is clicked
 function addJob(url) {
   console.log('add job pressed...');
   // temporary flag variables
@@ -206,6 +165,14 @@ function addJob(url) {
       company = $('#pcompanyTextField').val();
     }
 
+    var jobtitle;
+    if(!$('#ptitleTextField').val()) {
+      $('#ptitleTextField').css('border-color', 'red');
+      return;
+    } else {
+      title = $('#ptitleTextField').val();
+    }
+
     //TODO: deprecate the link parsing, that data also does not need
     //      to be saved to database.
     $.ajax({
@@ -219,7 +186,8 @@ function addJob(url) {
         search: el.search,
         joblink: el.href,
         comments: comments,
-        company: company
+        company: company,
+        jobtitle: jobtitle
       }),
       datatype: "json",
       success: function(data, status) {
@@ -270,6 +238,15 @@ function addJob(url) {
       company = $('#companyTextField').val();
     }
 
+    // title
+    var jobtitle;
+    if(!$('#jobtitleTextField').val()) {
+      $('#jobtitleTextField').css('border-color', 'red');
+      return;
+    } else {
+      jobtitle = $('#jobtitleTextField').val();
+    }
+
     //console.log('before ajax call...');
     $.ajax({
       type: 'POST',
@@ -282,7 +259,8 @@ function addJob(url) {
         search: el.search,
         joblink: el.href,
         comments: comments,
-        company: company
+        company: company,
+        jobtitle: jobtitle
       }),
       datatype: "json",
       success: function(data, status) {
@@ -296,12 +274,4 @@ function addJob(url) {
       }
     });
   }
-
 }
-
-// function for when editting comments is available
-/*function editCommentClick() {
-  var comments;
-  comments = $('#modalCommentLabel').val();
-  $('#modalCommentLabel').replaceWith("<input type='plaintext' value='" + comments + "'/>");
-}*/

@@ -100,7 +100,7 @@ nav * {
 
 #addjobarea {
   text-align: center;
-  background-color: var(--txt-color);
+  background-color: #343a40;
   color: var(--bck-color);
   transition: all .3s ease-out;
   height: 100%;
@@ -108,7 +108,7 @@ nav * {
 
 #addprospectarea {
   text-align: center;
-  background-color: var(--txt-color);
+  background-color: #343a40;
   color: var(--bck-color);
   margin-bottom: 1%;
 }
@@ -311,16 +311,6 @@ hr {
 #commentlink:hover {
   cursor: pointer;
   color: var(--accent);
-}
-
-#modalCloseSpan {
-  color: var(--bck-color);
-  opacity: .8;
-}
-
-#modalCloseSpan:hover {
-  color: var(--accent);
-  opacity: 1;
 }
 
 .edit-icon {
