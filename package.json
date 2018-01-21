@@ -1,6 +1,6 @@
 {
-  "name": "jobtrak-2",
-  "version": "1.0.0",
+  "name": "jobtrakr",
+  "version": "0.1.0",
   "engines": {
     "node": "8.9.0",
     "npm": "5.5.1"
@@ -15,8 +15,9 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "helmet": "^3.9.0",
-    "mongoose": "^4.13.0",
-    "nodemon": "^1.12.1",
+    "mongoose": "^4.13.9",
+    "nodemailer": "^4.4.2",
+    "nodemon": "^1.14.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.4",

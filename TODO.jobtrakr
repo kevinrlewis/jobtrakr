@@ -1,0 +1,15 @@
++ in routes.js add middleware function for /login post that verifies the input fields
+have been filled in
+
++ update job box display, make it easier to use and read
+
++ implement interviews
+  - add interviews to user schema
+  - determine how to display interviews under specific jobs, will interviews be a sub
+  array of a job, or will they be their own array of job objects?
+
++ add design features
+
++ fix transition glitch
+
++ possibly create tests

@@ -24,6 +24,9 @@ module.exports = function(app, passport) {
     // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) res.redirect('/signup');
     else next();
+
+    // add conditionals to check if input exists
+
     // authenticate the login using passport
   },
   passport.authenticate('local-login', {
@@ -39,7 +42,50 @@ module.exports = function(app, passport) {
   });
 
   // attempt signup
-  app.post('/signup', passport.authenticate('local-signup', {
+  app.post('/signup',
+  // middleware function to validate input
+  function(req, res, next) {
+    // regex to validate email
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // if the firstname field and the email field are not filled
+    if((req.body.firstname === '') && (req.body.email === '')) {
+      res.render('signup.pug', { message: 'Please enter both an e-mail and your first name.', title: 'jobtrakr' });
+    }
+    // if the firstname field is not filled
+    else if(req.body.firstname === '') {
+      res.render('signup.pug', { message: 'Please enter your first name.', title: 'jobtrakr' });
+    }
+    // if the email field is not filled
+    else if(req.body.email === '') {
+      res.render('signup.pug', { message: 'Please enter an e-mail.', title: 'jobtrakr' });
+    }
+    // if the email is not a valid email
+    else if(!(re.test(req.body.email))) {
+      res.render('signup.pug', { message: 'Please enter an VALID e-mail.', title: 'jobtrakr' });
+    }
+    // if one or both of the password fields are empty
+    else if((req.body.password === '') || (req.body.confirmpassword === '')) {
+      res.render('signup.pug', { message: 'Please enter a password.', title: 'jobtrakr' });
+    }
+    // if the passwords do not match
+    else if(req.body.password != req.body.confirmpassword) {
+      res.render('signup.pug', { message: 'Confirmation password does not match entered password.', title: 'jobtrakr' });
+    }
+    // if the password length does not meet the requirements
+    else if(req.body.password.length < 7) {
+      res.render('signup.pug', { message: 'Password does not meet length requirements.', title: 'jobtrakr' });
+    }
+    // if the password does not contain a number
+    else if((!/\d/.test(req.body.password))) {
+      res.render('signup.pug', { message: 'Password must contain a number.', title: 'jobtrakr' });
+    }
+    // sign was successful, continue to passport for signing up
+    else {
+      console.log('attempt successful...');
+      next();
+    }
+  },
+  passport.authenticate('local-signup', {
     successRedirect : '/profile',
     failureRedirect : '/signup',
     failureFlash : true
@@ -49,7 +95,6 @@ module.exports = function(app, passport) {
   app.get('/profile', isLoggedIn, function(req, res) {
     request('https://api.tronalddump.io/random/quote', function(error, response, body) {
       var obj = JSON.parse(body);
-      //console.log(req.user.jobs);
       res.render('user.pug', {
         user : req.user,
         title: 'jobtrakr',

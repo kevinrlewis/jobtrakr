@@ -16,9 +16,8 @@ var helmet        = require('helmet');
 var compression   = require('compression');
 var debug         = require('debug')('server');
 var favicon       = require('serve-favicon');
+var nodemailer    = require('nodemailer');
 var app           = express();
-
-//var validator = require('express-validator');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,6 +49,7 @@ try {
   console.log(e.message);
   // handle or display that the database can't connect
 }
+
 
 
 // require the routes and passport files

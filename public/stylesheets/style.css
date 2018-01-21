@@ -147,6 +147,17 @@ nav * {
     overflow: hidden;
 }
 
+.showInfo {
+  max-height: 1000px;
+  overflow: hidden;
+}
+
+.hideInfo {
+  overflow: hidden;
+  max-height: 0;
+  padding: 0!important;
+}
+
 #title {
   font-size: 600%;
 }
@@ -215,6 +226,11 @@ label {
   background-color: #8D0801;
   border-color: var(--txt-color);
   /*color: var(--bck-color);*/
+}
+
+.pwdreq {
+  margin-bottom: 0!important;
+  font-size: 90%
 }
 
 .form-control {
