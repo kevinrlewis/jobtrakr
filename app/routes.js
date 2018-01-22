@@ -1,14 +1,20 @@
 // ROUTES
 // ==============================================
 // load up the user model
-var User = require('../app/models/user');
-var userScript = require('../public/scripts/user');
-var request = require('request');
+var User          = require('../app/models/user');
+var userScript    = require('../public/scripts/user');
+var request       = require('request');
+var asynchro      = require('async');
+var crypto        = require('crypto');
+var nodemailer    = require('nodemailer');
+var sec           = require('../../outer/session.js');
+var mg            = require('nodemailer-mailgun-transport');
 
 module.exports = function(app, passport) {
 
   //home page
   app.get('/', function(req, res) {
+    //console.log(req);
     res.render('index.pug', { title: 'jobtrakr' });
   });
 
@@ -22,11 +28,25 @@ module.exports = function(app, passport) {
   // request, response, next function
   function(req, res, next) {
     // if signup button is pressed, redirect to signup page
-    if(req.body.signupButton) res.redirect('/signup');
-    else next();
-
-    // add conditionals to check if input exists
-
+    if(req.body.signupButton) {
+      res.redirect('/signup');
+    }
+    // if both the email and password fields are empty
+    else if(req.body.email === '' && req.body.password === '') {
+      res.render('login.pug', { message: 'Please enter an e-mail and password.', title: 'jobtrakr' });
+    }
+    // if the email field is empty but password has input
+    else if(req.body.email === '') {
+      res.render('login.pug', { message: 'Please enter an e-mail.', title: 'jobtrakr' });
+    }
+    // if the password field is empty but email has input
+    else if(req.body.password === '') {
+      res.render('login.pug', { message: 'Please enter a password.', title: 'jobtrakr' });
+    }
+    // form is completely filled
+    else {
+      next();
+    }
     // authenticate the login using passport
   },
   passport.authenticate('local-login', {
@@ -40,6 +60,137 @@ module.exports = function(app, passport) {
     // render the signup page
     res.render('signup.pug', { message: req.flash('signupMessage'), title: 'jobtrakr' });
   });
+
+  // forgot password
+  app.get('/forgot', function(req, res) {
+    if(req.flash('info').length === 1) {
+      //console.log(req);
+      // render the forgot password page
+      res.render('forgot.pug', { message: req.flash('info'), title: 'jobtrakr' });
+    } else {
+      // render the forgot password page
+      res.render('forgot.pug', { title: 'jobtrakr' });
+    }
+
+  });
+
+  // forgot password submit
+  app.post('/forgot', function(req, res, next) {
+    asynchro.waterfall([
+      function(done) {
+        crypto.randomBytes(20, function(err, buf) {
+          var token = buf.toString('hex');
+          done(err, token);
+        });
+      },
+      function(token, done) {
+        User.findOne({ 'local.email': req.body.email }, function(err, user) {
+          if (!user) {
+            console.log('no account with that email address exists');
+            req.flash('error', 'No account with that email address exists.');
+            return res.redirect('/forgot');
+          }
+
+          user.resetPasswordToken = token;
+          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+          user.save(function(err) {
+            done(err, token, user);
+          });
+        });
+      },
+      function(token, user, done) {
+        // authentication for mailgun api
+        var auth = {
+          auth: {
+            api_key: sec.emailkey,
+            domain: 'jobtrakr.kvnlws.xyz'
+          }
+        };
+        var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+        // create the message
+        var mailOptions = {
+          to: user.local.email,
+          from: 'jobtrakr.mail@jobtrakr.kvnlws.xyz',
+          subject: 'Node.js Password Reset',
+          text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+            'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        };
+        nodemailerMailgun.sendMail(mailOptions, function(err) {
+          req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
+          done(err, 'done');
+        });
+      }
+    ], function(err) {
+      if(err) {
+        console.log(err);
+        return next(err);
+      }
+      res.redirect('/forgot');
+    });
+  });
+
+  // reset password dependent on token
+  app.get('/reset/:token', function(req, res) {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      if (!user) {
+        req.flash('error', 'Password reset token is invalid or has expired.');
+        return res.redirect('/forgot');
+      }
+      res.render('reset', {
+        user: req.user
+      });
+    });
+  });
+
+  // attempt to reset password
+  app.post('/reset/:token', function(req, res) {
+    asynchro.waterfall([
+      function(done) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+          if (!user) {
+            req.flash('error', 'Password reset token is invalid or has expired.');
+            return res.redirect('back');
+          }
+
+          user.local.password = user.generateHash(req.body.password);
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+
+          user.save(function(err) {
+            req.logIn(user, function(err) {
+              done(err, user);
+            });
+          });
+        });
+      },
+      function(user, done) {
+        var auth = {
+          auth: {
+            api_key: sec.emailkey,
+            domain: 'jobtrakr.kvnlws.xyz'
+          }
+        };
+        var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+        var mailOptions = {
+          to: user.local.email,
+          from: 'jobtrakr.mail@jobtrakr.kvnlws.xyz',
+          subject: 'Your password has been changed',
+          text: 'Hello,\n\n' +
+            'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
+        };
+        nodemailerMailgun.sendMail(mailOptions, function(err) {
+          req.flash('success', 'Success! Your password has been changed.');
+          done(err);
+        });
+      }
+    ], function(err) {
+      res.redirect('/');
+    });
+  });
+
 
   // attempt signup
   app.post('/signup',

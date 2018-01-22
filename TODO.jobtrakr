@@ -1,5 +1,10 @@
-+ in routes.js add middleware function for /login post that verifies the input fields
-have been filled in
+DONE+ update google analytics
+
+DONE+ add validation for login
+
+DONE+ implement email/forgot password option
+
++ test email/forgot password
 
 + update job box display, make it easier to use and read
 

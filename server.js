@@ -11,12 +11,13 @@ var flash         = require('connect-flash');
 var bcrypt        = require('bcrypt-nodejs');
 var session       = require('express-session');
 var db            = require('../outer/database.js');
-var sec           = require('../outer/session.js')
+var sec           = require('../outer/session.js');
 var helmet        = require('helmet');
 var compression   = require('compression');
 var debug         = require('debug')('server');
 var favicon       = require('serve-favicon');
 var nodemailer    = require('nodemailer');
+//var async         = require('async');
 var app           = express();
 
 app.use(bodyParser.json());

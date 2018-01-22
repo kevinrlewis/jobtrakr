@@ -1,3 +1,11 @@
 extends layout
 
 block content
+  form(method='POST')
+    div.container-fluid
+      div.row.justify-content-center
+        h1 Forgot Password
+      div.row.justify-content-center
+        input.form-control.col-xs-12.col-sm-7(type='text', name='email' placeholder='e-mail')
+      div.row.justify-content-center
+        button.btn.btn-default.col-xs-12.col-sm-7(type='submit' formaction='/forgot') Reset Password

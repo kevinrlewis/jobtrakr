@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  form(method='POST')
+    div.container-fluid
+      div.row.justify-content-center
+        input.form-control.col-xs-12.col-sm-7(type='password', name='password', value='', placeholder='New password')
+      div.row.justify-content-center
+        input.form-control.col-xs-12.col-sm-7(type='password', name='confirm', value='', placeholder='Confirm password')
+      div.row.justify-content-center
+        button.btn.btn-default.col-xs-12.col-sm-7(type='submit') Update Password

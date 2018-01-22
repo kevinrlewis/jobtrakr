@@ -42,7 +42,10 @@ function toggleHome() {
 
 // show jobs applied
 function showJA() {
-  $('#navbarSupportedContent').toggleClass('show');
+  if($('#navbarSupportedContent').hasClass('hide')) {
+    $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  }
+
   if($('#jobsapplied').hasClass('show')) {
     return;
   } else {
@@ -55,7 +58,9 @@ function showJA() {
 
 // show prospective jobs
 function showPJ() {
-  $('#navbarSupportedContent').toggleClass('show');
+  if($('#navbarSupportedContent').hasClass('hide')) {
+    $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  }
   if($('#prospective').hasClass('show')) {
     return;
   } else {
@@ -68,7 +73,9 @@ function showPJ() {
 
 // show rejected jobs
 function showRJ() {
-  $('#navbarSupportedContent').toggleClass('show');
+  if($('#navbarSupportedContent').hasClass('hide')) {
+    $('#navbarSupportedContent').toggleClass('hide').toggleClass('show');
+  }
   if($('#reject-box').hasClass('show')) {
     return;
   } else {
@@ -128,6 +135,8 @@ function addJob(url) {
   }
 
   if(prospect === 2) {
+
+    // VALIDATIONS
     // if the link field is empty
     if(!$('#plinkTextField').val()) {
       $('#plinkTextField').css('border', 'solid 2px red');
@@ -136,17 +145,8 @@ function addJob(url) {
     // adding a prospective job
     console.log('adding prospective job....');
 
-    // create link element
-    var el = document.createElement('a');
-    el.href = $("#plinkTextField").val();
-
-    // handle generic job pages
-    var modhost;
-    if(el.hostname == 'www.indeed.com') {
-      modhost = 'job on indeed';
-    } else {
-      modhost = el.hostname;
-    }
+    // link
+    var link = $("#plinkTextField").val();
 
     // handle empty comments
     var comments;
@@ -173,21 +173,16 @@ function addJob(url) {
       title = $('#ptitleTextField').val();
     }
 
-    //TODO: deprecate the link parsing, that data also does not need
-    //      to be saved to database.
     $.ajax({
       type: 'POST',
       url: "/addprospect",
       contentType: 'application/json',
       data: JSON.stringify({
-        hostname: modhost,
-        hash: el.hash,
-        pathname: el.pathname,
-        search: el.search,
-        joblink: el.href,
+        joblink: link,
         comments: comments,
         company: company,
-        jobtitle: jobtitle
+        jobtitle: jobtitle,
+        interviews: []
       }),
       datatype: "json",
       success: function(data, status) {
@@ -210,16 +205,7 @@ function addJob(url) {
     console.log('adding job....');
 
     // create link element to parse
-    var el = document.createElement('a');
-    el.href = $("#linkTextField").val();
-
-    // handle generic job pages
-    var modhost;
-    if(el.hostname == 'www.indeed.com') {
-      modhost = 'job on indeed';
-    } else {
-      modhost = el.hostname;
-    }
+    var link = $("#linkTextField").val();
 
     // handle empty comments
     var comments;
@@ -253,14 +239,11 @@ function addJob(url) {
       url: "/add",
       contentType: 'application/json',
       data: JSON.stringify({
-        hostname: modhost,
-        hash: el.hash,
-        pathname: el.pathname,
-        search: el.search,
-        joblink: el.href,
+        joblink: link,
         comments: comments,
         company: company,
-        jobtitle: jobtitle
+        jobtitle: jobtitle,
+        interviews: []
       }),
       datatype: "json",
       success: function(data, status) {
