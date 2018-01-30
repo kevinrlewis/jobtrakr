@@ -1,4 +1,4 @@
-
+// remove job-box
 function remove(el, i) {
   console.log("-----------------------------------------");
   console.log("in remove function");
@@ -7,6 +7,7 @@ function remove(el, i) {
   console.log("-----------------------------------------");
 }
 
+// show messageAlert
 function showMessage() {
   $('#messageAlert').css("display", "block");
 }
@@ -14,109 +15,92 @@ function showMessage() {
 // When the user clicks on the button, open the modal
 function addjob_click() {
   $('#addjobarea').toggleClass('hide').toggleClass('show');
-  if($('#addprospectarea').hasClass('show')) {
-    $('#addprospectarea').toggleClass('hide').toggleClass('show');
-  }
-  // if add job area is not displayed then display it
-  // if(document.getElementById('addjobarea').style.display === "none") {
-  //   //$('#addjobarea').css('display', 'block');
-  //   //$('#addjobarea').toggleClass('show');
-  //   // if prospect area is open while job area is trying to be opened the close it
-  //   // if(document.getElementById('addprospectarea').style.display === "block") {
-  //   //   $('#addprospectarea').css('display', 'none');
-  //   // }
-  // // if job area is open then close it
-  // } else {
-  //   //$('#addjobarea').css('display', 'none');
-  //   //$('#addjobarea').toggleClass('hide');
-  // }
 }
 
 function addprospect_click() {
   $('#addprospectarea').toggleClass('hide').toggleClass('show');
-  if($('#addjobarea').hasClass('show')) {
-    $('#addjobarea').toggleClass('hide').toggleClass('show');
-  }
-  // if add prospect area is not displayed
-  // if(document.getElementById('addprospectarea').style.display === "none") {
-  //   // show the area
-  //   $('#addprospectarea').css('display', 'block');
-  //   // if add job area is open close it
-  //   if(document.getElementById('addjobarea').style.display === "block") {
-  //     $('#addjobarea').css('display', 'none');
-  //   }
-  // // if prospect area is displayed then hide it
-  // } else {
-  //   $('#addprospectarea').css('display', 'none');
-  // }
 }
 
-
+// when comments are clicked, toggle the comments
 function comments_click(index) {
   $('#comment' + index).toggleClass('hide').toggleClass('show');
-  // if(document.getElementById('comment' + index).style.display === "block") {
-  //   document.getElementById('comment' + index).style.display = "none";
-  // } else {
-  //   document.getElementById('comment' + index).style.display = "block";
-  // }
 }
 
+// when prospect comments are clicked, toggle the comments
 function prospectcomments_click(index) {
   $('#prospectcomment' + index).toggleClass('hide').toggleClass('show');
-  // if(document.getElementById('prospectcomment' + index).style.display === "block") {
-  //   document.getElementById('prospectcomment' + index).style.display = "none";
-  // } else {
-  //   document.getElementById('prospectcomment' + index).style.display = "block";
-  // }
 }
 
+// when the reject comments are clicked, toggle the comments
 function rejectcomments_click(index) {
   $('#rejectcomment' + index).toggleClass('hide').toggleClass('show');
-  // if(document.getElementById('rejectcomment' + index).style.display === "block") {
-  //   document.getElementById('rejectcomment' + index).style.display = "none";
-  // } else {
-  //   document.getElementById('rejectcomment' + index).style.display = "block";
-  // }
-}
-// When the user clicks on <span> (x), close the modal
-function comments_modalclose_click(index) {
-  document.getElementById('commentPopupModal' + index).style.display = "none";
-  location.reload();
 }
 
+// function called to show interviews
+function interviewsClick(index) {
+  $('#interviewsDiv-' + index).toggleClass('hide').toggleClass('show');
+  $('#interviews-' + index).toggleClass('fa-caret-right').toggleClass('fa-caret-down');
+}
 
+// function called when the add interview button is clicked
+function addInterviewClick(index) {
+  // make sure the both the interviewer and date are filled
+  if(!$('#interviewDate').val() || !$('#interviewer').val()) {
+    // set border of the interviewDate input to red if empty
+    if(!$('#interviewDate').val()) {
+      $('#interviewDate').css('border', 'solid 2px red');
+    }
+    // set border of the interviewer field to red if empty
+    if(!$('#interviewer').val()) {
+      $('#interviewer').css('border', 'solid 2px red');
+    }
+    return;
+  }
+
+  // get input
+  var date = $('#interviewDate').val();
+  var interviewer = $('#interviewer').val();
+
+  // send post request
+  $.ajax({
+    type: 'POST',
+    url: "/interviews",
+    contentType: 'application/json',
+    data: JSON.stringify({
+      interviewDate: date,
+      interviewer: interviewer,
+      interviewJobIndex: index
+    }),
+    datatype: "json",
+    success: function(data, status) {
+      // post to db was successful
+      console.log("post success");
+      location.reload();
+    },
+    error: function(data, status) {
+      console.log("post interview error");
+    }
+  });
+}
+
+// when the submit adding a job is clicked
 function addJob(url) {
   console.log('add job pressed...');
   // temporary flag variables
   var prospect;
-
-  // determine if a prospective job or regular job is being added
-  if($('#addprospectarea').hasClass('show')) {
-    prospect = 2;
-  } else {
-    prospect = 1;
-  }
-
-  if(prospect === 2) {
+  console.log(window.location.pathname === '/applied');
+  if(window.location.pathname === '/prospective') {
+    // VALIDATIONS
     // if the link field is empty
     if(!$('#plinkTextField').val()) {
-      $('#plinkTextField').css('border-color', 'red');
+      $('#plinkTextField').css('border', 'solid 2px red');
       return;
     }
     // adding a prospective job
     console.log('adding prospective job....');
 
-    // create link element
-    var el = document.createElement('a');
-    el.href = $("#plinkTextField").val();
-
-    // handle generic job pages
-    var modhost;
-    if(el.hostname == 'www.indeed.com') {
-      modhost = 'job on indeed';
-    } else {
-      modhost = el.hostname;
-    }
+    // link
+    var link = $("#plinkTextField").val();
 
     // handle empty comments
     var comments;
@@ -135,20 +119,24 @@ function addJob(url) {
       company = $('#pcompanyTextField').val();
     }
 
-    //TODO: deprecate the link parsing, that data also does not need
-    //      to be saved to database.
+    var jobtitle;
+    if(!$('#ptitleTextField').val()) {
+      $('#ptitleTextField').css('border-color', 'red');
+      return;
+    } else {
+      title = $('#ptitleTextField').val();
+    }
+
     $.ajax({
       type: 'POST',
-      url: "/addprospect",
+      url: "/prospective",
       contentType: 'application/json',
       data: JSON.stringify({
-        hostname: modhost,
-        hash: el.hash,
-        pathname: el.pathname,
-        search: el.search,
-        joblink: el.href,
+        joblink: link,
         comments: comments,
-        company: company
+        company: company,
+        jobtitle: jobtitle,
+        interviews: []
       }),
       datatype: "json",
       success: function(data, status) {
@@ -161,26 +149,17 @@ function addJob(url) {
         showMessage();
       }
     });
-  } else {
+  } else if(window.location.pathname === '/applied') {
     // if the link text field is empty
     if(!$('#linkTextField').val()) {
       $('#linkTextField').css('border-color', 'red');
       return;
     }
     // adding a regular job
-    console.log('adding job....');
+    console.log('adding applied job....');
 
     // create link element to parse
-    var el = document.createElement('a');
-    el.href = $("#linkTextField").val();
-
-    // handle generic job pages
-    var modhost;
-    if(el.hostname == 'www.indeed.com') {
-      modhost = 'job on indeed';
-    } else {
-      modhost = el.hostname;
-    }
+    var link = $("#linkTextField").val();
 
     // handle empty comments
     var comments;
@@ -199,38 +178,38 @@ function addJob(url) {
       company = $('#companyTextField').val();
     }
 
-    //console.log('before ajax call...');
+    // title
+    var jobtitle;
+    if(!$('#titleTextField').val()) {
+      $('#titleTextField').css('border-color', 'red');
+      return;
+    } else {
+      jobtitle = $('#titleTextField').val();
+    }
+
     $.ajax({
       type: 'POST',
-      url: "/add",
+      url: "/applied",
       contentType: 'application/json',
       data: JSON.stringify({
-        hostname: modhost,
-        hash: el.hash,
-        pathname: el.pathname,
-        search: el.search,
-        joblink: el.href,
+        joblink: link,
         comments: comments,
-        company: company
+        company: company,
+        jobtitle: jobtitle,
+        interviews: []
       }),
       datatype: "json",
       success: function(data, status) {
         // post to db was successful
-        //console.log("post success");
+        console.log("post success");
         location.reload();
       },
       error: function(data, status) {
-        //console.log("post error");
+        console.log("post error");
         showMessage();
       }
     });
+  } else {
+    console.log('window location not recognized when adding a job...');
   }
-
 }
-
-// function for when editting comments is available
-/*function editCommentClick() {
-  var comments;
-  comments = $('#modalCommentLabel').val();
-  $('#modalCommentLabel').replaceWith("<input type='plaintext' value='" + comments + "'/>");
-}*/

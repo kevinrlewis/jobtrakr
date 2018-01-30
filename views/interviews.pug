@@ -1,0 +1,64 @@
+extends layout
+
+
+block content
+  include userscripts.pug
+  include navigationbar.pug
+
+  div.box-cont.container-fluid#interviews
+    if user.interviewingjobs == undefined
+      label error retrieving jobs
+    else
+      each item, index in user.interviewingjobs
+        div.row(class="job-box")
+          h4(class="col-2 col-sm-1 col-md-1" type="text" name="index")=(index+1)
+          h5(class="col-2 col-sm-2 col-md-2" style='padding-top: 0.3rem;')=item.date
+          h4(class="col-8 col-sm-9 col-md-3")
+            if item.company == undefined
+              a.btn(href=item.website)=item.hostname
+            else
+              a.btn(href=item.website)=item.company
+          h4(class='col-3 col-sm-3 col-md-2')
+            a.btn(id='commentlink' onclick='comments_click(' + index + ')') comments
+          div.d-flex.p-2.col-6.col-sm-6.col-md-4.justify-content-end
+            form(action="/move?inter="+index method="POST")
+              button(
+                type='submit'
+                class="btn btn-danger reject"
+                aria-hidden="true"
+                style="float: left; padding-left: 5px; padding-right: 5px;"
+              ) rejected
+            form(action="/remove?inter="+index method="POST")
+              input(
+                type='submit'
+                class="btn btn-danger rmv"
+                aria-hidden="true"
+                value="remove"
+                style="float: right; padding-left: 5px; padding-right: 5px;"
+              )
+          div.comment-area.hide(id='comment'+index style='padding: 0!important;')
+            h8=item.comments            
+        a.btn.fa.fa-caret-right(
+          id='interviews-' +index
+          onclick='interviewsClick(' + index + ')'
+          style='padding: 0;'
+        )=' interviews'
+        div.container-fluid.hide(id='interviewsDiv-' +index)
+          each interview, interviewIndex in item.interviews
+            div.row.interview-box()
+              h5.col-1=(interviewIndex+1)
+              h5.col-3=interview.interviewDate
+              h5.col-8=interview.interviewer
+          div.row.interview-box()
+            input#interviewDate.form-control.col-xs-12.col-sm-3(
+              type='date'
+              name='interviewDate'
+            )
+            input#interviewer.form-control.col-xs-12.offset-sm-1.col-sm-6(
+              type='plaintext'
+              placeholder='interviewer'
+            )
+            button#addInterviewButton.btn.btn-success.offset-sm-1.col-sm-1(
+              onclick='addInterviewClick(' + index + ')'
+            ) add
+            

@@ -52,9 +52,33 @@
   }
 }
 
+@media (min-width: 576px) {
+  .submit-btn {
+    background-color: var(--bck-color)!important;
+    border: solid 1px #360!important;
+  }
+
+  .submit-btn:hover {
+    background-color: #360!important;
+    border: solid 1px var(--bck-color)!important;
+  }
+  .form-inline .form-control {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   #instru {
     display: none;
+  }
+
+  .fa-arrow-right {
+    display: none;
+  }
+
+  .nav-link {
+    text-align: center;
+    font-size: 150%!important;
   }
 }
 
@@ -64,15 +88,19 @@
 }
 
 body {
-  padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: var(--bck-color);
   color: var(--txt-color);
+  padding-top: 55px;
+}
+
+nav * {
+  color: var(--bck-color);
 }
 
 #addjobarea {
   text-align: center;
-  background-color: var(--txt-color);
+  background-color: #343a40;
   color: var(--bck-color);
   transition: all .3s ease-out;
   height: 100%;
@@ -80,9 +108,8 @@ body {
 
 #addprospectarea {
   text-align: center;
-  background-color: var(--txt-color);
+  background-color: #343a40;
   color: var(--bck-color);
-  margin-bottom: 1%;
 }
 
 .interviews-area {
@@ -117,7 +144,17 @@ body {
     transition-timing-function: ease-in;
     max-height: 1000px;
     overflow: hidden;
-    padding: 1%;
+}
+
+.showInfo {
+  max-height: 1000px;
+  overflow: hidden;
+}
+
+.hideInfo {
+  overflow: hidden;
+  max-height: 0;
+  padding: 0!important;
 }
 
 #title {
@@ -128,12 +165,22 @@ body {
   background-color: #CCCCCC;
 }
 
+#addInterviewButton {
+  background-color: #fff;
+  border: none;
+}
+
+#addInterviewButton:hover {
+  background-color: #360;
+}
+
 a {
-  color: var(--txt-color)!important;
+  color: var(--txt-color);
 }
 
 a:hover {
   color: var(--accent)!important;
+  cursor: pointer;
 }
 
 label {
@@ -189,6 +236,11 @@ label {
   /*color: var(--bck-color);*/
 }
 
+.pwdreq {
+  margin-bottom: 0!important;
+  font-size: 90%
+}
+
 .form-control {
   border-radius: 0;
 }
@@ -224,11 +276,16 @@ hr {
   border: 0px;
   background-color: var(--bck-color);
   color: var(--txt-color);
-
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .move:hover {
   background-color: #360;
+}
+
+form > .btn {
+  margin-right: 1rem;
 }
 
 .reject {
@@ -253,14 +310,24 @@ hr {
   background-color: var(--off-color);
   color: var(--txt-color);
 }
+.interview-box {
+  margin-bottom: 3px;
+  background-color: var(--off-color);
+  color: var(--txt-color);
+}
 
 .reject-box {
   border-left: solid 5px #9A031E;
   background-color: #E3B5A4;
 }
 
-.box-cont {
-  margin-top: 2%;
+.navbar {
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-brand {
+  padding-bottom: 0;
+  font-size:  2.5rem;
 }
 
 #prospective .job-box {
@@ -275,27 +342,9 @@ hr {
   border-radius: 0px;
 }
 
-.submit-btn {
-  background-color: var(--bck-color)!important;
-}
-
-.submit-btn:hover {
-  background-color: #360!important;
-}
-
 #commentlink:hover {
   cursor: pointer;
   color: var(--accent);
-}
-
-#modalCloseSpan {
-  color: var(--bck-color);
-  opacity: .8;
-}
-
-#modalCloseSpan:hover {
-  color: var(--accent);
-  opacity: 1;
 }
 
 .edit-icon {
@@ -309,8 +358,13 @@ hr {
 
 .version {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   color: var(--txt-color);
   float: right;
+}
+
+.index-footer {
+  position: fixed;
+  bottom: 0;
 }

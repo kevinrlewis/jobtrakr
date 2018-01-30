@@ -1,32 +1,50 @@
 extends layout
 
 block content
+  script(async, src="/scripts/signup.js")
   form(method='POST')
     div.container-fluid
-        div.row
-          h1#title(class='col' style='text-align: center;') sign up
+        a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
+          div.row
+            h1#title(class='col' style='text-align: center;')=title
+              sup(style="font-size: 20%; top: -3.15em;") beta
         hr
         if message.length > 0
-          div.row(class='alert alert-danger')=message
+          div.row.justify-content-center
+            p.col-xs-12.col-sm-7.alert.alert-danger=message
         div.row.justify-content-center
           input.form-control(
             type="plaintext"
-            placeholder="username"
+            placeholder="first name"
             class='text-field col-xs-12 col-sm-7'
-            name="username"
+            name="firstname"
           )
         div.row.justify-content-center
-          input.form-control(
+          input#enteremail.form-control(
+            type="plaintext"
+            placeholder="email"
+            class='text-field col-xs-12 col-sm-7'
+            name="email"
+          )
+        div.row.justify-content-center
+          input#enterpwd.form-control(
             type="password"
             placeholder="enter password"
             class='text-field col-xs-12 col-sm-7'
             name="password"
           )
+        div#char.row.justify-content-center.showInfo(style='color: var(--red)')
+          i.fa.fa-exclamation(style='padding-left: 1%;')
+          p.col-xs-12.col-sm-7.pwdreq Password must contain at least 7 characters
+        div#num.row.justify-content-center.showInfo(style='color: var(--red)')
+          i.fa.fa-exclamation(style='padding-left: 1%;')
+          p.col-xs-12.col-sm-7.pwdreq Password must contain a number
         div.row.justify-content-center
-          input.form-control(
+          input#confirmpwd.form-control(
             type="password"
             placeholder="confirm password"
             class='text-field col-xs-12 col-sm-7'
+            name="confirmpassword"
           )
         div.row.justify-content-center(style='margin-top:10px;')
           input(

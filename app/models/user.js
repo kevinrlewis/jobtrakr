@@ -6,12 +6,18 @@ var bcrypt   = require('bcrypt-nodejs');
 var userSchema = mongoose.Schema({
 
   local            : {
-    username     : String,
+    email        : String,
     password     : String,
+
   },
+  firstname : String,
   jobs : [{ type: mongoose.Schema.Types.Mixed }],
   prospectjobs : [{ type: mongoose.Schema.Types.Mixed }],
-  rejectjobs : [{ type: mongoose.Schema.Types.Mixed }]
+  rejectjobs : [{ type: mongoose.Schema.Types.Mixed }],
+  interviewingjobs : [{ type: mongoose.Schema.Types.Mixed }],
+  resetPasswordToken : String,
+  resetPasswordExpires : Date
+
 
 });
 

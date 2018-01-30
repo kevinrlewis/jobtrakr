@@ -3,16 +3,22 @@ extends layout
 block content
   form(method='POST')
     div.container-fluid
-      div.row
-        h1.mx-auto#title(class='col-xs-12' style="text-align: center;") jobtrakr
+      a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")    
+        div.row
+          h1.mx-auto#title(class='col-xs-12' style="text-align: center;")=title
+            sup(style="font-size: 20%; top: -3.15em;") beta
       hr
       if message.length > 0
-        div.row(class='alert alert-danger')=message
+        div.row.justify-content-center
+          p.col-xs-12.col-sm-7.alert.alert-danger=message
+      else if messageSuccess
+        div.row.justify-content-center
+          p.col-xs-12.col-sm-7.alert.alert-success=messageSuccess
       div.row.justify-content-center
         input.form-control(
           type="plaintext"
-          placeholder="username"
-          name='username'
+          placeholder="email"
+          name='email'
           class='text-field col-xs-12 col-sm-7'
         )
       div.row.justify-content-center
@@ -22,6 +28,8 @@ block content
           name='password'
           class='text-field col-xs-12 col-sm-7'
         )
+      div.row.justify-content-center
+        a.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 0.25rem;' href='/forgot') Forgot Password?
       div.row.justify-content-center(style='margin-top:10px;')
         input(
           class='btn btn-default col-xs-12 col-sm-7'
