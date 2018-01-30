@@ -11,6 +11,9 @@ block content
       if message.length > 0
         div.row.justify-content-center
           p.col-xs-12.col-sm-7.alert.alert-danger=message
+      else if messageSuccess
+        div.row.justify-content-center
+          p.col-xs-12.col-sm-7.alert.alert-success=messageSuccess
       div.row.justify-content-center
         input.form-control(
           type="plaintext"
@@ -26,8 +29,7 @@ block content
           class='text-field col-xs-12 col-sm-7'
         )
       div.row.justify-content-center
-        a.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 1%;' href='/forgot') Forgot Password
-          i.fa.fa-question(style='padding-left: 1%;')
+        a.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 0.25rem;' href='/forgot') Forgot Password?
       div.row.justify-content-center(style='margin-top:10px;')
         input(
           class='btn btn-default col-xs-12 col-sm-7'

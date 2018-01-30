@@ -7,7 +7,8 @@ var path          = require('path');
 var mongoose      = require('mongoose');
 var bodyParser    = require('body-parser');
 var passport      = require('passport');
-var flash         = require('connect-flash');
+//var flash         = require('connect-flash');
+var flash         = require('express-flash');
 var bcrypt        = require('bcrypt-nodejs');
 var session       = require('express-session');
 var db            = require('../outer/database.js');
@@ -17,7 +18,6 @@ var compression   = require('compression');
 var debug         = require('debug')('server');
 var favicon       = require('serve-favicon');
 var nodemailer    = require('nodemailer');
-//var async         = require('async');
 var app           = express();
 
 app.use(bodyParser.json());
@@ -50,8 +50,6 @@ try {
   console.log(e.message);
   // handle or display that the database can't connect
 }
-
-
 
 // require the routes and passport files
 require('./config/passport')(passport); // pass passport for configuration

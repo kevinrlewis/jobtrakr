@@ -110,7 +110,6 @@ nav * {
   text-align: center;
   background-color: #343a40;
   color: var(--bck-color);
-  margin-bottom: 1%;
 }
 
 .interviews-area {
@@ -164,6 +163,15 @@ nav * {
 
 #prospective > .job-box {
   background-color: #CCCCCC;
+}
+
+#addInterviewButton {
+  background-color: #fff;
+  border: none;
+}
+
+#addInterviewButton:hover {
+  background-color: #360;
 }
 
 a {
@@ -268,11 +276,16 @@ hr {
   border: 0px;
   background-color: var(--bck-color);
   color: var(--txt-color);
-
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .move:hover {
   background-color: #360;
+}
+
+form > .btn {
+  margin-right: 1rem;
 }
 
 .reject {
@@ -293,6 +306,11 @@ hr {
 
 .job-box {
   border-left: solid 5px var(--accent);
+  margin-bottom: 3px;
+  background-color: var(--off-color);
+  color: var(--txt-color);
+}
+.interview-box {
   margin-bottom: 3px;
   background-color: var(--off-color);
   color: var(--txt-color);

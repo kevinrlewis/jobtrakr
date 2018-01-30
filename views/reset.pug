@@ -1,11 +1,20 @@
 extends layout
 
 block content
+  script(async, src="/scripts/reset.js")
   form(method='POST')
     div.container-fluid
       div.row.justify-content-center
-        input.form-control.col-xs-12.col-sm-7(type='password', name='password', value='', placeholder='New password')
+        h1(style="font-size: 400%;") Reset Password
       div.row.justify-content-center
-        input.form-control.col-xs-12.col-sm-7(type='password', name='confirm', value='', placeholder='Confirm password')
+        input#enterpwd.form-control.col-xs-12.col-sm-7(type='password', name='password', value='', placeholder='New password')
+      div#char.row.justify-content-center.showInfo(style='color: var(--red)')
+        i.fa.fa-exclamation(style='padding-left: 1%;')
+        p.col-xs-12.col-sm-7.pwdreq Password must contain at least 7 characters
+      div#num.row.justify-content-center.showInfo(style='color: var(--red)')
+        i.fa.fa-exclamation(style='padding-left: 1%;')
+        p.col-xs-12.col-sm-7.pwdreq Password must contain a number
+      div.row.justify-content-center
+        input#confirmpwd.form-control.col-xs-12.col-sm-7(type='password', name='confirm', value='', placeholder='Confirm password')
       div.row.justify-content-center
         button.btn.btn-default.col-xs-12.col-sm-7(type='submit') Update Password
