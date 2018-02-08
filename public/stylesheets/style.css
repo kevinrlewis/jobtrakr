@@ -6,7 +6,6 @@
 }
 
 /*WIDTH RELEVANT STYLES*/
-/*FOR MOBILE DEVICES*/
 @media (max-width: 375px) {
   #submitJobBtn {
     width: 33%;
@@ -28,10 +27,13 @@
     color: var(--bck-color)!important;
     background-color: #9A031E!important;
   }
-
+  .move {
+    color: var(--bck-color)!important;
+    background-color: #360!important;
+  }
 }
 
-@media (max-width: 576px) {
+@media (min-width: 376px) {
   .reject {
     color: var(--bck-color)!important;
     background-color: #9A031E!important;
@@ -40,17 +42,13 @@
     color: var(--bck-color)!important;
     background-color: #9A031E!important;
   }
-  .submit-btn {
-    background-color: #360!important;
-    color: var(--bck-color)!important;
-  }
   .move {
     color: var(--bck-color)!important;
     background-color: #360!important;
   }
   #job-buttondiv {
-    -webkit-box-pack: center!important;
-    justify-content: center!important;
+    -webkit-box-pack: end!important;
+    justify-content: end!important;
   }
   .job-box label {
     font-size: 120%;
@@ -63,46 +61,16 @@
   }
 }
 
-@media (min-width: 376px) and (max-width: 768px) {
-  #job-buttondiv {
-    -webkit-box-pack: center!important;
-    justify-content: center!important;
+@media (min-width: 576px) {
+  .form-inline .form-control {
+    width: 100%;
   }
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
   .rmv {
     margin-right: 0.5rem!important;
   }
 }
 
-@media (max-width: 440px) {
-
-}
-
-/*FOR REGULAR DEVICES*/
-@media (min-width: 376px) {
-  #commentlink {
-    padding-left: 5%;
-  }
-}
-
-@media (min-width: 576px) {
-  .submit-btn {
-    background-color: var(--bck-color)!important;
-    border: solid 1px #360!important;
-  }
-
-  .submit-btn:hover {
-    background-color: #360!important;
-    border: solid 1px var(--bck-color)!important;
-  }
-  .form-inline .form-control {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   #instru {
     display: none;
   }
@@ -113,10 +81,6 @@
 
   .nav-link {
     font-size: 150%!important;
-  }
-
-  .label-header {
-    display: none;
   }
 }
 
@@ -136,6 +100,9 @@ nav * {
   color: var(--bck-color);
 }
 
+/*
+// adding jobs
+*/
 #addjobarea {
   text-align: center;
   background-color: #343a40;
@@ -221,18 +188,71 @@ a:hover {
   cursor: pointer;
 }
 
-label {
-  text-align: right;
-  line-height: 2rem;
-  font-weight: bold;
-}
-
 #home-container {
   color: var(--txt-color);
 }
 
 .text-field {
   color: #17202A;
+}
+
+.pwdreq {
+  margin-bottom: 0!important;
+  font-size: 90%
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+hr {
+  display: block;
+  height: 5px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+  border-color: var(--txt-color);
+}
+
+/*
+//BUTTONS
+*/
+.row {
+  padding: 5px;
+}
+
+.rmv {
+  border: 0px;
+  background-color: var(--bck-color);
+  color: var(--txt-color);
+}
+
+.rmv:hover {
+  background-color: #8D0801!important;
+  color: var(--bck-color)!important;
+}
+
+.move {
+  border: 0px;
+}
+
+.move:hover {
+  background-color: #264d00!important;
+}
+
+form > .btn {
+  margin-right: 1rem;
+}
+
+.reject {
+  border: 0px;
+  background-color: var(--bck-color);
+  color: var(--txt-color);
+}
+
+.reject:hover {
+  background-color: #8D0801;
 }
 
 .container > div > .btn {
@@ -271,92 +291,21 @@ label {
 .btn-danger:hover {
   background-color: #8D0801;
   border-color: var(--txt-color);
-  /*color: var(--bck-color);*/
 }
 
-.pwdreq {
-  margin-bottom: 0!important;
-  font-size: 90%
+.submit-btn:hover {
+  background-color: #360!important;
+  border: solid 1px var(--bck-color)!important;
 }
 
-.form-control {
-  border-radius: 0;
-}
-
-hr {
-    display: block;
-    height: 5px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-    border-color: var(--txt-color);
-}
-
-.row {
-  padding: 5px;
-}
-
-.rmv {
-  padding: 1px;
-  border: 0px;
-  background-color: var(--bck-color);
-  color: var(--txt-color);
-}
-
-.rmv:hover {
-  background-color: #8D0801;
-  color: var(--bck-color);
-}
-
-.move {
-  padding: 1px;
-  border: 0px;
-  background-color: var(--bck-color);
-  color: var(--txt-color);
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
-
-.move:hover {
-  background-color: #360;
-}
-
-form > .btn {
-  margin-right: 1rem;
-}
-
-.reject {
-  padding: 1px;
-  border: 0px;
-  background-color: var(--bck-color);
-  color: var(--txt-color);
-}
-
-.reject:hover {
-  background-color: #8D0801;
-}
-
-.box-info {
-  text-align: center;
-  font-size: 12px;
-}
-
+/*
+//BOXES
+*/
 .job-box {
   border-left: solid 5px var(--accent);
   margin-bottom: 3px;
   background-color: var(--off-color);
   color: var(--txt-color);
-}
-
-.label-header {
-  margin-bottom: 3px;
-  background-color: #CCCCCC;
-  color: var(--txt-color);
-}
-
-.head {
-  border-left: solid 1px var(--accent);
 }
 
 .interview-box {
@@ -369,6 +318,9 @@ form > .btn {
   border-left: solid 5px #9A031E;
   background-color: #E3B5A4;
 }
+#prospective .job-box {
+  border-left: solid 5px var(--txt-color);
+}
 
 .navbar {
   padding: 0.25rem 0.5rem;
@@ -377,10 +329,6 @@ form > .btn {
 .navbar-brand {
   padding-bottom: 0;
   font-size:  2.5rem;
-}
-
-#prospective .job-box {
-  border-left: solid 5px var(--txt-color);
 }
 
 .job-btn-grp {

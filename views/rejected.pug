@@ -7,32 +7,25 @@ block content
   div.box-cont.container-fluid#reject-box
     div.row
       h3.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Rejected jobs: " + rejectedsum)
-    div.row.label-header
-      p.col-1.head(style="margin-bottom: 0;") Index
-      p.col-2.head(style="margin-bottom: 0; text-align: end;") Date
-      p.col-3.head(style="margin-bottom: 0;") Company (link)
     if user.rejectjobs == undefined
       label error retrieving jobs
     else
       each item, index in user.rejectjobs
         div.job-box.reject-box.row
-          p.col-6.col-sm-2.col-md-1(
-            type="text" 
-            name="index" 
-            style="font-size: 165%; padding-top: 0.35rem; margin-bottom: 0;")=(index+1)
-          h5.col-6.col-sm-4.col-md-2(
-            style='padding-top: 0.35rem; margin-bottom: 0; text-align: end;')=item.date
-          h4.col-12.col-sm-3.col-md-3()
-            a.btn(href=item.website style="padding-left: 0;")=item.company
-          h4.col-12.col-sm-3.col-md-2()
-            a.btn#commentlink(onclick='rejectcomments_click(' + index + ')' style="padding-left: 0;") comments
-          div.d-flex.p-2.col-12.col-sm-12.col-md-4.justify-content-center#job-buttondiv
-            form(action="/remove?reject="+index method="POST")
+          h5.col-7()
+            a(href=item.website style="padding-left: 0;")=item.company
+            small(style="font-size: 60%;")
+              a#commentlink(onclick='rejectcomments_click(' + index + ')' style="padding-left: 0;")=" comments"
+          h5.col-5(
+            style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
+          h5.col-6.col-md-5()=item.jobtitle
+          div.col-6.col-md-7#job-buttondiv(style="padding: 0!important;")
+            form(action="/remove?reject="+index method="POST" style="float: right;")
               input.btn.btn-danger.rmv(
                 type='submit'
                 aria-hidden="true"
                 value="remove"
-                style="float: right; padding-left: 5px; padding-right: 5px;"
+                style="margin-right: 0;"
               )
           div.comment-area.hide(id='rejectcomment'+index style='padding: 0!important;')
             h8=item.comments

@@ -1,3 +1,6 @@
++ make display less ugly
+  - display job title
+
 + notification system based on date
 
 + add logging functionality when in development so console logs only display then

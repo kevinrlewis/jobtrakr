@@ -112,7 +112,7 @@ function addJob(url) {
       $('#ptitleTextField').css('border-color', 'red');
       return;
     } else {
-      title = $('#ptitleTextField').val();
+      jobtitle = $('#ptitleTextField').val();
     }
 
     $.ajax({

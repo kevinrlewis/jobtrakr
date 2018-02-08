@@ -302,6 +302,7 @@ module.exports = function(app, passport) {
   },
   function(req, res, next) {
     debug("adding job...");
+    debug(req.body);
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
@@ -620,6 +621,39 @@ module.exports = function(app, passport) {
 
           // send response
           res.redirect('/interviews');
+          return;
+        }
+      );
+    } else if(req.query.interreject) {
+      var interviewsarray;
+      var rejectsarray;
+      var movingobject;
+
+      interviewsarray = req.user.interviewingjobs;
+      rejectsarray = req.user.rejectjobs;
+
+      // object to move to jobsarray
+      movingobject = interviewsarray[req.query.interreject];
+
+      // remove object from prospect array
+      interviewsarray.splice(req.query.interreject, 1);
+
+      // add object to jobs array
+      rejectsarray.push(movingobject);
+
+      // mongoose find one and update
+      User.findOneAndUpdate(
+        { 'local.email': req.user.local.email },
+        { 'interviewingjobs': interviewsarray, 'rejectjobs': rejectsarray },
+        { upsert: true },
+        function(err, user) {
+          // if there are any errors, return the error
+          if (err) {
+            debug(err);
+          }
+
+          // send response
+          res.redirect('/rejected');
           return;
         }
       );
