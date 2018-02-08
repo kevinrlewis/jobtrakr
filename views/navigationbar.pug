@@ -10,20 +10,19 @@ nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
   div.collapse.navbar-collapse#navbarSupportedContent
     ul.navbar-nav.mr-auto
       li.nav-item
-        a.nav-link(href='/prospective'
+        a.nav-link#prospectiveNavLink(href='/prospective'
           style="font-size: 1rem") Prospective
       li.nav-item
-        a.nav-link(href='/applied'
+        a.nav-link#appliedNavLink(href='/applied'
           style="font-size: 1rem") Applied
       li.nav-item
-        a.nav-link(href='/interviews'
+        a.nav-link#interviewsNavLink(href='/interviews'
           style="font-size: 1rem") Interviewing
       li.nav-item
-        a.nav-link(href='/rejected'
+        a.nav-link#rejectedNavLink(href='/rejected'
           style="font-size: 1rem") Rejected
     form.form-inline.my-2.my-lg-0(method='GET')
-      input.form-control.mr-sm-2(
-        class='btn btn-danger'
+      input.btn.btn-danger.form-control.mr-sm-2(
         value='Logout'
         type='submit'
         formaction='/logout'

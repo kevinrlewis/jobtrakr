@@ -28,6 +28,7 @@
     color: var(--bck-color)!important;
     background-color: #9A031E!important;
   }
+
 }
 
 @media (max-width: 576px) {
@@ -43,6 +44,40 @@
     background-color: #360!important;
     color: var(--bck-color)!important;
   }
+  .move {
+    color: var(--bck-color)!important;
+    background-color: #360!important;
+  }
+  #job-buttondiv {
+    -webkit-box-pack: center!important;
+    justify-content: center!important;
+  }
+  .job-box label {
+    font-size: 120%;
+  }
+  .job-box a {
+    font-size: 120%;
+  }
+  #commentlink {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 768px) {
+  #job-buttondiv {
+    -webkit-box-pack: center!important;
+    justify-content: center!important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .rmv {
+    margin-right: 0.5rem!important;
+  }
+}
+
+@media (max-width: 440px) {
+
 }
 
 /*FOR REGULAR DEVICES*/
@@ -77,8 +112,11 @@
   }
 
   .nav-link {
-    text-align: center;
     font-size: 150%!important;
+  }
+
+  .label-header {
+    display: none;
   }
 }
 
@@ -310,6 +348,17 @@ form > .btn {
   background-color: var(--off-color);
   color: var(--txt-color);
 }
+
+.label-header {
+  margin-bottom: 3px;
+  background-color: #CCCCCC;
+  color: var(--txt-color);
+}
+
+.head {
+  border-left: solid 1px var(--accent);
+}
+
 .interview-box {
   margin-bottom: 3px;
   background-color: var(--off-color);

@@ -28,7 +28,7 @@ module.exports = function(app, passport) {
   function(req, res, next) {
     // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) {
-      res.redirect('/signup');
+      res.render('signup.pug', { title: 'jobtrakr' });
     }
     // if both the email and password fields are empty
     else if(req.body.email === '' && req.body.password === '') {
@@ -57,6 +57,7 @@ module.exports = function(app, passport) {
 
   // signup form
   app.get('/signup', function(req, res) {
+    //console.log(req);
     // render the signup page
     res.render('signup.pug', { message: req.flash('signupMessage'), title: 'jobtrakr' });
   });
@@ -222,7 +223,7 @@ module.exports = function(app, passport) {
     }
     // if the email is not a valid email
     else if(!(re.test(req.body.email))) {
-      res.render('signup.pug', { message: 'Please enter an VALID e-mail.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Please enter a VALID e-mail.', title: 'jobtrakr' });
     }
     // if one or both of the password fields are empty
     else if((req.body.password === '') || (req.body.confirmpassword === '')) {
@@ -374,7 +375,7 @@ module.exports = function(app, passport) {
 
   // route for interviews of the user
   app.get('/interviews', isLoggedIn, function(req, res) {
-    res.render('interviews.pug', { user: req.user, title: 'jobtrakr' });
+    res.render('interviews.pug', { user: req.user, title: 'jobtrakr', interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // attempt to add interviews
@@ -615,9 +616,6 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
-
-  // TODO: create post for interviews
-  // attempt to add interview to job
 }
 
 // middleware to check if user is logged in
@@ -643,7 +641,7 @@ function calcDate() {
   if (mm < 10){
     mm = '0' + mm;
   }
-  var today = mm + '/' + dd + '/' + yyyy;
+  var today = yyyy + '-' + mm + '-' + dd;
   return today;
 }
 

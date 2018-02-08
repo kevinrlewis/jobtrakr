@@ -4,34 +4,39 @@ extends layout
 block content
   include userscripts.pug
   include navigationbar.pug
-
+  script(src='/scripts/activetab.js')
   div.box-cont.container-fluid#interviews
+    div.row
+      h3.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Interviewing jobs: " + interviewingsum)
+    div.row.label-header
+      p.col-1.head(style="margin-bottom: 0;") Index
+      p.col-2.head(style="margin-bottom: 0; text-align: end;") Date
+      p.col-3.head(style="margin-bottom: 0;") Company (link)
+      
     if user.interviewingjobs == undefined
-      label error retrieving jobs
+      label error retrieving jobsnd
     else
       each item, index in user.interviewingjobs
-        div.row(class="job-box")
-          h4(class="col-2 col-sm-1 col-md-1" type="text" name="index")=(index+1)
-          h5(class="col-2 col-sm-2 col-md-2" style='padding-top: 0.3rem;')=item.date
-          h4(class="col-8 col-sm-9 col-md-3")
+        div.row.job-box
+          p.col-2.col-sm-2.col-md-1(type="text" name="index" style="font-size: 165%; padding-top: 0.35rem; margin-bottom: 0;")=(index+1)
+          h5.offset-6.col-4.col-sm-4.offset-md-0.col-md-2(style='padding-top: 0.35rem; margin-bottom: 0; text-align: end;')=item.date
+          h4.col-6.col-sm-3.col-md-3(style="padding-left: 0;")
             if item.company == undefined
               a.btn(href=item.website)=item.hostname
             else
               a.btn(href=item.website)=item.company
-          h4(class='col-3 col-sm-3 col-md-2')
+          h4.col-6.col-sm-3.col-md-2(style="text-align: end;")
             a.btn(id='commentlink' onclick='comments_click(' + index + ')') comments
-          div.d-flex.p-2.col-6.col-sm-6.col-md-4.justify-content-end
+          div.d-flex.p-2.col-12.col-sm-6.col-md-4.justify-content-center
             form(action="/move?inter="+index method="POST")
-              button(
+              button.btn.btn-danger.reject(
                 type='submit'
-                class="btn btn-danger reject"
                 aria-hidden="true"
                 style="float: left; padding-left: 5px; padding-right: 5px;"
               ) rejected
             form(action="/remove?inter="+index method="POST")
-              input(
+              input.btn.btn-danger.rmv(
                 type='submit'
-                class="btn btn-danger rmv"
                 aria-hidden="true"
                 value="remove"
                 style="float: right; padding-left: 5px; padding-right: 5px;"
@@ -42,13 +47,13 @@ block content
           id='interviews-' +index
           onclick='interviewsClick(' + index + ')'
           style='padding: 0;'
-        )=' interviews'
+        )=' Interviews'
         div.container-fluid.hide(id='interviewsDiv-' +index)
           each interview, interviewIndex in item.interviews
             div.row.interview-box()
-              h5.col-1=(interviewIndex+1)
-              h5.col-3=interview.interviewDate
-              h5.col-8=interview.interviewer
+              h5.col-1.col-sm-1=(interviewIndex+1)
+              h5.col-5.col-sm-5()=interview.interviewDate
+              h5.col-5.col-sm-6(style='text-align: end;')=interview.interviewer
           div.row.interview-box()
             input#interviewDate.form-control.col-xs-12.col-sm-3(
               type='date'

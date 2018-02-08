@@ -1,37 +1,22 @@
-DONE+ update google analytics
++ notification system based on date
 
-DONE+ add validation for login
+DONE+ determine how to display interviews under specific jobs
 
-DONE+ implement email/forgot password option
+DONE+ fix flash messages
 
-+ implement interviews
-  DONE- add interviews to user schema
-  - determine how to display interviews under specific jobs
-  DONE- determine what fields are needed
-
-DONE+ when adding a job, once job has been added, the same area should show and not show the home profile area
-
-DONE+ test email/forgot password
-  - fix flash messages
-
-DONE+ add validation to resetting and confirming password
-  DONE- add requirements similar to sign up page
-
-+ update job box display, make it easier to use and read
+DONE+ update job box display, make it easier to use and read
 
 + add logging functionality when in development so console logs only display then
 
+DONE+ add design to know what current tab you are on
+
 + add features to home page
 
-+ add design features
+DONE+ add design features
 
-+ use UTC date versus date.now
+DONE+ use UTC date versus date.now
 
 + fix transition glitch
-
-DONE+ fix functionality of dropdown navbar on click
-
-+ add welcome email when someone signs up
 
 + play with loading circles
 

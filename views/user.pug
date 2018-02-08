@@ -8,13 +8,12 @@ block content
     div.alert.alert-secondary(style='margin-top: 0.5rem;')
       h3=("Prospective jobs: " + (prospectivesum))
     div.alert(style="border: solid 1px #000000")
-      h3=("Total applied: " + (appliedsum + rejectedsum))
+      h3=("Total applied: " + (appliedsum + interviewingsum + rejectedsum))
       div.alert.alert-primary
         h3=("Applied jobs: " + (appliedsum))
       div.alert.alert-success
-        h3=("Total interviews: " + (totalinterviews))
-        div.alert.alert-light
-          h3=("Jobs interviewing: " + (interviewingsum))
+        h3=("Jobs interviewing: " + (interviewingsum))
+        h5=("Total interviews: " + (totalinterviews))
       div.alert.alert-danger
         h3=("Rejected jobs: " + (rejectedsum))
         

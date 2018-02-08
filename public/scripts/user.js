@@ -85,10 +85,8 @@ function addInterviewClick(index) {
 
 // when the submit adding a job is clicked
 function addJob(url) {
-  console.log('add job pressed...');
   // temporary flag variables
   var prospect;
-  console.log(window.location.pathname === '/applied');
   if(window.location.pathname === '/prospective') {
     // VALIDATIONS
     // if the link field is empty
@@ -97,8 +95,6 @@ function addJob(url) {
       return;
     }
     // adding a prospective job
-    console.log('adding prospective job....');
-
     // link
     var link = $("#plinkTextField").val();
 
@@ -126,6 +122,27 @@ function addJob(url) {
     } else {
       title = $('#ptitleTextField').val();
     }
+
+    // var requestdata = JSON.stringify({
+    //   joblink: link,
+    //   comments: comments,
+    //   company: company,
+    //   jobtitle: jobtitle,
+    //   interviews: []
+    // });
+    // var request = new Request(window.location.href, { method: 'POST', body: requestdata });
+    //
+    // fetch(request)
+    //   .then(response => {
+    //     if(response.status === 200) {
+    //       location.reload();
+    //       return;
+    //     } else {
+    //       console.log(response);
+    //       return;
+    //     }
+    //   }
+    // );
 
     $.ajax({
       type: 'POST',
@@ -156,8 +173,6 @@ function addJob(url) {
       return;
     }
     // adding a regular job
-    console.log('adding applied job....');
-
     // create link element to parse
     var link = $("#linkTextField").val();
 
@@ -201,11 +216,9 @@ function addJob(url) {
       datatype: "json",
       success: function(data, status) {
         // post to db was successful
-        console.log("post success");
         location.reload();
       },
       error: function(data, status) {
-        console.log("post error");
         showMessage();
       }
     });
