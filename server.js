@@ -18,8 +18,10 @@ var compression   = require('compression');
 var debug         = require('debug')('server');
 var favicon       = require('serve-favicon');
 var nodemailer    = require('nodemailer');
+var debug         = require('debug')('server');
 var app           = express();
 
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -46,8 +48,8 @@ app.use(helmet());
 try {
   mongoose.connect(db.url, { useMongoClient: true });
 } catch (e) {
-  console.log("was unable to connect to database");
-  console.log(e.message);
+  debug("was unable to connect to database");
+  debug(e.message);
   // handle or display that the database can't connect
 }
 
@@ -79,4 +81,4 @@ app.use(function(err, req, res, next) {
 // START THE SERVER
 // ==============================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+debug('Magic happens on port ' + port);

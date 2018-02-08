@@ -1,20 +1,8 @@
 + notification system based on date
 
-DONE+ determine how to display interviews under specific jobs
-
-DONE+ fix flash messages
-
-DONE+ update job box display, make it easier to use and read
-
 + add logging functionality when in development so console logs only display then
 
-DONE+ add design to know what current tab you are on
-
 + add features to home page
-
-DONE+ add design features
-
-DONE+ use UTC date versus date.now
 
 + fix transition glitch
 

@@ -9,16 +9,19 @@ var crypto        = require('crypto');
 var nodemailer    = require('nodemailer');
 var sec           = require('../../outer/session.js');
 var mg            = require('nodemailer-mailgun-transport');
+var debug         = require('debug')('routes');
 
 module.exports = function(app, passport) {
 
   //home page
   app.get('/', function(req, res) {
+    debug('GET /');
     res.render('index.pug', { title: 'jobtrakr' });
   });
 
   // login form
   app.get('/login', function(req, res) {
+    debug('GET /login');
     res.render('login.pug', { message: req.flash('loginMessage'), title: 'jobtrakr' });
   });
 
@@ -26,6 +29,7 @@ module.exports = function(app, passport) {
   app.post('/login',
   // request, response, next function
   function(req, res, next) {
+    debug('POST /login');
     // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) {
       res.render('signup.pug', { title: 'jobtrakr' });
@@ -44,7 +48,7 @@ module.exports = function(app, passport) {
     }
     // form is completely filled
     else {
-      console.log('validation passed. continuing to passport for authentication...')
+      debug('validation passed. continuing to passport for authentication...')
       next();
     }
     // authenticate the login using passport
@@ -57,13 +61,14 @@ module.exports = function(app, passport) {
 
   // signup form
   app.get('/signup', function(req, res) {
-    //console.log(req);
+    debug('GET /signup');
     // render the signup page
     res.render('signup.pug', { message: req.flash('signupMessage'), title: 'jobtrakr' });
   });
 
   // forgot password
   app.get('/forgot', function(req, res) {
+    debug('GET /forgot');
     if(req.session.flash.error != undefined) {
       res.render('forgot.pug', { messageError: req.session.flash.error[0], title: 'jobtrakr' });
     } else if(req.session.flash.info != undefined) {
@@ -76,6 +81,7 @@ module.exports = function(app, passport) {
 
   // forgot password submit
   app.post('/forgot', function(req, res, next) {
+    debug('POST /forgot');
     // waterfall asynchronous
     asynchro.waterfall([
       function(done) {
@@ -89,7 +95,6 @@ module.exports = function(app, passport) {
       function(token, done) {
         User.findOne({ 'local.email': req.body.email }, function(err, user) {
           if (!user) {
-
             req.flash('error', 'No account with that email address exists.');
             return res.redirect('/forgot');
           }
@@ -131,7 +136,7 @@ module.exports = function(app, passport) {
       }
     ], function(err) {
       if(err) {
-        console.log(err);
+        debug(err);
         return next(err);
       }
       res.redirect('/forgot');
@@ -140,6 +145,7 @@ module.exports = function(app, passport) {
 
   // reset password dependent on token
   app.get('/reset/:token', function(req, res) {
+    debug('GET /reset/:token');
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
         req.flash('error', 'Password reset token is invalid or has expired.');
@@ -153,6 +159,7 @@ module.exports = function(app, passport) {
 
   // attempt to reset password
   app.post('/reset/:token', function(req, res) {
+    debug('POST /reset/:token');
     // asynchronous waterfall
     asynchro.waterfall([
       // find the user with the token
@@ -207,6 +214,7 @@ module.exports = function(app, passport) {
   app.post('/signup',
   // middleware function to validate input
   function(req, res, next) {
+    debug('POST /signup');
     // regex to validate email
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // if the firstname field and the email field are not filled
@@ -243,7 +251,7 @@ module.exports = function(app, passport) {
     }
     // sign was successful, continue to passport for signing up
     else {
-      console.log('attempt successful...');
+      debug('signup attempt form successful...');
       next();
     }
   },
@@ -255,6 +263,7 @@ module.exports = function(app, passport) {
 
   // user page
   app.get('/profile', isLoggedIn, function(req, res) {
+    debug('GET /profile');
     var totalinterviews = 0;
     req.user.interviewingjobs.forEach(function(job) {
       totalinterviews += job.interviews.length;
@@ -272,17 +281,19 @@ module.exports = function(app, passport) {
 
   // route for prospective jobs of the user
   app.get('/prospective', isLoggedIn, function(req, res) {
+    debug('GET /prospective');
     res.render('prospective.pug', { user: req.user, title: 'jobtrakr', prospectivesum : (req.user.prospectjobs.length) });
   });
 
   // process adding a job
   app.post('/prospective', isLoggedIn,
   function(req, res, next) {
-    console.log("in /add prospect, adding prospect");
-    console.log("checking if job exists...");
+    debug('POST /prospective');
+    debug("in /add prospect, adding prospect");
+    debug("checking if job exists...");
     // job exists middle ware
     if(jobExists(req.user.jobs, req.body.joblink) || jobExists(req.user.prospectjobs, req.body.joblink)) {
-      console.log("job exists, sending 500 error");
+      debug("job exists, sending 500 error");
       // send response
       res.status(500).send('Job already exists.');
       return;
@@ -290,7 +301,7 @@ module.exports = function(app, passport) {
     next();
   },
   function(req, res, next) {
-    console.log("adding job...");
+    debug("adding job...");
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
@@ -310,7 +321,7 @@ module.exports = function(app, passport) {
       function(err, user) {
         // if there are any errors, return the error
         if (err) {
-          console.log(err);
+          debug(err);
         }
         // create response
         var response = {
@@ -324,16 +335,18 @@ module.exports = function(app, passport) {
 
   // route for applied jobs of the user
   app.get('/applied', isLoggedIn, function(req, res) {
+    debug('GET /applied');
     res.render('applied.pug', { user: req.user, title: 'jobtrakr', appliedsum : (req.user.jobs.length) });
   });
 
   // process adding a job
   app.post('/applied', isLoggedIn,
   function(req, res, next) {
-    console.log("checking if job exists...");
+    debug('POST /applied');
+    debug("checking if job exists...");
     // job exists middle ware
     if(jobExists(req.user.jobs, req.body.joblink) || jobExists(req.user.prospectjobs, req.body.joblink)) {
-      console.log("job exists, sending 500 error");
+      debug("job exists, sending 500 error");
       // send response
       res.status(500).send('Job already exists.');
       return;
@@ -341,7 +354,7 @@ module.exports = function(app, passport) {
     next();
   },
   function(req, res, next) {
-    console.log("adding job...");
+    debug("adding job...");
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
@@ -361,7 +374,7 @@ module.exports = function(app, passport) {
       function(err, user) {
         // if there are any errors, return the error
         if (err) {
-          console.log(err);
+          debug(err);
         }
 
         var response = {
@@ -375,15 +388,15 @@ module.exports = function(app, passport) {
 
   // route for interviews of the user
   app.get('/interviews', isLoggedIn, function(req, res) {
+    debug('GET /interviews');
     res.render('interviews.pug', { user: req.user, title: 'jobtrakr', interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // attempt to add interviews
   app.post('/interviews', isLoggedIn,
   function(req, res, next) {
-    console.log('in post to interviews...');
-    console.log('interviewingjob to update...');
-    console.log(req.user.interviewingjobs[req.body.interviewJobIndex]);
+    debug('POST /interviews');
+    debug('interviewingjob to update...');
     // create the interview object to add
     var interviewObject = {
       'interviewDate': req.body.interviewDate,
@@ -397,7 +410,6 @@ module.exports = function(app, passport) {
     // update interviews array
     interviews.push(interviewObject);
     jobObject.interviews = interviews;
-    console.log(jobObject);
 
     // update the job with interviews array
     // mongoose find one and update
@@ -408,7 +420,7 @@ module.exports = function(app, passport) {
       function(err, user) {
         // if there are any errors, return the error
         if (err) {
-          console.log(err);
+          debug(err);
         }
 
         var response = {
@@ -423,11 +435,13 @@ module.exports = function(app, passport) {
 
   // route for rejected jobs of the user
   app.get('/rejected', isLoggedIn, function(req, res) {
+    debug('GET /rejected');
     res.render('rejected.pug', { user: req.user, title: 'jobtrakr', rejectedsum : (req.user.rejectjobs.length) });
   });
 
   // process removing a job
   app.post('/remove', isLoggedIn, function(req, res) {
+    debug('POST /remove');
     var jobsarray;
     if(req.query.index) {
       jobsarray = req.user.jobs;
@@ -440,7 +454,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
             return done(err);
           }
 
@@ -459,7 +473,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
             return done(err);
           }
 
@@ -477,7 +491,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
             return done(err);
           }
 
@@ -495,7 +509,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
             return done(err);
           }
 
@@ -509,6 +523,7 @@ module.exports = function(app, passport) {
   // process adding a job
   app.post('/move', isLoggedIn,
   function(req, res, next) {
+    debug('POST /move');
     if(req.query.prospect) {
       var jobsarray;
       var prospectarray;
@@ -534,7 +549,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
           }
 
           // send response
@@ -567,7 +582,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
           }
 
           // send response
@@ -600,7 +615,7 @@ module.exports = function(app, passport) {
         function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log(err);
+            debug(err);
           }
 
           // send response
@@ -613,6 +628,7 @@ module.exports = function(app, passport) {
 
   // logout page
   app.get('/logout', function(req, res) {
+    debug('GET /logout');
     req.logout();
     res.redirect('/');
   });

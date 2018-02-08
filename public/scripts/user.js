@@ -1,10 +1,6 @@
 // remove job-box
 function remove(el, i) {
-  console.log("-----------------------------------------");
-  console.log("in remove function");
-
   $(el).closest('.job-box').remove();
-  console.log("-----------------------------------------");
 }
 
 // show messageAlert
@@ -74,11 +70,7 @@ function addInterviewClick(index) {
     datatype: "json",
     success: function(data, status) {
       // post to db was successful
-      console.log("post success");
       location.reload();
-    },
-    error: function(data, status) {
-      console.log("post interview error");
     }
   });
 }
@@ -122,27 +114,6 @@ function addJob(url) {
     } else {
       title = $('#ptitleTextField').val();
     }
-
-    // var requestdata = JSON.stringify({
-    //   joblink: link,
-    //   comments: comments,
-    //   company: company,
-    //   jobtitle: jobtitle,
-    //   interviews: []
-    // });
-    // var request = new Request(window.location.href, { method: 'POST', body: requestdata });
-    //
-    // fetch(request)
-    //   .then(response => {
-    //     if(response.status === 200) {
-    //       location.reload();
-    //       return;
-    //     } else {
-    //       console.log(response);
-    //       return;
-    //     }
-    //   }
-    // );
 
     $.ajax({
       type: 'POST',
@@ -222,7 +193,5 @@ function addJob(url) {
         showMessage();
       }
     });
-  } else {
-    console.log('window location not recognized when adding a job...');
   }
 }
