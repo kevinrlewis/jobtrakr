@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var path = window.location.pathname;
-  console.log(path);
   // call functions everytime a key is pressed
   if(path === "/prospective") {
     $('#prospectiveNavLink').css('font-style', 'italic');

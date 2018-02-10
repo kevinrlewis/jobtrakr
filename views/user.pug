@@ -5,15 +5,15 @@ block content
   include userscripts.pug
   include navigationbar.pug
   div.box-cont.container-fluid.show#home
-    div.alert.alert-secondary(style='margin-top: 0.5rem;')
+    div.txt-white.alert(style='margin-top: 0.5rem; border: solid 1px #FFFFFF; background-color: #6F8695;')
       h3=("Prospective jobs: " + (prospectivesum))
-    div.alert(style="border: solid 1px #000000")
-      h3=("Total applied: " + (appliedsum + interviewingsum + rejectedsum))
-      div.alert.alert-primary
-        h3=("Applied jobs: " + (appliedsum))
-      div.alert.alert-success
-        h3=("Jobs interviewing: " + (interviewingsum))
-        h5=("Total interviews: " + (totalinterviews))
-      div.alert.alert-danger
-        h3=("Rejected jobs: " + (rejectedsum))
+    div.alert(style="border: solid 1px #FFFFFF")
+      h3.txt-white=("Total applied: " + (appliedsum + interviewingsum + rejectedsum))
+      div.alert(style="border: solid 1px #FFFFFF; background-color: #360;")
+        h3.txt-white=("Applied jobs: " + (appliedsum))
+      div.alert(style="border: solid 1px #FFFFFF; background-color: #F4AC32;")
+        h3.txt-white=("Jobs interviewing: " + (interviewingsum))
+        h5.txt-white=("Total interviews: " + (totalinterviews))
+      div.alert(style="border: solid 1px #FFFFFF; background-color: #8D0801;")
+        h3.txt-white=("Rejected jobs: " + (rejectedsum))
         

@@ -86,14 +86,29 @@
 
 /*OTHER STYLES*/
 * {
-  font-family: Verdana, Geneva, sans-serif;
+  /*font-family: 'Roboto', sans-serif!important;*/
+}
+
+.txt-white {
+  color: var(--bck-color)!important;
+}
+
+.txt-black {
+  color: var(--txt-color)!important;
 }
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: var(--bck-color);
+  /*background-color: var(--bck-color);*/
   color: var(--txt-color);
   padding-top: 55px;
+
+  background-attachment: fixed;
+  height: 100%;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/back-2.jpg');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 nav * {
@@ -123,6 +138,28 @@ nav * {
 
 .interviews-area > a:hover {
   color: var(--bck-color)!important;
+}
+
+.interview-box * {
+  color: var(--txt-color)!important;
+}
+
+.interview-box.interview-box-input > * {
+  border: 2px solid #360;
+}
+
+.interview-box {
+  background-color: var(--off-color)!important;
+}
+
+#addInterviewButton {
+  background-color: #360!important;
+  color: var(--bck-color)!important;
+}
+
+.interview-caret:hover {
+  background-color: var(--off-color)!important;
+  color: #360!important;
 }
 
 .hide {
@@ -167,7 +204,17 @@ nav * {
 }
 
 #prospective > .job-box {
-  background-color: #CCCCCC;
+  background-color: #6F8695;
+  border-left: solid 5px var(--bck-color);
+}
+
+#interviews > .job-box {
+  background-color: #360;
+  border-left: solid 5px var(--bck-color);
+}
+
+#interviews * {
+  color: var(--bck-color);
 }
 
 #addInterviewButton {
@@ -188,7 +235,7 @@ a:hover {
   cursor: pointer;
 }
 
-#home-container {
+#home-container #title {
   color: var(--txt-color);
 }
 
@@ -318,9 +365,6 @@ form > .btn {
   border-left: solid 5px #9A031E;
   background-color: #E3B5A4;
 }
-#prospective .job-box {
-  border-left: solid 5px var(--txt-color);
-}
 
 .navbar {
   padding: 0.25rem 0.5rem;
@@ -344,24 +388,8 @@ form > .btn {
   color: var(--accent);
 }
 
-.edit-icon {
-  padding: 7px;
-  cursor: pointer;
-}
-
-.edit-icon:hover {
-  color: var(--bck-color);
-}
-
-.version {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: var(--txt-color);
-  float: right;
-}
-
 .index-footer {
   position: fixed;
   bottom: 0;
+  color: var(--bck-color);
 }

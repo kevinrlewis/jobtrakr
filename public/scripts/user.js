@@ -35,7 +35,7 @@ function rejectcomments_click(index) {
 // function called to show interviews
 function interviewsClick(index) {
   $('#interviewsDiv-' + index).toggleClass('hide').toggleClass('show');
-  $('#interviews-' + index).toggleClass('fa-caret-right').toggleClass('fa-caret-down');
+  $('#interviews-' + index).toggleClass('fa-caret-up').toggleClass('fa-caret-down');
 }
 
 // function called when the add interview button is clicked

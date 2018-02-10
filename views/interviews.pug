@@ -7,7 +7,7 @@ block content
   script(src='/scripts/activetab.js')
   div.box-cont.container-fluid#interviews
     div.row
-      h3.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Interviewing jobs: " + interviewingsum)
+      h3.txt-white.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Interviewing jobs: " + interviewingsum)
     if user.interviewingjobs == undefined
       label error retrieving jobs
     else
@@ -39,27 +39,26 @@ block content
                 )
             div.comment-area.hide(id='comment'+index style='padding: 0!important;')
               h8=item.comments            
-          a.btn.fa.fa-caret-right(
-            id='interviews-' +index
-            onclick='interviewsClick(' + index + ')'
-            style='padding: 0;'
-          )=' Interviews'
-          div.container-fluid.hide(id='interviewsDiv-' +index)
-            each interview, interviewIndex in item.interviews
-              div.row.interview-box()
-                h5.col-1.col-sm-1=(interviewIndex+1)
-                h5.col-5.col-sm-5()=interview.interviewDate
-                h5.col-5.col-sm-6(style='text-align: end;')=interview.interviewer
-            div.row.interview-box()
-              input#interviewDate.form-control.col-xs-12.col-sm-3(
-                type='date'
-                name='interviewDate'
-              )
-              input#interviewer.form-control.col-xs-12.offset-sm-1.col-sm-6(
-                type='plaintext'
-                placeholder='interviewer'
-              )
-              button#addInterviewButton.btn.btn-success.offset-sm-1.col-sm-1(
-                onclick='addInterviewClick(' + index + ')'
-              ) add
-            
+            div.container-fluid.hide(id='interviewsDiv-' +index style="padding-top: 1%;")
+              each interview, interviewIndex in item.interviews
+                div.row.interview-box()
+                  h5.col-1.col-sm-1=(interviewIndex+1)
+                  h5.col-5.col-sm-5()=interview.interviewDate
+                  h5.col-5.col-sm-6(style='text-align: end;')=interview.interviewer
+              div.row.interview-box.interview-box-input()
+                input#interviewDate.form-control.col-xs-12.col-sm-3(
+                  type='date'
+                  name='interviewDate'
+                )
+                input#interviewer.form-control.col-xs-12.offset-sm-1.col-sm-6(
+                  type='plaintext'
+                  placeholder='interviewer'
+                )
+                button#addInterviewButton.btn.btn-success.offset-sm-1.col-sm-1(
+                  onclick='addInterviewClick(' + index + ')'
+                ) add  
+            a.fa.fa-caret-down.interview-caret.col-12(
+              id='interviews-' +index
+              onclick='interviewsClick(' + index + ')'
+              style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center;'
+            )=''

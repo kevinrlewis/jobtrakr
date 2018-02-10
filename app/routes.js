@@ -11,18 +11,26 @@ var sec           = require('../../outer/session.js');
 var mg            = require('nodemailer-mailgun-transport');
 var debug         = require('debug')('routes');
 
+var webtitle         = "Jobtrakr";
+
 module.exports = function(app, passport) {
 
-  //home page
+  // home page
   app.get('/', function(req, res) {
     debug('GET /');
-    res.render('index.pug', { title: 'jobtrakr' });
+    res.render('index.pug', { title: webtitle });
+  });
+
+  // about page
+  app.get('/about', function(req, res) {
+    debug('GET /about');
+    res.render('about.pug', { title: webtitle });
   });
 
   // login form
   app.get('/login', function(req, res) {
     debug('GET /login');
-    res.render('login.pug', { message: req.flash('loginMessage'), title: 'jobtrakr' });
+    res.render('login.pug', { message: req.flash('loginMessage'), title: webtitle });
   });
 
   // process login
@@ -32,19 +40,19 @@ module.exports = function(app, passport) {
     debug('POST /login');
     // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) {
-      res.render('signup.pug', { title: 'jobtrakr' });
+      res.render('signup.pug', { title: webtitle });
     }
     // if both the email and password fields are empty
     else if(req.body.email === '' && req.body.password === '') {
-      res.render('login.pug', { message: 'Please enter an e-mail and password.', title: 'jobtrakr' });
+      res.render('login.pug', { message: 'Please enter an e-mail and password.', title: webtitle });
     }
     // if the email field is empty but password has input
     else if(req.body.email === '') {
-      res.render('login.pug', { message: 'Please enter an e-mail.', title: 'jobtrakr' });
+      res.render('login.pug', { message: 'Please enter an e-mail.', title: webtitle });
     }
     // if the password field is empty but email has input
     else if(req.body.password === '') {
-      res.render('login.pug', { message: 'Please enter a password.', title: 'jobtrakr' });
+      res.render('login.pug', { message: 'Please enter a password.', title: webtitle });
     }
     // form is completely filled
     else {
@@ -63,18 +71,18 @@ module.exports = function(app, passport) {
   app.get('/signup', function(req, res) {
     debug('GET /signup');
     // render the signup page
-    res.render('signup.pug', { message: req.flash('signupMessage'), title: 'jobtrakr' });
+    res.render('signup.pug', { message: req.flash('signupMessage'), title: webtitle });
   });
 
   // forgot password
   app.get('/forgot', function(req, res) {
     debug('GET /forgot');
     if(req.session.flash.error != undefined) {
-      res.render('forgot.pug', { messageError: req.session.flash.error[0], title: 'jobtrakr' });
+      res.render('forgot.pug', { messageError: req.session.flash.error[0], title: webtitle });
     } else if(req.session.flash.info != undefined) {
-      res.render('forgot.pug', { messageInfo: req.session.flash.info[0], title: 'jobtrakr' });
+      res.render('forgot.pug', { messageInfo: req.session.flash.info[0], title: webtitle });
     } else {
-      res.render('forgot.pug', { title: 'jobtrakr' });
+      res.render('forgot.pug', { title: webtitle });
     }
 
   });
@@ -219,35 +227,35 @@ module.exports = function(app, passport) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // if the firstname field and the email field are not filled
     if((req.body.firstname === '') && (req.body.email === '')) {
-      res.render('signup.pug', { message: 'Please enter both an e-mail and your first name.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Please enter both an e-mail and your first name.', title: webtitle });
     }
     // if the firstname field is not filled
     else if(req.body.firstname === '') {
-      res.render('signup.pug', { message: 'Please enter your first name.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Please enter your first name.', title: webtitle });
     }
     // if the email field is not filled
     else if(req.body.email === '') {
-      res.render('signup.pug', { message: 'Please enter an e-mail.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Please enter an e-mail.', title: webtitle });
     }
     // if the email is not a valid email
     else if(!(re.test(req.body.email))) {
-      res.render('signup.pug', { message: 'Please enter a VALID e-mail.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Please enter a VALID e-mail.', title: webtitle });
     }
     // if one or both of the password fields are empty
     else if((req.body.password === '') || (req.body.confirmpassword === '')) {
-      res.render('signup.pug', { message: 'Please enter a password.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Please enter a password.', title: webtitle });
     }
     // if the passwords do not match
     else if(req.body.password != req.body.confirmpassword) {
-      res.render('signup.pug', { message: 'Confirmation password does not match entered password.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Confirmation password does not match entered password.', title: webtitle });
     }
     // if the password length does not meet the requirements
     else if(req.body.password.length < 7) {
-      res.render('signup.pug', { message: 'Password does not meet length requirements.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Password does not meet length requirements.', title: webtitle });
     }
     // if the password does not contain a number
     else if((!/\d/.test(req.body.password))) {
-      res.render('signup.pug', { message: 'Password must contain a number.', title: 'jobtrakr' });
+      res.render('signup.pug', { message: 'Password must contain a number.', title: webtitle });
     }
     // sign was successful, continue to passport for signing up
     else {
@@ -270,7 +278,7 @@ module.exports = function(app, passport) {
     });
     res.render('user.pug', {
       user : req.user,
-      title: 'jobtrakr',
+      title: webtitle,
       appliedsum : (req.user.jobs.length),
       prospectivesum : (req.user.prospectjobs.length),
       rejectedsum : (req.user.rejectjobs.length),
@@ -282,7 +290,7 @@ module.exports = function(app, passport) {
   // route for prospective jobs of the user
   app.get('/prospective', isLoggedIn, function(req, res) {
     debug('GET /prospective');
-    res.render('prospective.pug', { user: req.user, title: 'jobtrakr', prospectivesum : (req.user.prospectjobs.length) });
+    res.render('prospective.pug', { user: req.user, title: webtitle, prospectivesum : (req.user.prospectjobs.length) });
   });
 
   // process adding a job
@@ -337,7 +345,7 @@ module.exports = function(app, passport) {
   // route for applied jobs of the user
   app.get('/applied', isLoggedIn, function(req, res) {
     debug('GET /applied');
-    res.render('applied.pug', { user: req.user, title: 'jobtrakr', appliedsum : (req.user.jobs.length) });
+    res.render('applied.pug', { user: req.user, title: webtitle, appliedsum : (req.user.jobs.length) });
   });
 
   // process adding a job
@@ -390,7 +398,7 @@ module.exports = function(app, passport) {
   // route for interviews of the user
   app.get('/interviews', isLoggedIn, function(req, res) {
     debug('GET /interviews');
-    res.render('interviews.pug', { user: req.user, title: 'jobtrakr', interviewingsum: (req.user.interviewingjobs.length) });
+    res.render('interviews.pug', { user: req.user, title: webtitle, interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // attempt to add interviews
@@ -437,7 +445,7 @@ module.exports = function(app, passport) {
   // route for rejected jobs of the user
   app.get('/rejected', isLoggedIn, function(req, res) {
     debug('GET /rejected');
-    res.render('rejected.pug', { user: req.user, title: 'jobtrakr', rejectedsum : (req.user.rejectjobs.length) });
+    res.render('rejected.pug', { user: req.user, title: webtitle, rejectedsum : (req.user.rejectjobs.length) });
   });
 
   // process removing a job

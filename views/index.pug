@@ -1,21 +1,23 @@
 extends layout
 
 block content
-  div.container-fluid(id='home-container')
+  div#home-container.container-fluid
     a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
       div.row
-        h1.mx-auto#title(class='col-xs-12' style='text-align: center;')=title
+        h1#title.mx-auto.txt-white.col-xs-12(style='text-align: center;')=title
           sup(style="font-size: 20%; top: -3.15em;") beta
-    hr
+    p.txt-white(style="text-align: center;") Jobtrakr allows job searchers to organize their applications in an intuitive way to make the search process easier. 
+    hr(style="border-color: var(--bck-color);")
     div.row.justify-content-center.index-btn
-      a(
+      a.btn.btn.default.col-xs-6.col-sm-8(
         href='/login'
-        class='btn btn-default col-xs-6 col-sm-8'
       ) Login
     div.row.justify-content-center.index-btn
-      a(
+      a.btn.btn-default.col-xs-6.col-sm-8(
         href='/signup'
-        class='btn btn-default col-xs-6 col-sm-8'
       ) Sign Up
-    footer.index-footer
-      p &copy; 2018
+    div.fixed-bottom(style="text-align: end;")
+      a.txt-white(href='/about' style="") About
+    p.index-footer(style="float: right; margin-bottom: 0;") &copy; 2018
+      
+    

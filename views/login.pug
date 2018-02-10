@@ -5,9 +5,9 @@ block content
     div.container-fluid
       a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")    
         div.row
-          h1.mx-auto#title(class='col-xs-12' style="text-align: center;")=title
-            sup(style="font-size: 20%; top: -3.15em;") beta
-      hr
+          h1.mx-auto.txt-white#title(class='col-xs-12' style="text-align: center;")=title
+            sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
+      hr(style="border-color: var(--bck-color);")
       if message.length > 0
         div.row.justify-content-center
           p.col-xs-12.col-sm-7.alert.alert-danger=message
@@ -29,7 +29,7 @@ block content
           class='text-field col-xs-12 col-sm-7'
         )
       div.row.justify-content-center
-        a.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 0.25rem;' href='/forgot') Forgot Password?
+        a.txt-white.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 0.25rem;' href='/forgot') Forgot Password?
       div.row.justify-content-center(style='margin-top:10px;')
         input(
           class='btn btn-default col-xs-12 col-sm-7'

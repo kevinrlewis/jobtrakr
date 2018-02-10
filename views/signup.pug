@@ -6,9 +6,9 @@ block content
     div.container-fluid
         a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
           div.row
-            h1#title(class='col' style='text-align: center;')=title
-              sup(style="font-size: 20%; top: -3.15em;") beta
-        hr
+            h1.txt-white#title(class='col' style='text-align: center;')=title
+              sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
+        hr(style="border-color: var(--bck-color);")
         if message.length > 0
           div.row.justify-content-center
             p.col-xs-12.col-sm-7.alert.alert-danger=message
@@ -33,10 +33,10 @@ block content
             class='text-field col-xs-12 col-sm-7'
             name="password"
           )
-        div#char.row.justify-content-center.showInfo(style='color: var(--red)')
+        div#char.txt-white.row.justify-content-center.showInfo(style='color: var(--red); font-weight: 1000;')
           i.fa.fa-exclamation(style='padding-left: 1%;')
           p.col-xs-12.col-sm-7.pwdreq Password must contain at least 7 characters
-        div#num.row.justify-content-center.showInfo(style='color: var(--red)')
+        div#num.txt-white.row.justify-content-center.showInfo(style='color: var(--red); font-weight: 1000;')
           i.fa.fa-exclamation(style='padding-left: 1%;')
           p.col-xs-12.col-sm-7.pwdreq Password must contain a number
         div.row.justify-content-center
