@@ -5,13 +5,13 @@ block content
   form(method='POST')
     div.container-fluid
       div.row.justify-content-center
-        h1(style="font-size: 400%;") Reset Password
+        h1.txt-white(style="font-size: 400%;") Reset Password
       div.row.justify-content-center
         input#enterpwd.form-control.col-xs-12.col-sm-7(type='password', name='password', value='', placeholder='New password')
-      div#char.row.justify-content-center.showInfo(style='color: var(--red)')
+      div#char.txt-white.row.justify-content-center.showInfo(style='color: var(--red); font-weight: 1000;')
         i.fa.fa-exclamation(style='padding-left: 1%;')
         p.col-xs-12.col-sm-7.pwdreq Password must contain at least 7 characters
-      div#num.row.justify-content-center.showInfo(style='color: var(--red)')
+      div#num.txt-white.row.justify-content-center.showInfo(style='color: var(--red); font-weight: 1000;')
         i.fa.fa-exclamation(style='padding-left: 1%;')
         p.col-xs-12.col-sm-7.pwdreq Password must contain a number
       div.row.justify-content-center

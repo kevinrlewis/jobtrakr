@@ -1,9 +1,12 @@
-+ make display less ugly
-  - display job title
++ add are you sure pop up for removing job
+
++ check performance of background image loading
+
++ minimize css
+
++ 
 
 + notification system based on date
-
-+ add logging functionality when in development so console logs only display then
 
 + add features to home page
 

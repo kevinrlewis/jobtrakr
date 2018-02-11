@@ -4,7 +4,7 @@ block content
   form(method='POST')
     div.container-fluid
       div.row.justify-content-center
-        h1(style="font-size: 400%;") Forgot Password
+        h1.txt-white(style="font-size: 400%;") Forgot Password
       if messageError
         div.row.justify-content-center
           p.col-xs-12.col-sm-7.alert.alert-danger=messageError
@@ -12,6 +12,6 @@ block content
         div.row.justify-content-center
           p.col-xs-12.col-sm-7.alert.alert-info=messageInfo
       div.row.justify-content-center
-        input.form-control.col-xs-12.col-sm-7(type='text', name='email' placeholder='e-mail')
+        input.form-control.col-xs-12.col-sm-7(type='text', name='email' placeholder='E-mail')
       div.row.justify-content-center
         button.btn.btn-default.col-xs-12.col-sm-7(type='submit' formaction='/forgot') Reset Password

@@ -169,6 +169,10 @@ nav * {
   color: var(--bck-color)!important;
 }
 
+#addInterviewButton:hover {
+  border: solid 1px var(--txt-color);
+}
+
 .interview-caret:hover {
   background-color: var(--off-color)!important;
   color: #360!important;
@@ -311,7 +315,7 @@ form > .btn {
 }
 
 .reject:hover {
-  background-color: #8D0801;
+  background-color: #8D0801!important;
 }
 
 .container > div > .btn {

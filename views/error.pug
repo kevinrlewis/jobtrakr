@@ -3,6 +3,5 @@ extends layout
 block content
   div.container
     div.row
-      h1(class='col-xs-1')= error.status
-      h1(class='col-xs-10')= message
-    p=error.stack
+      h1.txt-white(class='col-xs-1')= error.status
+      h1.txt-white(class='col-xs-10')= message
