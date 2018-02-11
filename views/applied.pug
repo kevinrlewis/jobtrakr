@@ -56,8 +56,8 @@ block content
               a#commentlink(onclick='comments_click(' + index + ')' style="padding-left: 0;")=" comments"
           h5.col-5(
             style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
-          h5.col-6.col-md-5()=item.jobtitle
-          div.col-6.col-md-7#job-buttondiv(style="padding: 0!important;")
+          h5.col-12.col-sm-4.col-md-5()=item.jobtitle
+          div.col-12.col-sm-8.col-md-7#job-buttondiv(style="padding: 0!important;")
             form(action="/move?inter="+index method="POST" style="float: right;")
               input.btn.btn-success.move(
                 type='submit'
@@ -75,7 +75,7 @@ block content
                 type='submit'
                 aria-hidden="true"
                 value="remove"
-                style=""
+                style="margin-right: 0.5rem;"
               )
           div.comment-area.hide(id='comment'+index style='padding: 0!important;')
             h8=item.comments            

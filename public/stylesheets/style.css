@@ -132,7 +132,7 @@ nav * {
 */
 #addjobarea {
   text-align: center;
-  background-color: #343a40;
+  background-color: #172535;
   color: var(--bck-color);
   transition: all .3s ease-out;
   height: 100%;
@@ -140,7 +140,7 @@ nav * {
 
 #addprospectarea {
   text-align: center;
-  background-color: #343a40;
+  background-color: #172535;
   color: var(--bck-color);
 }
 
