@@ -84,6 +84,12 @@
   }
 }
 
+@media (max-width: 767px) {
+  nav {
+    background-color: #172535;
+  }
+}
+
 /*OTHER STYLES*/
 * {
   /*font-family: 'Roboto', sans-serif!important;*/
