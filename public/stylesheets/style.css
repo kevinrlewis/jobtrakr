@@ -97,13 +97,16 @@
   color: var(--txt-color)!important;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   /*background-color: var(--bck-color);*/
   color: var(--txt-color);
   padding-top: 55px;
 
-  background-attachment: fixed;
   height: 100%;
   background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/back-2.jpg');
   background-position: 50% 50%;
