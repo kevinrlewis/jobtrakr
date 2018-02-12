@@ -85,14 +85,16 @@
 }
 
 @media (max-width: 767px) {
-  nav {
-    background-color: #172535;
-  }
+
 }
 
 /*OTHER STYLES*/
 * {
   /*font-family: 'Roboto', sans-serif!important;*/
+}
+
+nav {
+  background-color: #172535;
 }
 
 .txt-white {
@@ -242,6 +244,14 @@ nav * {
   background-color: #360;
 }
 
+#loginButton:hover {
+  color: #FFFFFF!important;
+}
+
+#signupButton:hover {
+  color: #FFFFFF!important;
+}
+
 a {
   color: var(--txt-color);
 }
@@ -302,6 +312,29 @@ hr {
 
 .move:hover {
   background-color: #264d00!important;
+}
+
+.btn-success {
+  background-color: #360;
+}
+
+.btn-success:hover {
+  background-color: #264d00!important;
+}
+
+#no {
+  background-color: #9A031E!important;
+  color: var(--bck-color);
+  border-color: 1px solid var(--bck-color)!important;
+}
+
+#no:hover {
+  background-color: #8D0801!important;
+  color: var(--bck-color);
+}
+
+#yes {
+  border-color: 1px solid var(--bck-color)!important;
 }
 
 form > .btn {

@@ -64,11 +64,21 @@ block content
                 aria-hidden="true"
                 style="margin-right: 0;"
               ) applied
-            form(action="/remove?prospect="+index method="POST" style="float: right;")
-              input.btn.btn-danger.rmv(
-                type='submit'
-                aria-hidden="true"
-                value="remove"
-              )
+            button.btn.btn-danger.rmv(
+              style="float: right; margin-right: 0.5rem;"
+              onclick="showRemoveOptions(" + 1 + ", " + index + ")"
+            ) remove
+          div.hide(id="doubleCheck" + index 
+              style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
+            h7(style="margin: 0.25rem;") Are you sure?
+            button#yes.btn.btn-success(
+              style="margin-left: 0.25rem;"
+              onclick="removeJob(" + 1 + ", " + index + ")"
+            ) Yes
+            button#no.btn(
+              style="margin-left: 0.25rem;"
+              onclick="showRemoveOptions(" + 1 + ", " + index + ")"
+            ) No
           div.comment-area.hide(id='prospectcomment'+index style='padding: 0!important;')
             h8=item.comments
+          

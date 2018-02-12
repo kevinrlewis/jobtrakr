@@ -195,3 +195,61 @@ function addJob(url) {
     });
   }
 }
+
+function showRemoveOptions(type, index) {
+  //console.log(type, index);
+  $('#doubleCheck' + index).toggleClass('hide').toggleClass('show');
+}
+
+function removeJob(type, index) {
+  // type 1 prospective
+  // type 2 applied
+  // type 3 interviews
+  // type 4 rejected
+  switch(type) {
+    case 1: $.ajax({
+      type: 'POST',
+      url: "/remove?prospect="+index,
+      contentType: 'application/json',
+      datatype: "json",
+      success: function(data, status) {
+        // post to db was successful
+        // TODO: possible just remove the job-box versus reloading the page
+        location.reload();
+      }
+    });
+    case 2: $.ajax({
+      type: 'POST',
+      url: "/remove?index="+index,
+      contentType: 'application/json',
+      datatype: "json",
+      success: function(data, status) {
+        // post to db was successful
+        // TODO: possible just remove the job-box versus reloading the page
+        location.reload();
+      }
+    });
+    case 3: $.ajax({
+      type: 'POST',
+      url: "/remove?inter="+index,
+      contentType: 'application/json',
+      datatype: "json",
+      success: function(data, status) {
+        // post to db was successful
+        // TODO: possible just remove the job-box versus reloading the page
+        location.reload();
+      }
+    });
+    case 4: $.ajax({
+      type: 'POST',
+      url: "/remove?reject="+index,
+      contentType: 'application/json',
+      datatype: "json",
+      success: function(data, status) {
+        // post to db was successful
+        // TODO: possible just remove the job-box versus reloading the page
+        location.reload();
+      }
+    });
+  }
+}

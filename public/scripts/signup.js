@@ -1,3 +1,6 @@
+var green = "41, 193, 26, 1";
+var red = "255, 0, 0, 1"
+
 $(document).ready(function () {
   // call functions everytime a key is pressed
   $("#enterpwd").keyup(checkPassword);
@@ -42,11 +45,11 @@ function checkPasswordMatch() {
 
   // password and confirmation password do not match then border color is red
   if(password != confirmPassword) {
-    $("#enterpwd").css("border", "solid 2px rgba(255, 1, 1, 0.5");
-    $("#confirmpwd").css("border", "solid 2px rgba(255, 1, 1, 0.5)");
+    $("#enterpwd").css("border", "solid 2px rgba(" + red + ")");
+    $("#confirmpwd").css("border", "solid 2px rgba(" + red + ")");
   } else {
-    $("#enterpwd").css("border", "solid 2px rgba(51, 102, 0, 0.5");
-    $("#confirmpwd").css("border", "solid 2px rgba(51, 102, 0, 0.5)");
+    $("#enterpwd").css("border", "solid 2px rgba(" + green + ")");
+    $("#confirmpwd").css("border", "solid 2px rgba(" + green + ")");
   }
 }
 
@@ -60,8 +63,8 @@ function validateEmail(email) {
 function validate() {
   var email = $("#enteremail").val();
   if (validateEmail(email)) {
-    $("#enteremail").css("border", "solid 2px rgba(51, 102, 0, 0.5");
+    $("#enteremail").css("border", "solid 2px rgba(" + green + ")");
   } else {
-    $("#enteremail").css("border", "solid 2px rgba(255, 1, 1, 0.5");
+    $("#enteremail").css("border", "solid 2px rgba(" + red + ")");
   }
 }

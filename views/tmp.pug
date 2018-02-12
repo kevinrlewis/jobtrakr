@@ -1,23 +1,32 @@
-script(src="/scripts/jquery-3.2.1.min.js")
-script(src="/scripts/bootstrap.min.js")
-link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+form(action="/remove?prospect="+index method="POST" style="float: right;")
+  input.btn.btn-danger.rmv(
+    type='submit'
+    aria-hidden="true"
+    value="remove"
+  )
 
 
-  
-  div.container-fluid.interviews-area.hide(id='interviews'+index style='padding: 0!important;')
-  form.row
-    a.btn.col-1
-      i.fa.fa-plus-square(aria-hidden='true')
-    input.form-control.col-2(type='date')
-    input.form-control.offset-1.col-4(
-      type='plaintext'
-      placeholder="interviewer"
+  form(action="/remove?index="+index method="POST" style="float: right;")
+    input.btn.btn-danger.rmv(
+      type='submit'
+      aria-hidden="true"
+      value="remove"
+      style="margin-right: 0.5rem;"
+    )
+    
+    
+    form(action="/remove?inter="+index method="POST" style="float: right;")
+      input.btn.btn-danger.rmv(
+        type='submit'
+        aria-hidden="true"
+        value="remove"
+        style=""
       )
-    input.form-control.col-4(
-      type='plaintext'
-      placeholder='comments')
-
-
-      function interviews_click(index) {
-        $('#interviews' + index).toggleClass('hide').toggleClass('show');
-      }
+      
+      form(action="/remove?reject="+index method="POST" style="float: right;")
+        input.btn.btn-danger.rmv(
+          type='submit'
+          aria-hidden="true"
+          value="remove"
+          style="margin-right: 0!important;"
+        )

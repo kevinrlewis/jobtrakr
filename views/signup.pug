@@ -33,12 +33,12 @@ block content
             class='text-field col-xs-12 col-sm-7'
             name="password"
           )
-        div#char.txt-white.row.justify-content-center.showInfo(style='color: var(--red); font-weight: 1000;')
-          i.fa.fa-exclamation(style='padding-left: 1%;')
-          p.col-xs-12.col-sm-7.pwdreq Password must contain at least 7 characters
-        div#num.txt-white.row.justify-content-center.showInfo(style='color: var(--red); font-weight: 1000;')
-          i.fa.fa-exclamation(style='padding-left: 1%;')
-          p.col-xs-12.col-sm-7.pwdreq Password must contain a number
+        div#char.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 1000;')
+          i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
+          p.col-11.col-sm-7.pwdreq Password must contain at least 7 characters
+        div#num.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 1000;')
+          i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
+          p.col-11.col-sm-7.pwdreq Password must contain a number
         div.row.justify-content-center
           input#confirmpwd.form-control(
             type="password"
