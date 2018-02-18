@@ -30,3 +30,49 @@ form(action="/remove?prospect="+index method="POST" style="float: right;")
           value="remove"
           style="margin-right: 0!important;"
         )
+        
+        
+        div#home-container.container-fluid
+          div.row
+            div.col-12.col-sm-7.col-md-6.container-fluid
+              a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
+                div.row
+                  h1#title.mx-auto.txt-white.col-xs-12(style='text-align: center;')=title
+                    sup(style="font-size: 20%; top: -3.15em;") beta
+              p.txt-white(style="text-align: center;") Jobtrakr allows job searchers to organize their applications in an intuitive way to make the search process easier. 
+            div.col-12.col-sm-5.col-md-6.container-fluid(style="margin-top: 2%;")
+              div.row.justify-content-center.index-btn
+                a#loginButton.btn.btn.default.col-6.col-sm-8(
+                  href='/login'
+                ) Login
+              div.row.justify-content-center.index-btn
+                a#signupButton.btn.btn-default.col-6.col-sm-8(
+                  href='/signup'
+                ) Sign Up
+          hr(style="border-color: var(--bck-color);")
+            
+            
+            
+            
+            div#carousel.carousel.slide(data-ride="carousel")
+              ol.carousel-indicators
+                li(data-target="#carousel" data-slide-to="0" class="active")
+                li(data-target="#carousel" data-slide-to="1")
+                li(data-target="#carousel" data-slide-to="2")
+                li(data-target="#carousel" data-slide-to="3")
+              div.carousel-inner(style="height: 325px;")
+                div.carousel-item.active
+                  img.resize.d-block(src="/images/prospective.png" alt="First slide" style="height: auto; width: auto; max-width: 100%;")
+                div.carousel-item
+                  img.resize.d-block(src="/images/applied.png" alt="Second slide" style="height: auto; width: auto; max-width: 100%")
+                div.carousel-item
+                  img.resize.d-block(src="/images/interviewing.png" alt="Third slide" style="height: auto; width: auto; max-width: 100%")
+                div.carousel-item
+                  img.resize.d-block(src="/images/rejected.png" alt="Fourth slide" style="height: auto; width: auto; max-width: 100%")
+              a.carousel-control-prev(href="#carousel" role="button" data-slide="prev")
+                span.carousel-control-prev-icon(aria-hidden="true")
+                span.sr-only Previous
+              a.carousel-control-next(href="#carousel" role="button" data-slide="next")
+                span.carousel-control-next-icon(aria-hidden="true")
+                span.sr-only Next
+            

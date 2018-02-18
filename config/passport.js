@@ -117,7 +117,7 @@ module.exports = function(passport) {
       // if the user is found but the password is wrong
       if (!user.validPassword(password)) {
         debug('password is wrong');
-        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'), req.flash('email', email)); // create the loginMessage and save it to session as flashdata
       }
 
       // all is well, return successful user

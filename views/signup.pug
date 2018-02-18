@@ -11,21 +11,41 @@ block content
         hr(style="border-color: var(--bck-color);")
         if message.length > 0
           div.row.justify-content-center
-            p.col-xs-12.col-sm-7.alert.alert-danger=message
-        div.row.justify-content-center
-          input.form-control(
-            type="plaintext"
-            placeholder="First name"
-            class='text-field col-xs-12 col-sm-7'
-            name="firstname"
-          )
-        div.row.justify-content-center
-          input#enteremail.form-control(
-            type="plaintext"
-            placeholder="E-mail"
-            class='text-field col-xs-12 col-sm-7'
-            name="email"
-          )
+            p.col-xs-12.col-sm-7.alert.alert-danger(style="margin-bottom: 0;")=message
+        if name
+          div.row.justify-content-center
+            input.form-control(
+              type="plaintext"
+              placeholder="First name"
+              class='text-field col-xs-12 col-sm-7'
+              name="firstname"
+              value=name
+            )
+        else
+          div.row.justify-content-center
+            input.form-control(
+              type="plaintext"
+              placeholder="First name"
+              class='text-field col-xs-12 col-sm-7'
+              name="firstname"
+            )
+        if email
+          div.row.justify-content-center
+            input#enteremail.form-control(
+              type="plaintext"
+              placeholder="E-mail"
+              class='text-field col-xs-12 col-sm-7'
+              name="email"
+              value=email
+            )
+        else
+          div.row.justify-content-center
+            input#enteremail.form-control(
+              type="plaintext"
+              placeholder="E-mail"
+              class='text-field col-xs-12 col-sm-7'
+              name="email"
+            )
         div.row.justify-content-center
           input#enterpwd.form-control(
             type="password"
@@ -33,10 +53,10 @@ block content
             class='text-field col-xs-12 col-sm-7'
             name="password"
           )
-        div#char.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 1000;')
+        div#char.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 900;')
           i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
           p.col-11.col-sm-7.pwdreq Password must contain at least 7 characters
-        div#num.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 1000;')
+        div#num.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 900;')
           i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
           p.col-11.col-sm-7.pwdreq Password must contain a number
         div.row.justify-content-center

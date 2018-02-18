@@ -1,22 +1,48 @@
 extends layout
 
 block content
+  link(rel='stylesheet', href='/stylesheets/images.css')
   div#home-container.container-fluid
-    a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
-      div.row
-        h1#title.mx-auto.txt-white.col-xs-12(style='text-align: center;')=title
-          sup(style="font-size: 20%; top: -3.15em;") beta
-    p.txt-white(style="text-align: center;") Jobtrakr allows job searchers to organize their applications in an intuitive way to make the search process easier. 
+    div.row
+      div.col-12.col-sm-7.col-md-6.container-fluid
+        a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
+          div.row
+            h1#title.mx-auto.txt-white.col-xs-12(style='text-align: center;')=title
+              sup(style="font-size: 20%; top: -3.15em;") beta
+        p.txt-white(style="text-align: center;") Jobtrakr allows job searchers to organize their applications in an intuitive way to make the search process easier.
+        p.txt-white(style="text-align: center;") See images below for a sneak peek of the features.
+      div.col-12.col-sm-5.col-md-6.container-fluid(style="margin-top: 4%;")
+        div.row.justify-content-center.index-btn
+          a#loginButton.btn.btn.default.col-12.col-sm-8(
+            href='/login'
+          ) Login
+        div.row.justify-content-center.index-btn
+          a#signupButton.btn.btn-default.col-12.col-sm-8(
+            href='/signup'
+          ) Sign Up
     hr(style="border-color: var(--bck-color);")
-    div.row.justify-content-center.index-btn
-      a#loginButton.btn.btn.default.col-xs-6.col-sm-8(
-        href='/login'
-      ) Login
-    div.row.justify-content-center.index-btn
-      a#signupButton.btn.btn-default.col-xs-6.col-sm-8(
-        href='/signup'
-      ) Sign Up
-    div.row.fixed-bottom
+    div.row
+      a.col-12.col-sm-6.lightbox(href="#prospectiveImg")
+        img(src="/images/prospective.png")
+      a.col-12.col-sm-6.lightbox(href="#appliedImg")
+        img(src="/images/applied.png")
+      a.col-12.col-sm-6.lightbox(href="#interviewingImg")
+        img(src="/images/interviewing.png")
+      a.col-12.col-sm-6.lightbox(href="#rejectedImg")
+        img(src="/images/rejected.png")
+      div.lightbox-target#appliedImg
+        img(src="/images/applied.png")
+        a.lightbox-close(href="#")
+      div.lightbox-target#interviewingImg
+        img(src="/images/interviewing.png")
+        a.lightbox-close(href="#")
+      div.lightbox-target#prospectiveImg
+        img(src="/images/prospective.png")
+        a.lightbox-close(href="#")
+      div.lightbox-target#rejectedImg
+        img(src="/images/rejected.png")
+        a.lightbox-close(href="#")
+    div.row.fixed-bottom#footer
       a.col-6.txt-white(href='/about' style="") About
       p.col-6.txt-white(style="margin-bottom: 0; text-align: end;") &copy; 2018
       

@@ -1,10 +1,6 @@
-DONE+ add are you sure pop up for removing job
++ add offer implementation
 
-DONE+ check performance of background image loading
-
-DONE+ minimize css
-
-DONE+ fix index button hover colors
++ add immutable interviews to the reject page
 
 + notification system based on date
 

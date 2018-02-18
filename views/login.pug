@@ -10,17 +10,25 @@ block content
       hr(style="border-color: var(--bck-color);")
       if message.length > 0
         div.row.justify-content-center
-          p.col-xs-12.col-sm-7.alert.alert-danger=message
+          p.col-xs-12.col-sm-7.alert.alert-danger(style="margin-bottom: 0;")=message
       else if messageSuccess
         div.row.justify-content-center
-          p.col-xs-12.col-sm-7.alert.alert-success=messageSuccess
-      div.row.justify-content-center
-        input.form-control(
-          type="plaintext"
-          placeholder="E-mail"
-          name='email'
-          class='text-field col-xs-12 col-sm-7'
-        )
+          p.col-xs-12.col-sm-7.alert.alert-success(style="margin-bottom: 0;")=messageSuccess
+      if email
+        div.row.justify-content-center
+          input.text-field.col-xs-12.col-sm-7.form-control(
+            type="plaintext"
+            placeholder="E-mail"
+            name='email'
+            value=email
+          )
+      else
+        div.row.justify-content-center
+          input.text-field.col-xs-12.col-sm-7.form-control(
+            type="plaintext"
+            placeholder="E-mail"
+            name='email'
+          )
       div.row.justify-content-center
         input.form-control(
           type="password"
@@ -31,11 +39,12 @@ block content
       div.row.justify-content-center
         a.txt-white.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 0.25rem;' href='/forgot') Forgot Password?
       div.row.justify-content-center(style='margin-top:10px;')
-        input(
-          class='btn btn-default col-xs-12 col-sm-7'
+        input.btn.btn-default.col-xs-12.col-sm-7(
           type='submit'
           value='Sign In'
           name='signinButton'
           formaction='/login'
           id='sign-in'
         )
+      div.row.justify-content-center()
+        a.btn.btn-default.col-xs-12.col-sm-7(href="/signup") Sign Up

@@ -30,7 +30,8 @@ module.exports = function(app, passport) {
   // login form
   app.get('/login', function(req, res) {
     debug('GET /login');
-    res.render('login.pug', { message: req.flash('loginMessage'), title: webtitle });
+    var emailback = '';
+    res.render('login.pug', { message: req.flash('loginMessage'), title: webtitle, email: req.flash('email')[0] });
   });
 
   // process login
@@ -38,6 +39,7 @@ module.exports = function(app, passport) {
   // request, response, next function
   function(req, res, next) {
     debug('POST /login');
+    debug(req);
     // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) {
       res.render('signup.pug', { title: webtitle });
@@ -52,7 +54,7 @@ module.exports = function(app, passport) {
     }
     // if the password field is empty but email has input
     else if(req.body.password === '') {
-      res.render('login.pug', { message: 'Please enter a password.', title: webtitle });
+      res.render('login.pug', { message: 'Please enter a password.', title: webtitle, email: req.body.email });
     }
     // form is completely filled
     else {
@@ -223,6 +225,7 @@ module.exports = function(app, passport) {
   // middleware function to validate input
   function(req, res, next) {
     debug('POST /signup');
+    debug(req);
     // regex to validate email
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // if the firstname field and the email field are not filled
@@ -231,31 +234,31 @@ module.exports = function(app, passport) {
     }
     // if the firstname field is not filled
     else if(req.body.firstname === '') {
-      res.render('signup.pug', { message: 'Please enter your first name.', title: webtitle });
+      res.render('signup.pug', { message: 'Please enter your first name.', title: webtitle, email: req.body.email });
     }
     // if the email field is not filled
     else if(req.body.email === '') {
-      res.render('signup.pug', { message: 'Please enter an e-mail.', title: webtitle });
+      res.render('signup.pug', { message: 'Please enter an e-mail.', title: webtitle, name: req.body.firstname });
     }
     // if the email is not a valid email
     else if(!(re.test(req.body.email))) {
-      res.render('signup.pug', { message: 'Please enter a VALID e-mail.', title: webtitle });
+      res.render('signup.pug', { message: 'Please enter a VALID e-mail.', title: webtitle, name: req.body.firstname });
     }
     // if one or both of the password fields are empty
     else if((req.body.password === '') || (req.body.confirmpassword === '')) {
-      res.render('signup.pug', { message: 'Please enter a password.', title: webtitle });
+      res.render('signup.pug', { message: 'Please enter a password.', title: webtitle, email: req.body.email, name: req.body.firstname });
     }
     // if the passwords do not match
     else if(req.body.password != req.body.confirmpassword) {
-      res.render('signup.pug', { message: 'Confirmation password does not match entered password.', title: webtitle });
+      res.render('signup.pug', { message: 'Confirmation password does not match entered password.', title: webtitle, email: req.body.email, name: req.body.firstname });
     }
     // if the password length does not meet the requirements
     else if(req.body.password.length < 7) {
-      res.render('signup.pug', { message: 'Password does not meet length requirements.', title: webtitle });
+      res.render('signup.pug', { message: 'Password does not meet length requirements.', title: webtitle, email: req.body.email, name: req.body.firstname});
     }
     // if the password does not contain a number
     else if((!/\d/.test(req.body.password))) {
-      res.render('signup.pug', { message: 'Password must contain a number.', title: webtitle });
+      res.render('signup.pug', { message: 'Password must contain a number.', title: webtitle, email: req.body.email, name: req.body.firstname });
     }
     // sign was successful, continue to passport for signing up
     else {

@@ -84,8 +84,10 @@
   }
 }
 
-@media (max-width: 767px) {
-
+@media (max-width: 576px) {
+  #footer {
+    position: inherit;
+  }
 }
 
 /*OTHER STYLES*/
@@ -127,6 +129,11 @@ body {
 
 nav * {
   color: var(--bck-color);
+}
+
+.resize {
+  height: auto;
+  width: auto;
 }
 
 /*
@@ -441,4 +448,9 @@ form > .btn {
   position: fixed;
   bottom: 0;
   color: var(--bck-color);
+}
+
+#carousel {
+  height: 760px;
+  max-height: 760px;
 }
