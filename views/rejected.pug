@@ -37,3 +37,14 @@ block content
             ) No
           div.comment-area.hide(id='rejectcomment'+index style='padding: 0!important;')
             h8=item.comments
+          div.container-fluid.hide(id='interviewsDiv-' +index style="padding-top: 1%;")
+            each interview, interviewIndex in item.interviews
+              div.row.interview-box()
+                h5.col-1.col-sm-1=(interviewIndex+1)
+                h5.col-5.col-sm-5()=interview.interviewDate
+                h5.col-5.col-sm-6(style='text-align: end;')=interview.interviewer
+          a.fa.fa-caret-down.interview-caret.col-12(
+            id='interviews-' +index
+            onclick='interviewsClick(' + index + ')'
+            style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center;'
+          )=''
