@@ -1,6 +1,7 @@
 nav.navbar.navbar-dark.navbar-expand-md.fixed-top(style="border-bottom: 1px solid var(--bck-color);")
   a(href="/profile")  
     h1.navbar-brand=user.firstname
+      sup.badge.badge-success(style="font-size: 30%; top: -2em;")=(appliedsum + interviewingsum + rejectedsum)
   button.navbar-toggler(data-toggle='collapse'
     data-target="#navbarSupportedContent" 
     aria-controls="navbarSupportedContent" 
@@ -11,16 +12,20 @@ nav.navbar.navbar-dark.navbar-expand-md.fixed-top(style="border-bottom: 1px soli
     ul.navbar-nav.mr-auto
       li.nav-item
         a.nav-link#prospectiveNavLink(href='/prospective'
-          style="font-size: 1rem") Prospective
+          style="font-size: 1rem;")=" Prospective "
+          span.badge.badge-secondary(style="font-style: normal;")=prospectivesum
       li.nav-item
         a.nav-link#appliedNavLink(href='/applied'
-          style="font-size: 1rem") Applied
+          style="font-size: 1rem;")=" Applied "
+          span.badge.badge-secondary(style="font-style: normal;")=appliedsum
       li.nav-item
         a.nav-link#interviewsNavLink(href='/interviews'
-          style="font-size: 1rem") Interviewing
+          style="font-size: 1rem;")=" Interviewing "
+          span.badge.badge-secondary(style="font-style: normal;")=interviewingsum
       li.nav-item
         a.nav-link#rejectedNavLink(href='/rejected'
-          style="font-size: 1rem") Rejected
+          style="font-size: 1rem;")=" Rejected "
+          span.badge.badge-secondary(style="font-style: normal;")=rejectedsum
     form.form-inline.my-2.my-lg-0(method='GET')
       input.btn.btn-danger.form-control.mr-sm-2(
         value='Logout'

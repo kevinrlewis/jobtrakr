@@ -293,7 +293,11 @@ module.exports = function(app, passport) {
   // route for prospective jobs of the user
   app.get('/prospective', isLoggedIn, function(req, res) {
     debug('GET /prospective');
-    res.render('prospective.pug', { user: req.user, title: webtitle, prospectivesum : (req.user.prospectjobs.length) });
+    res.render('prospective.pug', { user: req.user, title: webtitle, prospectivesum : (req.user.prospectjobs.length),
+      appliedsum : (req.user.jobs.length),
+      prospectivesum : (req.user.prospectjobs.length),
+      rejectedsum : (req.user.rejectjobs.length),
+      interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // process adding a job
@@ -348,7 +352,11 @@ module.exports = function(app, passport) {
   // route for applied jobs of the user
   app.get('/applied', isLoggedIn, function(req, res) {
     debug('GET /applied');
-    res.render('applied.pug', { user: req.user, title: webtitle, appliedsum : (req.user.jobs.length) });
+    res.render('applied.pug', { user: req.user, title: webtitle, appliedsum : (req.user.jobs.length),
+      appliedsum : (req.user.jobs.length),
+      prospectivesum : (req.user.prospectjobs.length),
+      rejectedsum : (req.user.rejectjobs.length),
+      interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // process adding a job
@@ -401,7 +409,11 @@ module.exports = function(app, passport) {
   // route for interviews of the user
   app.get('/interviews', isLoggedIn, function(req, res) {
     debug('GET /interviews');
-    res.render('interviews.pug', { user: req.user, title: webtitle, interviewingsum: (req.user.interviewingjobs.length) });
+    res.render('interviews.pug', { user: req.user, title: webtitle, interviewingsum: (req.user.interviewingjobs.length),
+      appliedsum : (req.user.jobs.length),
+      prospectivesum : (req.user.prospectjobs.length),
+      rejectedsum : (req.user.rejectjobs.length),
+      interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // attempt to add interviews
@@ -448,7 +460,11 @@ module.exports = function(app, passport) {
   // route for rejected jobs of the user
   app.get('/rejected', isLoggedIn, function(req, res) {
     debug('GET /rejected');
-    res.render('rejected.pug', { user: req.user, title: webtitle, rejectedsum : (req.user.rejectjobs.length) });
+    res.render('rejected.pug', { user: req.user, title: webtitle, rejectedsum : (req.user.rejectjobs.length),
+      appliedsum : (req.user.jobs.length),
+      prospectivesum : (req.user.prospectjobs.length),
+      rejectedsum : (req.user.rejectjobs.length),
+      interviewingsum: (req.user.interviewingjobs.length) });
   });
 
   // process removing a job

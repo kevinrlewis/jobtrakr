@@ -89,6 +89,9 @@
     position: inherit;
   }
 }
+#footer {
+  position: inherit;
+}
 
 /*OTHER STYLES*/
 * {

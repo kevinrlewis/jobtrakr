@@ -1,8 +1,7 @@
 extends layout
 
-
 block content
-  include userscripts.pug
+  script(async, src="/scripts/user.js")
   include navigationbar.pug
   div.box-cont.container-fluid.show#home
     div.txt-white.alert(style='margin-top: 0.5rem; border: solid 1px #FFFFFF; background-color: #6F8695;')
