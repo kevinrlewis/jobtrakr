@@ -2,9 +2,9 @@ extends layout
 
 
 block content
-  include userscripts.pug
-  include navigationbar.pug
+  script(async, src="/scripts/user.js")
   script(src='/scripts/activetab.js')
+  include navigationbar.pug
   div.box-cont.container-fluid#interviews
     div.row
       h3.txt-white.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Interviewing jobs: " + interviewingsum)
