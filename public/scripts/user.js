@@ -143,6 +143,12 @@ function addJob(url) {
       $('#linkTextField').css('border-color', 'red');
       return;
     }
+
+    // check if a url is a valid url
+    if(!urlValid($('#linkTextField').val())) {
+      $('#linkTextField').css('border-color', 'red');
+      return;
+    }
     // adding a regular job
     // create link element to parse
     var link = $("#linkTextField").val();
@@ -252,4 +258,8 @@ function removeJob(type, index) {
       }
     });
   }
+}
+
+function urlValid(url) {
+  return /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/.test(url);
 }
