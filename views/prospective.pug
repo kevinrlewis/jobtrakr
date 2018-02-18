@@ -11,11 +11,13 @@ block content
       button.btn.btn-default.col-xs-6.offset-sm-2.col-sm-4.offset-md-2.col-md-4(
         id="addJobBtn"
         onclick="addprospect_click()"
-      ) add a prospect
+      ) Add Prospect
     div.row.hide#addprospectarea
       div.container
-        div.alert.alert-danger.row(id='messageAlert' style="display: none; font: 13px arial, sans-serif;")
-          label.col-xs-12 job already exists.
+        div#messageAlert.row.justify-content-center(style="display: none;")
+          label.col-xs-12.col-sm-7.alert.alert-danger(style="margin-bottom: 0;") Job already exists.
+        div#urlMessageAlert.row.justify-content-center(style="display: none;")
+          label.col-xs-12.col-sm-7.alert.alert-danger(style="margin-bottom: 0;") Invalid link.
         div.row.justify-content-center
           input.col-xs-12.col-sm-7.form-control(
             id="pcompanyTextField"

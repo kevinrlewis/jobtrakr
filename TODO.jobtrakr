@@ -1,11 +1,19 @@
-+ add offer implementation
++ fix adding job validations
+  + fix flow of input error messages
+  - prospective
+  - applied
+  - double check error messages on reload
+  - clear errors with new errors when attempting to submit again
+  - clean up functions for adding jobs
 
-+ notification system based on date
++ capitalize fields for adding jobs(applied and prospective)
+
++ check if bootstrap-grid css file is needed
+
++ add offer implementation
 
 + add features to home page
 
-+ fix transition glitch
++ pattern to email user attempt to signup?
 
 + play with loading circles
-
-+ possibly create tests

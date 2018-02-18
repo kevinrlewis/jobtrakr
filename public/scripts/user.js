@@ -147,11 +147,15 @@ function addJob(url) {
     // check if a url is a valid url
     if(!urlValid($('#linkTextField').val())) {
       $('#linkTextField').css('border-color', 'red');
+      $('#urlMessageAlert').css("display", "block");
       return;
     }
     // adding a regular job
     // create link element to parse
     var link = $("#linkTextField").val();
+    if(link.substring(0, 3).toLowerCase() !== "http") {
+      link = "http://" + link;
+    }
 
     // handle empty comments
     var comments;
