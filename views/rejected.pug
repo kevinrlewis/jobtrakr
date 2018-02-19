@@ -13,9 +13,11 @@ block content
       each item, index in user.rejectjobs
         div.job-box.reject-box.row
           h5.col-7()
-            a(href=item.website style="padding-left: 0;")=item.company
-            small(style="font-size: 60%;")
-              a#commentlink(onclick='rejectcomments_click(' + index + ')' style="padding-left: 0;")=" comments"
+            a#companylink(href=item.website style="padding-left: 0;")=item.company
+            if item.comments
+              small(style="font-size: 60%; padding-left: 1%;")
+                a#commentlink.badge.badge-warning(onclick='rejectcomments_click(' + index + ')' style="padding: 2px;")=" comments"
+            else
           h5.col-5(
             style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
           h5.col-6.col-md-5()=item.jobtitle
@@ -23,7 +25,7 @@ block content
             button.btn.btn-danger.rmv(
               style="float: right; margin-right: 0!important;"
               onclick="showRemoveOptions(" + 4 + ", " + index + ")"
-            ) remove
+            ) Remove
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
             h7(style="margin: 0.25rem;") Are you sure?
@@ -43,7 +45,7 @@ block content
                 h5.col-1.col-sm-1=(interviewIndex+1)
                 h5.col-5.col-sm-5()=interview.interviewDate
                 h5.col-5.col-sm-6(style='text-align: end;')=interview.interviewer
-          a.fa.fa-caret-down.interview-caret.col-12(
+          a.fas.fa-caret-down.interview-caret.col-12(
             id='interviews-' +index
             onclick='interviewsClick(' + index + ')'
             style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center;'

@@ -1,14 +1,18 @@
-+ fix adding job validations
-  + fix flow of input error messages
-  - prospective
-  - applied
-  - double check error messages on reload
-  - clear errors with new errors when attempting to submit again
-  - clean up functions for adding jobs
+DONE+ fix adding job validations
+  DONE+ fix flow of input error messages
+  DONE- prospective
+  DONE- applied
+  DONE- double check error messages on reload
+  DONE- clear errors with new errors when attempting to submit again
+  DONE- clean up functions for adding jobs
 
-+ capitalize fields for adding jobs(applied and prospective)
+DONE+ capitalize fields for adding jobs(applied and prospective)
 
-+ check if bootstrap-grid css file is needed
+DONE+ make clickable links recognizable
+
+DONE+ fixed font awesome
+
+DONE+ check if bootstrap-grid css file is needed
 
 + add offer implementation
 

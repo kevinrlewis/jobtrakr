@@ -18,9 +18,11 @@ block content
         else
           div.row.job-box
             h5.col-7()
-              a(href=item.website style="padding-left: 0;")=item.company
-              small(style="font-size: 60%;")
-                a#commentlink(onclick='comments_click(' + index + ')' style="padding-left: 0;")=" comments"
+              a#companylink(href=item.website style="padding-left: 0;")=item.company
+              if item.comments
+                small(style="font-size: 60%; padding-left: 1%;")
+                  a#commentlink.badge.badge-warning(onclick='comments_click(' + index + ')' style="padding: 2px;")=" comments"
+              else
             h5.col-5(style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
             h5.col-6.col-md-7()=item.jobtitle
             div.col-6.col-md-5#job-buttondiv(style="padding: 0!important;")
@@ -29,11 +31,11 @@ block content
                   type='submit'
                   aria-hidden="true"
                   style="margin-right: 0;"
-                ) rejected
+                ) Rejected
               button.btn.btn-danger.rmv(
                 style="float: right; margin-right: 0.5rem;"
                 onclick="showRemoveOptions(" + 3 + ", " + index + ")"
-              ) remove
+              ) Remove
             div.hide(id="doubleCheck" + index 
                 style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
               h7(style="margin: 0.25rem;") Are you sure?
@@ -60,13 +62,13 @@ block content
                 )
                 input#interviewer.form-control.col-xs-12.offset-sm-1.col-sm-6(
                   type='plaintext'
-                  placeholder='interviewer'
+                  placeholder='Interviewer'
                 )
                 button#addInterviewButton.btn.btn-success.offset-sm-1.col-sm-1(
                   onclick='addInterviewClick(' + index + ')'
-                ) add  
-            a.fa.fa-caret-down.interview-caret.col-12(
+                ) Add  
+            a.fas.fa-caret-down.col-12(
               id='interviews-' +index
               onclick='interviewsClick(' + index + ')'
               style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center;'
-            )=''
+            )

@@ -22,31 +22,31 @@ block content
           input.col-xs-12.col-sm-7.form-control(
             id="pcompanyTextField"
             type="plaintext"
-            placeholder="company"
+            placeholder="Company"
           )
         div.row.justify-content-center
           input.col-xs-12.col-sm-7.form-control(
             id="ptitleTextField"
             type="plaintext"
-            placeholder="job title"
+            placeholder="Job Title"
           )
         div.row.justify-content-center      
           input.col-xs-12.col-sm-7.form-control(
             id="plinkTextField"
             type="plaintext"
-            placeholder="link"
+            placeholder="Job Link"
           )
         div.row.justify-content-center
           input.col-xs-12.col-sm-7.form-control(
             id="pjobCommentField"
             type="plaintext"
-            placeholder="comments or identifiers"
+            placeholder="Comments"
           )
         div.row.justify-content-center
           button.btn.btn-success.col-12.col-sm-7.submit-btn(
             id="psubmitJobBtn"
             onclick="addJob()"
-          ) submit
+          ) Submit
 
     if user.jobs == undefined
       label error retrieving jobs
@@ -54,9 +54,11 @@ block content
       each item, index in user.prospectjobs
         div.row(class="job-box")
           h5.col-7()
-            a(href=item.website style="padding-left: 0;")=item.company
-            small(style="font-size: 60%;")
-              a#commentlink(onclick='prospectcomments_click(' + index + ')' style="padding-left: 0;")=" comments"
+            a#companylink(href=item.website style="padding-left: 0;")=item.company
+            if item.comments
+              small(style="font-size: 60%; padding-left: 1%;")
+                a#commentlink.badge.badge-warning(onclick='prospectcomments_click(' + index + ')' style="padding: 2px;")="comments"
+            else
           h5.col-5(style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
           h5.col-6.col-md-7()=item.jobtitle
           div.col-6.col-md-5#job-buttondiv(style="padding: 0!important;")
@@ -65,11 +67,11 @@ block content
                 type='submit'
                 aria-hidden="true"
                 style="margin-right: 0;"
-              ) applied
+              ) Applied
             button.btn.btn-danger.rmv(
               style="float: right; margin-right: 0.5rem;"
               onclick="showRemoveOptions(" + 1 + ", " + index + ")"
-            ) remove
+            ) Remove
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
             h7(style="margin: 0.25rem;") Are you sure?

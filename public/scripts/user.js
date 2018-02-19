@@ -81,38 +81,59 @@ function addJob(url) {
   var prospect;
   if(window.location.pathname === '/prospective') {
     // VALIDATIONS
-    // if the link field is empty
+    var companyValid = true;
+    var titleValid = true;
+    var linkValid = true;
+    if(!$('#pcompanyTextField').val()) {
+      companyValid = false;
+    }
+    if(!$('#ptitleTextField').val()) {
+      titleValid = false;
+    }
     if(!$('#plinkTextField').val()) {
+      linkValid = false;
+    }
+    if(!urlValid($('#plinkTextField').val()) && $('#plinkTextField').val()) {
+      $('#urlMessageAlert').css("display", "block");
+      linkValid = false;
+    }
+
+    var company;
+    var jobtitle;
+    var link;
+    if(!companyValid) {
+      $('#pcompanyTextField').css('border', 'solid 2px red');
+    } else {
+      $('#pcompanyTextField').css('border', '0');
+    }
+    if(!titleValid) {
+      $('#ptitleTextField').css('border', 'solid 2px red');
+    } else {
+      $('#ptitleTextField').css('border', '0');
+    }
+    if(!linkValid) {
       $('#plinkTextField').css('border', 'solid 2px red');
+    } else {
+      $('#plinkTextField').css('border', '0');
+    }
+
+    if(companyValid && titleValid && linkValid) {
+      company = $('#pcompanyTextField').val();
+      jobtitle = $('#ptitleTextField').val();
+      link = $("#plinkTextField").val();
+      if(link.substring(0, 6).toLowerCase() !== "http://") {
+        link = "http://" + link;
+      }
+    } else {
       return;
     }
-    // adding a prospective job
-    // link
-    var link = $("#plinkTextField").val();
 
     // handle empty comments
     var comments;
     if(!$('#pjobCommentField').val()) {
-      comments = "no comments";
+      comments = "";
     } else {
       comments = $('#pjobCommentField').val();
-    }
-
-    // company
-    var company;
-    if(!$('#pcompanyTextField').val()) {
-      $('#pcompanyTextField').css('border-color', 'red');
-      return;
-    } else {
-      company = $('#pcompanyTextField').val();
-    }
-
-    var jobtitle;
-    if(!$('#ptitleTextField').val()) {
-      $('#ptitleTextField').css('border-color', 'red');
-      return;
-    } else {
-      jobtitle = $('#ptitleTextField').val();
     }
 
     $.ajax({
@@ -138,49 +159,61 @@ function addJob(url) {
       }
     });
   } else if(window.location.pathname === '/applied') {
-    // if the link text field is empty
+
+    // VALIDATIONS
+    var companyValid = true;
+    var titleValid = true;
+    var linkValid = true;
+    if(!$('#companyTextField').val()) {
+      companyValid = false;
+    }
+    if(!$('#titleTextField').val()) {
+      titleValid = false;
+    }
     if(!$('#linkTextField').val()) {
-      $('#linkTextField').css('border-color', 'red');
-      return;
+      linkValid = false;
+    }
+    if(!urlValid($('#linkTextField').val()) && $('#linkTextField').val()) {
+      $('#urlMessageAlert').css("display", "block");
+      linkValid = false;
     }
 
-    // check if a url is a valid url
-    if(!urlValid($('#linkTextField').val())) {
-      $('#linkTextField').css('border-color', 'red');
-      $('#urlMessageAlert').css("display", "block");
-      return;
+    var company;
+    var jobtitle;
+    var link;
+    if(!companyValid) {
+      $('#companyTextField').css('border', 'solid 2px red');
+    } else {
+      $('#companyTextField').css('border', '0');
     }
-    // adding a regular job
-    // create link element to parse
-    var link = $("#linkTextField").val();
-    if(link.substring(0, 3).toLowerCase() !== "http") {
-      link = "http://" + link;
+    if(!titleValid) {
+      $('#titleTextField').css('border', 'solid 2px red');
+    } else {
+      $('#titleTextField').css('border', '0');
+    }
+    if(!linkValid) {
+      $('#linkTextField').css('border', 'solid 2px red');
+    } else {
+      $('#linkTextField').css('border', '0');
+    }
+
+    if(companyValid && titleValid && linkValid) {
+      company = $('#companyTextField').val();
+      jobtitle = $('#titleTextField').val();
+      link = $("#linkTextField").val();
+      if(link.substring(0, 6).toLowerCase() !== "http://") {
+        link = "http://" + link;
+      }
+    } else {
+      return;
     }
 
     // handle empty comments
     var comments;
     if(!$('#jobCommentField').val()) {
-      comments = "no comments";
+      comments = "";
     } else {
       comments = $('#jobCommentField').val();
-    }
-
-    // company
-    var company;
-    if(!$('#companyTextField').val()) {
-      $('#companyTextField').css('border-color', 'red');
-      return;
-    } else {
-      company = $('#companyTextField').val();
-    }
-
-    // title
-    var jobtitle;
-    if(!$('#titleTextField').val()) {
-      $('#titleTextField').css('border-color', 'red');
-      return;
-    } else {
-      jobtitle = $('#titleTextField').val();
     }
 
     $.ajax({

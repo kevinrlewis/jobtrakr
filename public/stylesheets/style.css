@@ -442,9 +442,21 @@ form > .btn {
   border-radius: 0px;
 }
 
+#commentlink {
+  color: var(--txt-color)!important;
+}
+
 #commentlink:hover {
   cursor: pointer;
-  color: var(--accent);
+  color: var(--txt-color)!important;
+}
+
+#companylink {
+  text-decoration: underline!important;
+}
+
+#companylink:hover {
+  color: #FFFFFF!important;
 }
 
 .index-footer {
