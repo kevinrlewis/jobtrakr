@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  script(async, src="/scripts/signup.js")
-  form(method='POST')
+  script(src="/scripts/signup.js")
+  form(id='signup_form' method='POST' action='/signup')
     div.container-fluid
         a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
           div.row
-            h1.txt-white#title(class='col' style='text-align: center;')=title
+            h1.txt-white#title(class='col' style='text-align: center;')="Jobtrakr"
               sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
         hr(style="border-color: var(--bck-color);")
         if message.length > 0
@@ -60,17 +60,12 @@ block content
           i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
           p.col-11.col-sm-7.pwdreq Password must contain a number
         div.row.justify-content-center
-          input#confirmpwd.form-control(
+          input#confirmpwd.form-control.text-field.col-xs-12.col-sm-7(
             type="password"
             placeholder="Confirm password"
-            class='text-field col-xs-12 col-sm-7'
             name="confirmpassword"
           )
         div.row.justify-content-center(style='margin-top:10px;')
-          input(
-            type='submit'
-            class='btn btn-default col-xs-12 col-sm-7'
-            name='newsignup'
-            formaction='/signup'
-            value='Submit'
-          )
+          a.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
+            href="javascript:{}" 
+            onclick="document.getElementById('signup_form').submit();") Sign Up

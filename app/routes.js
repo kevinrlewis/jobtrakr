@@ -11,7 +11,7 @@ var sec           = require('../../outer/session.js');
 var mg            = require('nodemailer-mailgun-transport');
 var debug         = require('debug')('routes');
 
-var webtitle         = "Jobtrakr";
+var webtitle      = "Job Tracker";
 
 module.exports = function(app, passport) {
 

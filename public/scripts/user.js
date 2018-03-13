@@ -1,3 +1,23 @@
+function changeToCheck() {
+  // var inner = '<i class="fas fa-check"></i>';
+  var temp = document.getElementById('check');
+  temp.innerHTML = '';
+  // temp.innerHTML = inner;
+
+  $('#check').toggleClass('fas');
+  $('#check').toggleClass('fa-check');
+}
+
+function changeBackCheck() {
+  $('#check').toggleClass('fas');
+  $('#check').toggleClass('fa-check');
+
+  var inner = 'Applied';
+  var temp = document.getElementById('check');
+  temp.innerHTML = '';
+  temp.innerHTML = inner;
+}
+
 // remove job-box
 function remove(el, i) {
   $(el).closest('.job-box').remove();

@@ -3,6 +3,7 @@
   --bck-color: #FFFFFF;
   --off-color: #A6D49F;
   --accent: #60993E;
+  --background: #172535;
 }
 
 /*WIDTH RELEVANT STYLES*/
@@ -98,10 +99,6 @@
   /*font-family: 'Roboto', sans-serif!important;*/
 }
 
-nav {
-  background-color: #172535;
-}
-
 .txt-white {
   color: var(--bck-color)!important;
 }
@@ -116,12 +113,27 @@ html {
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background-color: var(--bck-color);*/
+  background-color: var(--background);
+  /*background-color: #172535;*/
   color: var(--txt-color);
   padding-top: 55px;
 
   height: 100%;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/back-2.jpg');
+  /*background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/back-2.jpg');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;*/
+}
+
+nav * {
+  color: #FFF!important;
+}
+
+nav {
+  background-image: linear-gradient( rgba(0, 0, 0, -0.4), rgba(0, 0, 0, -0.4) ), url('/images/back-2.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -130,13 +142,50 @@ body {
   -o-background-size: cover;
 }
 
-nav * {
-  color: var(--bck-color);
+.nav-link {
+  position: relative;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #FFF;
+}
+
+.nav-link:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #FFF;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.nav-link:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .resize {
   height: auto;
   width: auto;
+}
+
+#companylink {
+  color: #000000;
+  text-decoration: underline!important;
+}
+
+#companylink:hover {
+  color: limegreen!important;
+  text-decoration: underline!important;
 }
 
 /*
@@ -146,7 +195,7 @@ nav * {
   text-align: center;
   background-color: #172535;
   color: var(--bck-color);
-  transition: all .3s ease-out;
+  /*transition: all .3s ease-out;*/
   height: 100%;
 }
 
@@ -162,18 +211,6 @@ nav * {
 
 .interviews-area > a:hover {
   color: var(--bck-color)!important;
-}
-
-.interview-box * {
-  color: var(--txt-color)!important;
-}
-
-.interview-box.interview-box-input > * {
-  border: 2px solid #360;
-}
-
-.interview-box {
-  background-color: var(--off-color)!important;
 }
 
 #addInterviewButton {
@@ -212,6 +249,11 @@ nav * {
     -webkit-transition-timing-function: ease-in;
     -o-transition-timing-function: ease-in;
     transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in-out;
+    -webkit-transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+    transition: 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
     max-height: 1000px;
     overflow: hidden;
 }
@@ -231,20 +273,6 @@ nav * {
   font-size: 600%;
 }
 
-#prospective > .job-box {
-  background-color: #6F8695;
-  border-left: solid 5px var(--bck-color);
-}
-
-#interviews > .job-box {
-  background-color: #360;
-  border-left: solid 5px var(--bck-color);
-}
-
-#interviews * {
-  color: var(--bck-color);
-}
-
 #addInterviewButton {
   background-color: #fff;
   border: none;
@@ -262,14 +290,14 @@ nav * {
   color: #FFFFFF!important;
 }
 
-a {
+/*a {
   color: var(--txt-color);
 }
 
 a:hover {
   color: var(--accent)!important;
   cursor: pointer;
-}
+}*/
 
 #home-container #title {
   color: var(--txt-color);
@@ -305,7 +333,7 @@ hr {
   padding: 5px;
 }
 
-.rmv {
+/*.rmv {
   border: 0px;
   background-color: var(--bck-color);
   color: var(--txt-color);
@@ -322,17 +350,17 @@ hr {
 
 .move:hover {
   background-color: #264d00!important;
-}
+}*/
 
-.btn-success {
+/*.btn-success {
   background-color: #360;
 }
 
 .btn-success:hover {
   background-color: #264d00!important;
-}
+}*/
 
-#no {
+/*#no {
   background-color: #9A031E!important;
   color: var(--bck-color);
   border-color: 1px solid var(--bck-color)!important;
@@ -341,17 +369,17 @@ hr {
 #no:hover {
   background-color: #8D0801!important;
   color: var(--bck-color);
-}
+}*/
 
-#yes {
+/*#yes {
   border-color: 1px solid var(--bck-color)!important;
-}
+}*/
 
-form > .btn {
+/*form > .btn {
   margin-right: 1rem;
-}
+}*/
 
-.reject {
+/*.reject {
   border: 0px;
   background-color: var(--bck-color);
   color: var(--txt-color);
@@ -359,9 +387,9 @@ form > .btn {
 
 .reject:hover {
   background-color: #8D0801!important;
-}
+}*/
 
-.container > div > .btn {
+/*.container > div > .btn {
   border-color: var(--txt-color);
   background-color: var(--off-color);
   color: var(--txt-color);
@@ -369,9 +397,9 @@ form > .btn {
 .container > div > .btn:hover {
   background-color: #360;
   color: var(--bck-color);
-}
+}*/
 
-.container-fluid > div > .btn {
+/*.container-fluid > div > .btn {
   border-color: var(--txt-color);
   background-color: var(--off-color);
   color: var(--txt-color);
@@ -379,13 +407,14 @@ form > .btn {
 .container-fluid > div > .btn:hover {
   background-color: #360;
   color: var(--bck-color);
-}
+}*/
 
-.btn {
-  border-radius: 0px;
-}
+/*.btn {
+  border-radius: 0;
+  box-shadow: 0px 1px 10px #666666;
+}*/
 
-.btn:hover {
+/*.btn:hover {
   cursor: pointer;
 }
 
@@ -402,27 +431,202 @@ form > .btn {
 .submit-btn:hover {
   background-color: #360!important;
   border: solid 1px var(--bck-color)!important;
+}*/
+
+/*BUtton styling*/
+/* credit: https://codepen.io/sazzad/pen/yNNNJG?editors=1100*/
+/* Global Button Styles */
+.animated-button:link, .animated-button:visited {
+	position: relative;
+	display: block;
+	padding: 14px 15px;
+	color: #fff;
+	font-size: 18px;
+	/*font-weight: bold;*/
+	text-align: center;
+	/*text-decoration: none;*/
+	/*text-transform: uppercase;*/
+	overflow: hidden;
+	/*letter-spacing: .08em;*/
+	border-radius: 0;
+	/*text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);*/
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 }
+.animated-button:link::after, .animated-button:visited::after {
+	content: "";
+	position: absolute;
+	height: 0%;
+	left: 50%;
+	top: 50%;
+	width: 150%;
+	z-index: -1;
+	-webkit-transition: all 0.75s ease 0s;
+	-moz-transition: all 0.75s ease 0s;
+	-o-transition: all 0.75s ease 0s;
+	transition: all 0.75s ease 0s;
+}
+.animated-button:link:hover, .animated-button:visited:hover {
+	/*color: #FFF;*/
+	text-shadow: none;
+}
+.animated-button:link:hover::after, .animated-button:visited:hover::after {
+	height: 450%;
+}
+.animated-button:link, .animated-button:visited {
+	position: relative;
+	display: block;
+	padding: 14px 15px;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 0;
+	/*font-weight: bold;*/
+	text-align: center;
+	/*text-decoration: none;*/
+	/*text-transform: uppercase;*/
+	overflow: hidden;
+	/*letter-spacing: .08em;*/
+	/*text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);*/
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+}
+/* login and sign up */
+.animated-button.green {
+	border: 2px solid #360;
+}
+.animated-button.green::after {
+	background: #360;
+	-moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	-ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	-webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+
+.animated-button.red {
+	border: 2px solid #8D0801;
+}
+.animated-button.red::after {
+	background: #8D0801;
+	-moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	-ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	-webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+
+/* remove buttons */
+.animated-button.remove {
+	border: 2px solid #8D0801;
+	color: #000000;
+  padding: 5px;
+}
+.animated-button.remove::after {
+	opacity: 0;
+	background-image: -webkit-linear-gradient( transparent 50%, rgba(255, 0, 0, 0.8) 50%);
+	background-image: -moz-linear-gradient(transparent 50%, rgba(255, 0, 0, 0.8) 50%);
+	background-size: 10px 10px;
+	-moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+	-ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+	-webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+	transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+}
+.animated-button.remove:hover::after {
+	height: 600% !important;
+	opacity: 1;
+	color: #000000;
+}
+
+/*https://codepen.io/giana/pen/BZaGyP?editors=1100*/
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #360;
+  }
+}
+.pulse {
+  color: #FFF;
+  border: 2px solid #360;
+  border-radius: 0;
+}
+.pulse:hover, .pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(0, 255, 0, 0);
+  color: #FFF;
+}
+
+.offset {
+  box-shadow: 0.3em 0.3em 0 0 #19bc8b, inset 0.3em 0.3em 0 0 #19bc8b;
+}
+.offset:hover, .offset:focus {
+  box-shadow: 0 0 0 0 #1973bc, inset 6em 3.5em 0 0 #1973bc;
+}
+
+.remove {
+  background-color: #8D0801;
+  color: #FFF;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 red;
+}
+
+.remove:hover, .remove:focus {
+  box-shadow: 0 0 0;
+  color: #8D0801!important;
+  background-color: #FFF;
+  border: 1px solid #8D0801;
+}
+
+.sub-green {
+  background-color: #360;
+  color: #FFF;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 limegreen;
+}
+
+.sub-green:hover, .remove:focus {
+  box-shadow: 0 0 0;
+  color: #360;
+  background-color: #FFF;
+  border: 1px solid #360;
+}
+
 
 /*
 //BOXES
 */
+/*Isolates what needs to be entered when adding an interview*/
+.interview-box-input > * {
+  border: 2px solid #360;
+}
+
+/*sets left border of prospective job-box*/
+#prospective > .job-box {
+  border-left: solid 5px #6F8695;
+}
+
+/*sets left border of interviews job box*/
+#interviews > .job-box {
+  border-left: solid 5px #360;
+}
+
 .job-box {
   border-left: solid 5px var(--accent);
   margin-bottom: 3px;
-  background-color: var(--off-color);
+  background-color: var(--bck-color);
   color: var(--txt-color);
+  margin: 0.45em;
 }
 
 .interview-box {
   margin-bottom: 3px;
-  background-color: var(--off-color);
+  background-color: var(--bck-color);
   color: var(--txt-color);
 }
 
 .reject-box {
   border-left: solid 5px #9A031E;
-  background-color: #E3B5A4;
+  background-color: var(--bck-color);
 }
 
 .navbar {
@@ -451,21 +655,9 @@ form > .btn {
   color: var(--txt-color)!important;
 }
 
-#companylink {
-  text-decoration: underline!important;
-}
-
-#companylink:hover {
-  color: #FFFFFF!important;
-}
 
 .index-footer {
   position: fixed;
   bottom: 0;
   color: var(--bck-color);
-}
-
-#carousel {
-  height: 760px;
-  max-height: 760px;
 }

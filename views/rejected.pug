@@ -13,7 +13,8 @@ block content
       each item, index in user.rejectjobs
         div.job-box.reject-box.row
           h5.col-7()
-            a#companylink(href=item.website style="padding-left: 0;")=item.company
+            a#companylink(href=item.website style="padding-left: 0;")=item.company + " "
+              i.fas.fa-external-link-square-alt(style="font-size: 60%;")
             if item.comments
               small(style="font-size: 60%; padding-left: 1%;")
                 a#commentlink.badge.badge-warning(onclick='rejectcomments_click(' + index + ')' style="padding: 2px;")=" comments"
@@ -22,18 +23,18 @@ block content
             style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
           h5.col-6.col-md-5()=item.jobtitle
           div.col-6.col-md-7#job-buttondiv(style="padding: 0!important;")
-            button.btn.btn-danger.rmv(
+            button.btn.remove(
               style="float: right; margin-right: 0!important;"
               onclick="showRemoveOptions(" + 4 + ", " + index + ")"
             ) Remove
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
             h7(style="margin: 0.25rem;") Are you sure?
-            button#yes.btn.btn-success(
+            button#yes.btn.sub-green(
               style="margin-left: 0.25rem;"
               onclick="removeJob(" + 4 + ", " + index + ")"
             ) Yes
-            button#no.btn(
+            button#no.btn.remove(
               style="margin-left: 0.25rem;"
               onclick="showRemoveOptions(" + 4 + ", " + index + ")"
             ) No
@@ -48,5 +49,5 @@ block content
           a.fas.fa-caret-down.interview-caret.col-12(
             id='interviews-' +index
             onclick='interviewsClick(' + index + ')'
-            style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center;'
+            style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center; cursor: pointer;'
           )=''

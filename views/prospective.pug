@@ -8,9 +8,10 @@ block content
   div.box-cont.container-fluid#prospective
     div.row
       h3.txt-white.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Prospective jobs: " + prospectivesum)
-      button.btn.btn-default.col-xs-6.offset-sm-2.col-sm-4.offset-md-2.col-md-4(
+      a.btn.btn-sm.animated-button.green.col-xs-6.offset-sm-2.col-sm-4.offset-md-2.col-md-4(
         id="addJobBtn"
         onclick="addprospect_click()"
+        href="javascript:{}"
       ) Add Prospect
     div.row.hide#addprospectarea
       div.container
@@ -43,7 +44,8 @@ block content
             placeholder="Comments"
           )
         div.row.justify-content-center
-          button.btn.btn-success.col-12.col-sm-7.submit-btn(
+          a.btn.btn.sub-green.col-12.col-sm-7(
+            href="javascript:{}"
             id="psubmitJobBtn"
             onclick="addJob()"
           ) Submit
@@ -54,7 +56,8 @@ block content
       each item, index in user.prospectjobs
         div.row(class="job-box")
           h5.col-7()
-            a#companylink(href=item.website style="padding-left: 0;")=item.company
+            a#companylink(href=item.website style="padding-left: 0;")=item.company + " "
+              i.fas.fa-external-link-square-alt(style="font-size: 60%;")
             if item.comments
               small(style="font-size: 60%; padding-left: 1%;")
                 a#commentlink.badge.badge-warning(onclick='prospectcomments_click(' + index + ')' style="padding: 2px;")="comments"
@@ -63,14 +66,15 @@ block content
           h5.col-6.col-md-7()=item.jobtitle
           div.col-6.col-md-5#job-buttondiv(style="padding: 0!important;")
             form(action="/move?prospect="+index method="POST" style="float: right;")
-              button.btn.btn-success.move(
+              button.btn.sub-green(
                 type='submit'
                 aria-hidden="true"
                 style="margin-right: 0;"
               ) Applied
-            button.btn.btn-danger.rmv(
+            a.btn.remove(
               style="float: right; margin-right: 0.5rem;"
               onclick="showRemoveOptions(" + 1 + ", " + index + ")"
+              href="javascript:{}"
             ) Remove
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
@@ -85,4 +89,3 @@ block content
             ) No
           div.comment-area.hide(id='prospectcomment'+index style='padding: 0!important;')
             h8=item.comments
-          

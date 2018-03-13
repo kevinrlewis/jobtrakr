@@ -7,17 +7,17 @@ block content
       div.col-12.col-sm-7.col-md-6.container-fluid
         a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
           div.row
-            h1#title.mx-auto.txt-white.col-xs-12(style='text-align: center;')=title
+            h1#title.mx-auto.txt-white.col-xs-12(style='text-align: center;')="Jobtrakr"
               sup(style="font-size: 20%; top: -3.15em;") beta
         p.txt-white(style="text-align: center;") Jobtrakr allows job searchers to organize their applications in an intuitive way to make the search process easier.
         p.txt-white(style="text-align: center;") See images below for a sneak peek of the features.
       div.col-12.col-sm-5.col-md-6.container-fluid(style="margin-top: 4%;")
-        div.row.justify-content-center.index-btn
-          a#loginButton.btn.btn.default.col-12.col-sm-8(
+        div.row.justify-content-center
+          a#loginButton.btn.btn-sm.animated-button.green.col-12.col-sm-8(
             href='/login'
           ) Login
-        div.row.justify-content-center.index-btn
-          a#signupButton.btn.btn-default.col-12.col-sm-8(
+        div.row.justify-content-center
+          a#signupButton.btn.btn-sm.animated-button.green.col-12.col-sm-8(
             href='/signup'
           ) Sign Up
     hr(style="border-color: var(--bck-color);")

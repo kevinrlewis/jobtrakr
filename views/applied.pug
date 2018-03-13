@@ -7,9 +7,10 @@ block content
   div.box-cont.container-fluid#jobsapplied
     div.row
       h3.txt-white.col-xs-12.col-sm-6.col-md-6(style='margin-top:2px;')=("Jobs applied: " + appliedsum)   
-      button.btn.btn-default.col-xs-6.offset-sm-2.col-sm-4.offset-md-2.col-md-4(
+      a.btn.btn-sm.animated-button.green.col-xs-6.offset-sm-2.col-sm-4.offset-md-2.col-md-4(
         id="addJobBtn"
         onclick="addjob_click()"
+        href="javascript:{}"
       ) Add Job
     div.row.hide#addjobarea
       div.container-fluid
@@ -42,7 +43,8 @@ block content
             placeholder="Comments"
           )
         div.row.justify-content-center
-          button.btn.btn-success.col-xs-12.col-sm-7.submit-btn(
+          a.btn.btn.sub-green.col-12.col-sm-7(
+            href="javascript:{}"
             id="submitJobBtn"
             onclick="addJob()"
           ) Submit
@@ -53,7 +55,8 @@ block content
       each item, index in user.jobs
         div.row(class="job-box")
           h5.col-7()
-            a#companylink(href=item.website style="padding-left: 0;")=item.company
+            a#companylink(href=item.website style="padding-left: 0;")=item.company + " "
+              i.fas.fa-external-link-square-alt(style="font-size: 60%;")
             if item.comments
               small(style="font-size: 60%; padding-left: 1%;")
                 a#commentlink.badge.badge-warning(onclick='comments_click(' + index + ')' style="padding: 2px;")=" comments"
@@ -63,29 +66,29 @@ block content
           h5.col-12.col-sm-4.col-md-5()=item.jobtitle
           div.col-12.col-sm-8.col-md-7#job-buttondiv(style="padding: 0!important;")
             form(action="/move?inter="+index method="POST" style="float: right;")
-              input.btn.btn-success.move(
+              input.btn.sub-green(
                 type='submit'
                 value='Interviewing'
                 style="margin-right: 0;"
               )
             form(action="/move?reject="+index method="POST" style="float: right;")
-              button.btn.btn-success.reject(
+              button.btn.remove(
                 type='submit'
                 aria-hidden="true"
                 style="margin-right: 0.5rem;"
               ) Rejected
-            button.btn.btn-danger.rmv(
+            button.btn.remove(
               style="float: right; margin-right: 0.5rem;"
               onclick="showRemoveOptions(" + 2 + ", " + index + ")"
             ) Remove
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
             h7(style="margin: 0.25rem;") Are you sure?
-            button#yes.btn.btn-success(
+            button#yes.btn.sub-green(
               style="margin-left: 0.25rem;"
               onclick="removeJob(" + 2 + ", " + index + ")"
             ) Yes
-            button#no.btn(
+            button#no.btn.remove(
               style="margin-left: 0.25rem;"
               onclick="showRemoveOptions(" + 2 + ", " + index + ")"
             ) No

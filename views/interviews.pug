@@ -18,7 +18,8 @@ block content
         else
           div.row.job-box
             h5.col-7()
-              a#companylink(href=item.website style="padding-left: 0;")=item.company
+              a#companylink(href=item.website style="padding-left: 0;")=item.company + " "
+                i.fas.fa-external-link-square-alt(style="font-size: 60%;")
               if item.comments
                 small(style="font-size: 60%; padding-left: 1%;")
                   a#commentlink.badge.badge-warning(onclick='comments_click(' + index + ')' style="padding: 2px;")=" comments"
@@ -27,23 +28,23 @@ block content
             h5.col-6.col-md-7()=item.jobtitle
             div.col-6.col-md-5#job-buttondiv(style="padding: 0!important;")
               form(action="/move?interreject="+index method="POST" style="float: right;")
-                button.btn.btn-danger.reject(
+                button.btn.remove(
                   type='submit'
                   aria-hidden="true"
                   style="margin-right: 0;"
                 ) Rejected
-              button.btn.btn-danger.rmv(
+              button.btn.remove(
                 style="float: right; margin-right: 0.5rem;"
                 onclick="showRemoveOptions(" + 3 + ", " + index + ")"
               ) Remove
             div.hide(id="doubleCheck" + index 
                 style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
               h7(style="margin: 0.25rem;") Are you sure?
-              button#yes.btn.btn-success(
+              button#yes.btn.sub-green(
                 style="margin-left: 0.25rem;"
                 onclick="removeJob(" + 3 + ", " + index + ")"
               ) Yes
-              button#no.btn(
+              button#no.btn.remove(
                 style="margin-left: 0.25rem;"
                 onclick="showRemoveOptions(" + 3 + ", " + index + ")"
               ) No
@@ -59,16 +60,17 @@ block content
                 input#interviewDate.form-control.col-xs-12.col-sm-3(
                   type='date'
                   name='interviewDate'
+                  style="content: attr('Date')"
                 )
                 input#interviewer.form-control.col-xs-12.offset-sm-1.col-sm-6(
                   type='plaintext'
                   placeholder='Interviewer'
                 )
-                button#addInterviewButton.btn.btn-success.offset-sm-1.col-sm-1(
+                button#addInterviewButton.btn.sub-green.offset-sm-1.col-sm-1(
                   onclick='addInterviewClick(' + index + ')'
                 ) Add  
             a.fas.fa-caret-down.col-12(
               id='interviews-' +index
               onclick='interviewsClick(' + index + ')'
-              style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center;'
+              style='padding: 0; margin-top: 0.25rem; font-size: 150%; text-align: center; cursor: pointer;'
             )
