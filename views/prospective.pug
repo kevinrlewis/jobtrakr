@@ -79,11 +79,11 @@ block content
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
             h7(style="margin: 0.25rem;") Are you sure?
-            button#yes.btn.btn-success(
+            button#yes.btn.sub-green(
               style="margin-left: 0.25rem;"
               onclick="removeJob(" + 1 + ", " + index + ")"
             ) Yes
-            button#no.btn(
+            button#no.btn.remove(
               style="margin-left: 0.25rem;"
               onclick="showRemoveOptions(" + 1 + ", " + index + ")"
             ) No

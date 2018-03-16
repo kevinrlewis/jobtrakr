@@ -40,7 +40,7 @@ block content
             ) No
           div.comment-area.hide(id='rejectcomment'+index style='padding: 0!important;')
             h8=item.comments
-          div.container-fluid.hide(id='interviewsDiv-' +index style="padding-top: 1%;")
+          div.container-fluid.hide.interview-container(id='interviewsDiv-' +index)
             each interview, interviewIndex in item.interviews
               div.row.interview-box()
                 h5.col-1.col-sm-1=(interviewIndex+1)

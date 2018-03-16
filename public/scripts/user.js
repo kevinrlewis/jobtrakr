@@ -141,9 +141,6 @@ function addJob(url) {
       company = $('#pcompanyTextField').val();
       jobtitle = $('#ptitleTextField').val();
       link = $("#plinkTextField").val();
-      if(link.substring(0, 6).toLowerCase() !== "http://") {
-        link = "http://" + link;
-      }
     } else {
       return;
     }
@@ -221,9 +218,6 @@ function addJob(url) {
       company = $('#companyTextField').val();
       jobtitle = $('#titleTextField').val();
       link = $("#linkTextField").val();
-      if(link.substring(0, 6).toLowerCase() !== "http://") {
-        link = "http://" + link;
-      }
     } else {
       return;
     }

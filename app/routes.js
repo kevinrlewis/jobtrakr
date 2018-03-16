@@ -273,7 +273,9 @@ module.exports = function(app, passport) {
   }));
 
   // user page
-  app.get('/profile', isLoggedIn, function(req, res) {
+  app.get('/profile',
+  isLoggedIn,
+  function(req, res, next) {
     debug('GET /profile');
     var totalinterviews = 0;
     req.user.interviewingjobs.forEach(function(job) {
@@ -287,6 +289,34 @@ module.exports = function(app, passport) {
       rejectedsum : (req.user.rejectjobs.length),
       interviewingsum: (req.user.interviewingjobs.length),
       totalinterviews: totalinterviews
+    });
+    next();
+  },
+  function(req, res) {
+    console.log('after middleware: page loaded');
+    var url = "https://jobs.github.com/positions.json?description=python&location=new+york"
+    // var url = "https://jobs.github.com/positions.json"
+    // generate random jobs
+    // if(req.user.jobs.length == 0 || req.user.prospectjobs.length == 0 || req.user.interviewingjobs.length == 0 || req.user.rejectjobs.length == 0) {
+    //   // do nothing
+    // } else {
+    // // generate jobs based on already applied jobs
+    //   if(req.user.jobs.length > 1) {
+    //     var searchterm = req.user.jobs[0].jobtitle;
+    //     url = url + "?description=" + searchterm;
+    //   }
+    // }
+
+    request(url, function(error, response, body) {
+      if(error) {
+        console.log(error);
+        return;
+      }
+      var temp = JSON.parse(body);
+      var i;
+      for(i = 0; i < 4; i++) {
+        console.log(temp[i]);
+      }
     });
   });
 
@@ -318,11 +348,18 @@ module.exports = function(app, passport) {
   function(req, res, next) {
     debug("adding job...");
     debug(req.body);
+
+    // handle urls with out protocols
+    var link = req.body.joblink;
+    if(link.substring(0, 6).toLowerCase() !== "http:" || link.substring(0, 6).toLowerCase() !== "https:") {
+      link = "http://" + link;
+    }
+
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
     var jobObject = {
-      'website': req.body.joblink,
+      'website': link,
       'comments': req.body.comments,
       'company': req.body.company,
       'jobtitle': req.body.jobtitle,
@@ -375,11 +412,18 @@ module.exports = function(app, passport) {
   },
   function(req, res, next) {
     debug("adding job...");
+
+    // handle urls with out protocols
+    var link = req.body.joblink;
+    if(link.substring(0, 6).toLowerCase() !== "http:" || link.substring(0, 6).toLowerCase() !== "https:") {
+      link = "http://" + link;
+    }
+
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
     var jobObject = {
-      'website': req.body.joblink,
+      'website': link,
       'comments': req.body.comments,
       'company': req.body.company,
       'jobtitle': req.body.jobtitle,
