@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form(method='POST')
+  form(id="forgot_form" method='POST' action='/forgot')
     div.container-fluid
       div.row.justify-content-center
         h1.txt-white(style="font-size: 400%;") Forgot Password
@@ -14,4 +14,7 @@ block content
       div.row.justify-content-center
         input.form-control.col-xs-12.col-sm-7(type='text', name='email' placeholder='E-mail')
       div.row.justify-content-center
-        button.btn.btn-default.col-xs-12.col-sm-7(type='submit' formaction='/forgot') Reset Password
+        a.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
+          href="javascript:{}" 
+          onclick="document.getElementById('forgot_form').submit();"
+          ) Reset Password

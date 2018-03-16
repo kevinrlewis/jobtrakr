@@ -2,7 +2,7 @@ extends layout
 
 block content
   script(async, src="/scripts/reset.js")
-  form(method='POST')
+  form(id="reset_form" method='POST')
     div.container-fluid
       div.row.justify-content-center
         h1.txt-white(style="font-size: 400%;") Reset Password
@@ -17,4 +17,7 @@ block content
       div.row.justify-content-center
         input#confirmpwd.form-control.col-xs-12.col-sm-7(type='password', name='confirm', value='', placeholder='Confirm password')
       div.row.justify-content-center
-        button.btn.btn-default.col-xs-12.col-sm-7(type='submit') Update Password
+        a.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
+          href="javascript:{}" 
+          onclick="document.getElementById('reset_form').submit();"
+          ) Update Password

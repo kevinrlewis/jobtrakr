@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  script(src='/scripts/form_submit.js')
   form(id="login_form" method='POST' action="/login")
     div.container-fluid
       a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")    
@@ -39,14 +40,7 @@ block content
       div.row.justify-content-center
         a.txt-white.col-xs-12.col-sm-7(style='font-size: 90%; padding-left: 0.25rem;' href='/forgot') Forgot Password?
       div.row.justify-content-center(style='margin-top:10px;')
-        //- input.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
-        //-   type='submit'
-        //-   value='Sign In'
-        //-   name='signinButton'
-        //-   formaction='/login'
-        //-   id='sign-in'
-        //- )
-        a.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
+        a#login_submit.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
           href="javascript:{}"
           onclick="document.getElementById('login_form').submit();") Sign In
       div.row.justify-content-center()

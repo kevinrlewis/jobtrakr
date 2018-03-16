@@ -4,10 +4,10 @@ block content
   script(src="/scripts/signup.js")
   form(id='signup_form' method='POST' action='/signup')
     div.container-fluid
-        a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
-          div.row
-            h1.txt-white#title(class='col' style='text-align: center;')="Jobtrakr"
-              sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
+      a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
+        div.row
+          h1.txt-white#title(class='col' style='text-align: center;')="Jobtrakr"
+            sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
         hr(style="border-color: var(--bck-color);")
         if message.length > 0
           div.row.justify-content-center
