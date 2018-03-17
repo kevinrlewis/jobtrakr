@@ -4,68 +4,68 @@ block content
   script(src="/scripts/signup.min.js")
   form(id='signup_form' method='POST' action='/signup')
     div.container-fluid
-      a(href="/" style="color: var(--txt-color)!important; text-decoration: unset;")  
-        div.row
-          h1.txt-white#title(class='col' style='text-align: center;')="Jobtrakr"
-            sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
-        hr(style="border-color: var(--bck-color);")
-        if message.length > 0
-          div.row.justify-content-center
-            p.col-xs-12.col-sm-7.alert.alert-danger(style="margin-bottom: 0;")=message
-        if name
-          div.row.justify-content-center
-            input.form-control(
-              type="plaintext"
-              placeholder="First name"
-              class='text-field col-xs-12 col-sm-7'
-              name="firstname"
-              value=name
-            )
-        else
-          div.row.justify-content-center
-            input.form-control(
-              type="plaintext"
-              placeholder="First name"
-              class='text-field col-xs-12 col-sm-7'
-              name="firstname"
-            )
-        if email
-          div.row.justify-content-center
-            input#enteremail.form-control(
-              type="plaintext"
-              placeholder="E-mail"
-              class='text-field col-xs-12 col-sm-7'
-              name="email"
-              value=email
-            )
-        else
-          div.row.justify-content-center
-            input#enteremail.form-control(
-              type="plaintext"
-              placeholder="E-mail"
-              class='text-field col-xs-12 col-sm-7'
-              name="email"
-            )
+      a.nav-link.underline(href='/' style="text-align: center; position: fixed; left: 0;") Back
+      div.row
+        h1.txt-white.col-6.mx-auto#title(style='text-align: center;')="Jobtrakr"
+          sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
+      hr(style="border-color: var(--bck-color);")
+      if message.length > 0
         div.row.justify-content-center
-          input#enterpwd.form-control(
-            type="password"
-            placeholder="Enter password"
+          p.col-xs-12.col-sm-7.alert.alert-danger(style="margin-bottom: 0;")=message
+      if name
+        div.row.justify-content-center
+          input.form-control(
+            type="plaintext"
+            placeholder="First name"
             class='text-field col-xs-12 col-sm-7'
-            name="password"
+            name="firstname"
+            value=name
           )
-        div#char.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 900;')
-          i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
-          p.col-11.col-sm-7.pwdreq Password must contain at least 7 characters
-        div#num.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 900;')
-          i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
-          p.col-11.col-sm-7.pwdreq Password must contain a number
+      else
         div.row.justify-content-center
-          input#confirmpwd.form-control.text-field.col-xs-12.col-sm-7(
-            type="password"
-            placeholder="Confirm password"
-            name="confirmpassword"
+          input.form-control(
+            type="plaintext"
+            placeholder="First name"
+            class='text-field col-xs-12 col-sm-7'
+            name="firstname"
           )
-        div.row.justify-content-center(style='margin-top:10px;')
-          a.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
-            href="javascript:{}" 
-            onclick="document.getElementById('signup_form').submit();") Sign Up
+      if email
+        div.row.justify-content-center
+          input#enteremail.form-control(
+            type="plaintext"
+            placeholder="E-mail"
+            class='text-field col-xs-12 col-sm-7'
+            name="email"
+            value=email
+          )
+      else
+        div.row.justify-content-center
+          input#enteremail.form-control(
+            type="plaintext"
+            placeholder="E-mail"
+            class='text-field col-xs-12 col-sm-7'
+            name="email"
+          )
+      div.row.justify-content-center
+        input#enterpwd.form-control(
+          type="password"
+          placeholder="Enter password"
+          class='text-field col-xs-12 col-sm-7'
+          name="password"
+        )
+      div#char.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 900;')
+        i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
+        p.col-11.col-sm-7.pwdreq Password must contain at least 7 characters
+      div#num.justify-content-center.txt-white.row.showInfo(style='color: var(--red); font-weight: 900;')
+        i.fa.fa-exclamation(style='padding-left: 1%; padding-right: 1%;')
+        p.col-11.col-sm-7.pwdreq Password must contain a number
+      div.row.justify-content-center
+        input#confirmpwd.form-control.text-field.col-xs-12.col-sm-7(
+          type="password"
+          placeholder="Confirm password"
+          name="confirmpassword"
+        )
+      div.row.justify-content-center(style='margin-top:10px;')
+        a#signup_submit.btn.btn-sm.animated-button.green.col-xs-12.col-sm-7(
+          href="javascript:{}" 
+          onclick="document.getElementById('signup_form').submit();") Sign Up

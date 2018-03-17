@@ -273,21 +273,80 @@ module.exports = function(app, passport) {
   }));
 
   // user page
-  app.get('/profile', isLoggedIn, function(req, res) {
+  app.get('/profile',
+  isLoggedIn,
+  function(req, res, next) {
     debug('GET /profile');
-    var totalinterviews = 0;
-    req.user.interviewingjobs.forEach(function(job) {
-      totalinterviews += job.interviews.length;
+    // var url = "https://jobs.github.com/positions.json?description=python&location=new+york"
+    var url = "https://jobs.github.com/positions.json"
+    // //generate random jobs
+    // if(req.user.jobs.length != 0) {
+    //   // generate jobs based on already applied jobs
+    //   debug('changing url...');
+    //   var searchterm = req.user.jobs[0].jobtitle;
+    //   url = url + "?description=" + searchterm;
+    // } else if(req.user.prospectjobs.length != 0){
+    //   debug('changing url...');
+    //   var searchterm = req.user.prospectjobs[0].jobtitle;
+    //   url = url + "?description=" + searchterm;
+    // } else if(req.user.interviewingjobs.length != 0) {
+    //   debug('changing url...');
+    //   var searchterm = req.user.interviewingjobs[0].jobtitle;
+    //   url = url + "?description=" + searchterm;
+    // } else if(req.user.rejectjobs.length != 0) {
+    //   debug('changing url...');
+    //   var searchterm = req.user.rejectjobs[0].jobtitle;
+    //   url = url + "?description=" + searchterm;
+    // }
+
+    debug('request url: ' + url);
+    request(url, function(error, response, body) {
+      if(error) {
+        debug(error);
+        return;
+      }
+
+      // display random jobs from github jobs api
+      var ghjobsarray = [];
+      var temp = JSON.parse(body);
+      var i;
+      var temparr = [];
+      for(i = 0; i < 4; i++) {
+        // generate random number
+        var rand = Math.floor(Math.random() * (temp.length+1));
+        // if random number was chosen already, pick a new random number
+        while(temparr.includes(rand)) {
+          rand = Math.floor(Math.random() * (temp.length+1));
+        }
+        // push to array to track which numbers have been used
+        temparr.push(rand);
+        // push job to array
+        ghjobsarray.push(temp[rand]);
+      }
+
+      // render page
+      var totalinterviews = 0;
+      req.user.interviewingjobs.forEach(function(job) {
+        totalinterviews += job.interviews.length;
+      });
+      res.render('user.pug', {
+        user : req.user,
+        title: webtitle,
+        appliedsum : (req.user.jobs.length),
+        prospectivesum : (req.user.prospectjobs.length),
+        rejectedsum : (req.user.rejectjobs.length),
+        interviewingsum: (req.user.interviewingjobs.length),
+        totalinterviews: totalinterviews,
+        githubarray: ghjobsarray
+      });
     });
-    res.render('user.pug', {
-      user : req.user,
-      title: webtitle,
-      appliedsum : (req.user.jobs.length),
-      prospectivesum : (req.user.prospectjobs.length),
-      rejectedsum : (req.user.rejectjobs.length),
-      interviewingsum: (req.user.interviewingjobs.length),
-      totalinterviews: totalinterviews
-    });
+    //next();
+  });
+
+  // get github jobs
+  app.get('/ghjobs', isLoggedIn, function(req, res) {
+    debug('GET ghjobs');
+
   });
 
   // route for prospective jobs of the user
@@ -307,7 +366,14 @@ module.exports = function(app, passport) {
     debug("in /add prospect, adding prospect");
     debug("checking if job exists...");
     // job exists middle ware
-    if(jobExists(req.user.jobs, req.body.joblink) || jobExists(req.user.prospectjobs, req.body.joblink)) {
+    debug("job exists in applied jobs: " + jobExists(req.user.jobs, req.body.joblink));
+    debug("job exists in prospective jobs: " + jobExists(req.user.prospectjobs, req.body.joblink));
+    debug("job exists in interviewing jobs: " + jobExists(req.user.interviewingjobs, req.body.joblink));
+    debug("job exists in reject jobs: " + jobExists(req.user.rejectjobs, req.body.joblink));
+    if(jobExists(req.user.jobs, req.body.joblink)
+    || jobExists(req.user.prospectjobs, req.body.joblink)
+    || jobExists(req.user.interviewingjobs, req.body.joblink)
+    || jobExists(req.user.rejectjobs, req.user.joblink)) {
       debug("job exists, sending 500 error");
       // send response
       res.status(500).send('Job already exists.');
@@ -318,11 +384,19 @@ module.exports = function(app, passport) {
   function(req, res, next) {
     debug("adding job...");
     debug(req.body);
+    // handle urls with out protocols
+    var link = req.body.joblink;
+    if(link.substring(0, 5).toLowerCase() !== "http:" && link.substring(0, 6).toLowerCase() !== "https:") {
+      link = "http://" + link;
+    }
+
+    debug(link);
+
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
     var jobObject = {
-      'website': req.body.joblink,
+      'website': link,
       'comments': req.body.comments,
       'company': req.body.company,
       'jobtitle': req.body.jobtitle,
@@ -365,7 +439,14 @@ module.exports = function(app, passport) {
     debug('POST /applied');
     debug("checking if job exists...");
     // job exists middle ware
-    if(jobExists(req.user.jobs, req.body.joblink) || jobExists(req.user.prospectjobs, req.body.joblink)) {
+    debug("job exists in applied jobs: " + jobExists(req.user.jobs, req.body.joblink));
+    debug("job exists in prospective jobs: " + jobExists(req.user.prospectjobs, req.body.joblink));
+    debug("job exists in interviewing jobs: " + jobExists(req.user.interviewingjobs, req.body.joblink));
+    debug("job exists in reject jobs: " + jobExists(req.user.rejectjobs, req.body.joblink));
+    if(jobExists(req.user.jobs, req.body.joblink)
+    || jobExists(req.user.prospectjobs, req.body.joblink)
+    || jobExists(req.user.interviewingjobs, req.body.joblink)
+    || jobExists(req.user.rejectjobs, req.user.joblink)) {
       debug("job exists, sending 500 error");
       // send response
       res.status(500).send('Job already exists.');
@@ -375,11 +456,20 @@ module.exports = function(app, passport) {
   },
   function(req, res, next) {
     debug("adding job...");
+
+    // handle urls with out protocols
+    var link = req.body.joblink;
+    if(link.substring(0, 5).toLowerCase() !== "http:" && link.substring(0, 6).toLowerCase() !== "https:") {
+      link = "http://" + link;
+    }
+
+    debug(link);
+
     // job add middleware
     // process adding a job if the link does not exist yet
     // job object to add to mongodb
     var jobObject = {
-      'website': req.body.joblink,
+      'website': link,
       'comments': req.body.comments,
       'company': req.body.company,
       'jobtitle': req.body.jobtitle,
