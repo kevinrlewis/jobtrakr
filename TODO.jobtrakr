@@ -1,4 +1,6 @@
-+ implement github jobs
+DONE+ implement github jobs
+
++ fix the urls in existing users
 
 + CAN ONLY PRESS ENTER ONCE ON PAGE
 
@@ -8,4 +10,4 @@
 
 + pattern to email user attempt to signup?
 
-+ play with loading circles
+DONE+ play with loading circles

@@ -54,7 +54,7 @@ block content
       label error retrieving jobs
     else
       each item, index in user.prospectjobs
-        div.row(class="job-box")
+        div.row(class="job-box" id="jobBox" + index)
           h5.col-7()
             a#companylink(href=item.website style="padding-left: 0;")=item.company + " "
               i.fas.fa-external-link-square-alt(style="font-size: 60%;")
@@ -79,7 +79,8 @@ block content
           div.hide(id="doubleCheck" + index 
               style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
             h7(style="margin: 0.25rem;") Are you sure?
-            button#yes.btn.sub-green(
+            button.btn.sub-green(
+              id="yes" + index
               style="margin-left: 0.25rem;"
               onclick="removeJob(" + 1 + ", " + index + ")"
             ) Yes

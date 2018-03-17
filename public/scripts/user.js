@@ -259,6 +259,9 @@ function showRemoveOptions(type, index) {
 }
 
 function removeJob(type, index) {
+  $('#jobBox' + index).toggleClass('disabled');
+  $('#jobBox' + index).append("<div class='loader'></div>");
+
   // type 1 prospective
   // type 2 applied
   // type 3 interviews
