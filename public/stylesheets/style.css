@@ -119,13 +119,6 @@ body {
   /*padding-top: 55px;*/
 
   height: 100%;
-  /*background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/back-2.jpg');
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;*/
 }
 
 nav * {
@@ -328,15 +321,6 @@ nav {
   color: #FFFFFF!important;
 }
 
-/*a {
-  color: var(--txt-color);
-}
-
-a:hover {
-  color: var(--accent)!important;
-  cursor: pointer;
-}*/
-
 #home-container #title {
   color: var(--txt-color);
 }
@@ -371,106 +355,6 @@ hr {
   padding: 5px;
 }
 
-/*.rmv {
-  border: 0px;
-  background-color: var(--bck-color);
-  color: var(--txt-color);
-}
-
-.rmv:hover {
-  background-color: #8D0801!important;
-  color: var(--bck-color)!important;
-}
-
-.move {
-  border: 0px;
-}
-
-.move:hover {
-  background-color: #264d00!important;
-}*/
-
-/*.btn-success {
-  background-color: #360;
-}
-
-.btn-success:hover {
-  background-color: #264d00!important;
-}*/
-
-/*#no {
-  background-color: #9A031E!important;
-  color: var(--bck-color);
-  border-color: 1px solid var(--bck-color)!important;
-}
-
-#no:hover {
-  background-color: #8D0801!important;
-  color: var(--bck-color);
-}*/
-
-/*#yes {
-  border-color: 1px solid var(--bck-color)!important;
-}*/
-
-/*form > .btn {
-  margin-right: 1rem;
-}*/
-
-/*.reject {
-  border: 0px;
-  background-color: var(--bck-color);
-  color: var(--txt-color);
-}
-
-.reject:hover {
-  background-color: #8D0801!important;
-}*/
-
-/*.container > div > .btn {
-  border-color: var(--txt-color);
-  background-color: var(--off-color);
-  color: var(--txt-color);
-}
-.container > div > .btn:hover {
-  background-color: #360;
-  color: var(--bck-color);
-}*/
-
-/*.container-fluid > div > .btn {
-  border-color: var(--txt-color);
-  background-color: var(--off-color);
-  color: var(--txt-color);
-}
-.container-fluid > div > .btn:hover {
-  background-color: #360;
-  color: var(--bck-color);
-}*/
-
-/*.btn {
-  border-radius: 0;
-  box-shadow: 0px 1px 10px #666666;
-}*/
-
-/*.btn:hover {
-  cursor: pointer;
-}
-
-.btn-danger {
-  background-color: #8D0801;
-  border-color: var(--bck-color);
-}
-
-.btn-danger:hover {
-  background-color: #8D0801;
-  border-color: var(--txt-color);
-}
-
-.submit-btn:hover {
-  background-color: #360!important;
-  border: solid 1px var(--bck-color)!important;
-}*/
-
 /*BUtton styling*/
 /* credit: https://codepen.io/sazzad/pen/yNNNJG?editors=1100*/
 /* Global Button Styles */
@@ -480,14 +364,9 @@ hr {
 	padding: 14px 15px;
 	color: #fff;
 	font-size: 18px;
-	/*font-weight: bold;*/
 	text-align: center;
-	/*text-decoration: none;*/
-	/*text-transform: uppercase;*/
 	overflow: hidden;
-	/*letter-spacing: .08em;*/
 	border-radius: 0;
-	/*text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);*/
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
@@ -520,13 +399,8 @@ hr {
 	color: #fff;
 	font-size: 18px;
 	border-radius: 0;
-	/*font-weight: bold;*/
 	text-align: center;
-	/*text-decoration: none;*/
-	/*text-transform: uppercase;*/
 	overflow: hidden;
-	/*letter-spacing: .08em;*/
-	/*text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);*/
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
@@ -736,7 +610,6 @@ hr {
   border-radius: 50%;
   position: absolute;
   right: 45%;
-  top: 18%;
   text-indent: -9999em;
   -webkit-animation: load4 1.3s infinite linear;
   animation: load4 1.3s infinite linear;
