@@ -13,7 +13,7 @@ block content
     else
       each item, index in user.interviewingjobs
         if item == null
-          div.row.job-box
+          div.row.job-box(id="jobBox" + index)
             h5.col-12 Job item is null
         else
           div.row.job-box(id="jobBox" + index)
@@ -25,8 +25,8 @@ block content
                   a#commentlink.badge.badge-warning(onclick='comments_click(' + index + ')' style="padding: 2px;")=" comments"
               else
             h5.col-5(style='margin-bottom: 0; text-align: end; padding-right: 0;')=item.date
-            h5.col-6.col-md-7()=item.jobtitle
-            div.col-6.col-md-5#job-buttondiv(style="padding: 0!important;")
+            h5.col-12.col-md-7()=item.jobtitle
+            div.col-12.col-md-5#job-buttondiv(style="padding: 0!important;")
               form(action="/move?interreject="+index method="POST" style="float: right;")
                 button.btn.remove(
                   type='submit'
