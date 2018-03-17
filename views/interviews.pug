@@ -16,7 +16,7 @@ block content
           div.row.job-box
             h5.col-12 Job item is null
         else
-          div.row.job-box
+          div.row.job-box(id="jobBox" + index)
             h5.col-7()
               a#companylink(href=item.website style="padding-left: 0;")=item.company + " "
                 i.fas.fa-external-link-square-alt(style="font-size: 60%;")
@@ -40,7 +40,8 @@ block content
             div.hide(id="doubleCheck" + index 
                 style="width: 100%; text-align: right; padding: 0; margin-top: 0.25rem;")
               h7(style="margin: 0.25rem;") Are you sure?
-              button#yes.btn.sub-green(
+              button.btn.sub-green(
+                id="yes" + index
                 style="margin-left: 0.25rem;"
                 onclick="removeJob(" + 3 + ", " + index + ")"
               ) Yes
@@ -50,7 +51,7 @@ block content
               ) No
             div.comment-area.hide(id='comment'+index style='padding: 0!important;')
               h8=item.comments            
-            div.container-fluid.hide(id='interviewsDiv-' +index style="padding-top: 1%;")
+            div.container-fluid.hide.interview-container(id='interviewsDiv-' +index)
               each interview, interviewIndex in item.interviews
                 div.row.interview-box()
                   h5.col-1.col-sm-1=(interviewIndex+1)
