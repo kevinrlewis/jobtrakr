@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
   // request, response, next function
   function(req, res, next) {
     debug('POST /login');
-    debug(req);
+    //debug(req);
     // if signup button is pressed, redirect to signup page
     if(req.body.signupButton) {
       res.render('signup.pug', { title: webtitle });

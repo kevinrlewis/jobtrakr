@@ -13,17 +13,15 @@ block content
         h6.txt-white=("Jobs interviewing: " + (interviewingsum))
       div.col-12.col-sm-3.alert(style="border: solid 1px #FFFFFF; background-color: #8D0801;")
         h6.txt-white=("Rejected jobs: " + (rejectedsum))
-    div.row
-      h2.txt-white Apply for more below!
     div.row.txt-white()#ghjobs
       p.strong.col-6(style="text-align: left;") Recommended Jobs
       a.col-6.fab.fa-github-square(href="https://jobs.github.com/api" style="text-align: right;")=" Powered by GitHub Jobs API"
       each item in githubarray
-        div.col-12.col-sm-6.col-md-3(style="border: solid 1px #FFFFFF;")
+        div.col-12.col-sm-6(style="border-left: solid 2px #FFFFFF; margin-top: 1em; margin-bottom: 1em; box-shadow: 1px 5px 5px 1px rgba(0,0,0,0.75);")
           small=item.created_at
           h5=item.company
           small=" " + item.location
           br
           h7=item.title
           br
-          a(href=item.url style="font-size: 80%;") Job Link
+          a(href=item.url) Job Link
