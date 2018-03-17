@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.10.1
+version: v1.10.2
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:bson:20180225':
@@ -9,4 +9,11 @@ ignore:
     - mongoose > mongodb > mongodb-core > bson:
         reason: No other option
         expires: '2018-03-30T23:44:50.519Z'
+  'npm:braces:20180219':
+    - anymatch > micromatch > braces:
+        reason: no patch avail
+        expires: '2018-04-16T19:57:38.312Z'
+    - chokidar > braces:
+        reason: no patch avail
+        expires: '2018-04-16T19:57:38.312Z'
 patch: {}
