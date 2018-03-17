@@ -8,6 +8,12 @@ $(document).ready(function () {
   $('#enteremail').keyup(validate);
 });
 
+$(document).keypress(function(event){
+  if(event.keyCode == 13){
+    $("#signup_submit").click();
+  }
+});
+
 // function to check if the password is greater than the
 // required length and contains a number
 function checkPassword() {
