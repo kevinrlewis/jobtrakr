@@ -4,7 +4,9 @@ block content
   script(src="/scripts/signup.min.js")
   form(id='signup_form' method='POST' action='/signup')
     div.container-fluid
-      a.nav-link.underline(href='/' style="text-align: center; position: fixed; left: 0;") Back
+      div.row
+        a.col-2.nav-link.underline(href='/' style="text-align: left;") Back
+    div.container-fluid
       div.row
         h1.txt-white.mx-auto#title(style='text-align: center;')="Jobtrakr"
           sup.txt-white(style="font-size: 20%; top: -3.15em;") beta
