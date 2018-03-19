@@ -3,9 +3,11 @@ extends layout
 block content
   link(rel='stylesheet', href='/stylesheets/images.min.css')
   div.container-fluid
-    a.nav-link.underline(href='/' style="text-align: center; position: fixed; left: 0;") Back
-    a.nav-link.underline(href="https://kvnlws.xyz" style="text-align: center; position: fixed; right: 0;")="My portfolio "
-      i.fas.fa-external-link-alt(style="font-size: 80%;")
+    div.row
+      a.col-2.nav-link.underline(href='/' style="text-align: left;") Back
+      a.offset-7.col-3.nav-link.underline(href="https://kvnlws.xyz" style="text-align: right;")="My portfolio "
+        i.fas.fa-external-link-alt(style="font-size: 80%;")
+  div.container-fluid
     h1.mx-auto.txt-white#title(class='col-xs-12' style="text-align: center;")="About"
   hr(style="border-color: var(--bck-color);")
   div.container-fluid  
