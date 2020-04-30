@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:bson:20180225':
@@ -16,4 +16,18 @@ ignore:
     - chokidar > braces:
         reason: no patch avail
         expires: '2018-04-16T19:57:38.312Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - async > lodash:
+        patched: '2020-04-30T22:36:33.998Z'
+    - mongoose > async > lodash:
+        patched: '2020-04-30T22:36:33.998Z'
+    - nodemailer-mailgun-transport > mailgun-js > async > lodash:
+        patched: '2020-04-30T22:36:33.998Z'
+    - pug > pug-code-gen > constantinople > babel-types > lodash:
+        patched: '2020-04-30T22:36:33.998Z'
+    - pug > pug-filters > constantinople > babel-types > lodash:
+        patched: '2020-04-30T22:36:33.998Z'
+    - pug > pug-code-gen > pug-attrs > constantinople > babel-types > lodash:
+        patched: '2020-04-30T22:36:33.998Z'
